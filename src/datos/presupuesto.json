@@ -1,19 +1,17 @@
-[
-    {
-        "base": 100,
-        "medida": {
-            "15x20": 100,
-            "25x30": 200,
-            "35x40": 300
-        },
-        "material": {
-            "vidrio": 400,
-            "plastico": 200
-        },
-        "marco": {
-            "mdf": 100,
-            "madera": 200,
-            "aluminio": 300
-        }
+{
+    "base": 100,
+    "medida": {
+        "15x20": 100,
+        "25x30": 200,
+        "35x40": 300
+    },
+    "material": {
+        "vidrio": 400,
+        "plastico": 200
+    },
+    "marco": {
+        "mdf": 100,
+        "madera": 200,
+        "aluminio": 300
     }
-]
+}
