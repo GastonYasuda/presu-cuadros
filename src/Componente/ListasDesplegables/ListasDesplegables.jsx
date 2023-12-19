@@ -1,43 +1,47 @@
 import React, { useEffect, useState } from 'react'
-import Form from 'react-bootstrap/Form';
+import Listados from '../Listados/Listados';
 
 
 const ListasDesplegables = ({ datos }) => {
 
     const [medida, setMedida] = useState([])
-    
+    const [material, setMaterial] = useState([])
+    const [marco, setMarco] = useState([])
+
 
     useEffect(() => {
         if (Object.keys(datos).length !== 0) {
             console.log(typeof (datos));
             console.log(datos);
-            setMedida(datos.medida)
 
+            for (const key in Object.keys(datos)) {
+                if (Object.keys(datos)[key] === 'medida') {
+                    setMedida(Object.keys(datos)[key])
+                    //  console.log("medida");
+
+                } else if (Object.keys(datos)[key] === 'material') {
+                    setMaterial(Object.keys(datos)[key])
+                    //  console.log("material");
+
+                } else if (Object.keys(datos)[key] === 'marco') {
+                    setMarco(Object.keys(datos)[key])
+                    // console.log("marco");
+
+                }
+            }
+
+            // console.log(Object.keys(datos)[1]);
+        console.log(medida);
         }
-        console.log(Object.keys(medida)[0]);
 
-    }, [datos, medida])
+    }, [datos, medida, material, marco])
 
 
     return (
         <div>
-            <Form.Select aria-label="Default select example">
-                <option>Medidas</option>
-                <option value="1">15x20</option>
-                <option value="2">25x30</option>
-                <option value="3">35x40</option>
-            </Form.Select>
-            <Form.Select aria-label="Default select example">
-                <option>Material</option>
-                <option value="1">Plástico</option>
-                <option value="2">Vidrio</option>
-            </Form.Select>
-            <Form.Select aria-label="Default select example">
-                <option>Marco</option>
-                <option value="1">Aluminio</option>
-                <option value="2">Madera</option>
-                <option value="3">MDF</option>
-            </Form.Select>
+            <Listados losDatos={medida} />
+            <Listados losDatos={material} />
+            <Listados losDatos={marco} />
         </div>
     )
 }
