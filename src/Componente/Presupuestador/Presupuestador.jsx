@@ -6,10 +6,7 @@ const Presupuestador = () => {
 
     const [datos, setDatos] = useState([])
 
-    // fetch('https://fakestoreapi.com/products/1')
-    //     .then(res => res.json())
-    //     .then(json => console.log(json))
-
+    
     useEffect(() => {
         const promesa = new Promise((acc, rej) => {
             acc(misDatos)

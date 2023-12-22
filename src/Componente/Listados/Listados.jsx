@@ -1,19 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form';
 
 
-const Listados = ({ losDatos }) => {
+const Listados = ({ losDatos, valor }) => {
 
-    console.log(losDatos)
+
+    const generarOpciones = () => {
+        const opciones = [];
+
+        for (const key in losDatos) {
+            opciones.push(
+                <option key={key} value={losDatos[key]}>
+                    {key}
+                </option>
+            );
+        }
+
+        return opciones;
+    };
 
 
 
     return (
         <Form.Select aria-label="Default select example">
-            <option>{losDatos}</option>
-            <option value="1">15x20</option>
-            <option value="2">25x30</option>
-            <option value="3">35x40</option>
+            <option>{valor}</option>
+
+            {generarOpciones()}
+
         </Form.Select>
     )
 }

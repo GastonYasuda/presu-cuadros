@@ -7,41 +7,74 @@ const ListasDesplegables = ({ datos }) => {
     const [medida, setMedida] = useState([])
     const [material, setMaterial] = useState([])
     const [marco, setMarco] = useState([])
+    const [color, setColor] = useState([])
+
+    const [valorMedida, setValorMedida] = useState('')
+    const [valorMaterial, setValorMaterial] = useState('')
+    const [valorMarco, setValorMarco] = useState('')
+    const [valorColor, setValorColor] = useState('')
+
+    //console.log(datos);
 
 
     useEffect(() => {
-        if (Object.keys(datos).length !== 0) {
-            console.log(typeof (datos));
-            console.log(datos);
+        if (datos.length !== 0) {
 
-            for (const key in Object.keys(datos)) {
-                if (Object.keys(datos)[key] === 'medida') {
-                    setMedida(Object.keys(datos)[key])
-                    //  console.log("medida");
+            for (const key in datos) {
+                //  console.log(datos.medida);
 
-                } else if (Object.keys(datos)[key] === 'material') {
-                    setMaterial(Object.keys(datos)[key])
-                    //  console.log("material");
+                if (key === "medida") {
+                    setMedida(datos.medida)
 
-                } else if (Object.keys(datos)[key] === 'marco') {
-                    setMarco(Object.keys(datos)[key])
-                    // console.log("marco");
+                    Object.keys(datos).find(e => {
+                        if (e === key) {
+                            // console.log(e);
+                            setValorMedida(e)
+                        }
+                    })
+                } else if (key === "material") {
+                    setMaterial(datos.material)
 
+                    Object.keys(datos).find(e => {
+                        if (e === key) {
+                            // console.log(e);
+                            setValorMaterial(e)
+                        }
+                    })
+                } else if (key === "marco") {
+                    setMarco(datos.marco)
+
+                    Object.keys(datos).find(e => {
+                        if (e === key) {
+                            //  console.log(e);
+                            setValorMarco(e)
+                        }
+                    })
+                } else if (key === "color") {
+                    setColor(datos.color)
+
+                    Object.keys(datos).find(e => {
+                        if (e === key) {
+                            //  console.log(e);
+                            setValorColor(e)
+                        }
+                    })
                 }
             }
 
-            // console.log(Object.keys(datos)[1]);
-        console.log(medida);
+
+
         }
 
-    }, [datos, medida, material, marco])
+    }, [datos])
 
 
     return (
         <div>
-            <Listados losDatos={medida} />
-            <Listados losDatos={material} />
-            <Listados losDatos={marco} />
+            <Listados losDatos={medida} valor={valorMedida} />
+            <Listados losDatos={material} valor={valorMaterial} />
+            <Listados losDatos={marco} valor={valorMarco} />
+            <Listados losDatos={color} valor={valorColor} />
         </div>
     )
 }

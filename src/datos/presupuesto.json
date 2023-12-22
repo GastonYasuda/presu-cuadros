@@ -13,5 +13,9 @@
         "mdf": 100,
         "madera": 200,
         "aluminio": 300
+    },
+    "color": {
+        "rojo": 500,
+        "negro": 10
     }
 }
