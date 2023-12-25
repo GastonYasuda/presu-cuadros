@@ -1,34 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import Form from 'react-bootstrap/Form';
+// import React, {  useEffect, useState } from 'react'
+// import Form from 'react-bootstrap/Form';
 
 
-const Listados = ({ losDatos, valor }) => {
+// const Listados = ({ losDatos, valor }) => {
 
 
-    const generarOpciones = () => {
-        const opciones = [];
+//     const [valorSeleccionado, setValorSeleccionado] = useState('');
 
-        for (const key in losDatos) {
-            opciones.push(
-                <option key={key} value={losDatos[key]}>
-                    {key}
-                </option>
-            );
-        }
+//     const handleChange = (event) => {
+//         setValorSeleccionado(event.target.value);
+//     };
 
-        return opciones;
-    };
+//     useEffect(() => {
+//         console.log(saludo);
+//         if (valorSeleccionado.length !== 0) {
+//             console.log(valorSeleccionado)
+//         }
+//     }, [valorSeleccionado])
+
+//     const generarOpciones = () => {
+//         const opciones = [];
+
+//         for (const key in losDatos) {
+//             opciones.push(
+//                 <option key={key} value={losDatos[key]}>
+//                     {key}
+//                 </option>
+//             );
+//         }
+
+//         return opciones;
+//     };
 
 
 
-    return (
-        <Form.Select aria-label="Default select example">
-            <option>{valor}</option>
+//     return (
+//         <Form.Select value={valorSeleccionado} onChange={handleChange}>
 
-            {generarOpciones()}
+//             <option>{valor}</option>
 
-        </Form.Select>
-    )
-}
+//             {generarOpciones()}
 
-export default Listados
+//         </Form.Select>
+//     )
+// }
+
+// export default Listados
