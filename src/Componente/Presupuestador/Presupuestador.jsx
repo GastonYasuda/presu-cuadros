@@ -1,32 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import ListasDesplegables from '../ListasDesplegables/ListasDesplegables'
-import misDatos from '../../datos/presupuesto.json'
+import { cotizador } from '../Context/ApiContext';
+
 
 const Presupuestador = () => {
+    const { presu, usuario } = useContext(cotizador)
 
-    const [datos, setDatos] = useState([])
 
-    
+
     useEffect(() => {
-        const promesa = new Promise((acc, rej) => {
-            acc(misDatos)
-        })
-        promesa
-            .then((result) => {
-                setDatos(result)
-            })
-            .catch((erro) => {
-                console.log(erro);
-            })
+        if (presu.length !== 0) {
 
-    }, [datos])
 
+
+
+        }
+    }, [presu, usuario])
 
     return (
         <div>
             <h1>Presupuestador</h1>
+            <h1>precio base: ${presu.base}</h1>
 
-            <ListasDesplegables datos={datos} />
+            <ListasDesplegables presu={presu} />
         </div>
     )
 }

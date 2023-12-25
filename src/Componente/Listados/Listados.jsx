@@ -1,48 +1,33 @@
-// import React, {  useEffect, useState } from 'react'
-// import Form from 'react-bootstrap/Form';
+import React, { useContext, useEffect } from 'react'
+import Form from 'react-bootstrap/Form';
+import { cotizador } from '../Context/ApiContext';
 
 
-// const Listados = ({ losDatos, valor }) => {
+const Listados = ({ lista, optionTitle }) => {
 
+    const { presu } = useContext(cotizador)
 
-//     const [valorSeleccionado, setValorSeleccionado] = useState('');
+    useEffect(() => {
+        if (optionTitle !== '' && optionTitle !== undefined) {
+            console.log(optionTitle);
 
-//     const handleChange = (event) => {
-//         setValorSeleccionado(event.target.value);
-//     };
+        }
+    }, [optionTitle])
 
-//     useEffect(() => {
-//         console.log(saludo);
-//         if (valorSeleccionado.length !== 0) {
-//             console.log(valorSeleccionado)
-//         }
-//     }, [valorSeleccionado])
+    return (
+        <Form.Select aria-label="Default select example">
+            <option>{optionTitle}</option>
 
-//     const generarOpciones = () => {
-//         const opciones = [];
+            {
+                lista.map((list, i) => {
+                    return (
+                        <option value={i} key={i}>{Object.keys(list)}</option>
+                    )
+                })
+            }
+        </Form.Select>
 
-//         for (const key in losDatos) {
-//             opciones.push(
-//                 <option key={key} value={losDatos[key]}>
-//                     {key}
-//                 </option>
-//             );
-//         }
+    )
+}
 
-//         return opciones;
-//     };
-
-
-
-//     return (
-//         <Form.Select value={valorSeleccionado} onChange={handleChange}>
-
-//             <option>{valor}</option>
-
-//             {generarOpciones()}
-
-//         </Form.Select>
-//     )
-// }
-
-// export default Listados
+export default Listados
