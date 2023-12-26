@@ -14,6 +14,9 @@ const ListasDesplegables = ({ presu }) => {
     const [titleMedidas, setTitleMedidas] = useState('')
 
 
+
+
+
     useEffect(() => {
         if (presu.length !== 0) {
 
@@ -30,17 +33,26 @@ const ListasDesplegables = ({ presu }) => {
             setMateriales(presu.materiales)
             setMedidas(presu.medidas)
             setColores(presu.colores)
-
+            //    console.log(presu.precios);
         }
     }, [presu])
 
 
     return (
         <div>
+            {
+                presu.precios !== undefined &&
+                presu.precios.map((cadaPresu, i) => {
 
-            <Listados lista={materiales} optionTitle={titleMateriales} />
+                    return (
+                        <Listados key={i} lista={cadaPresu} />
+                    )
+                })
+            }
+
+            {/* <Listados lista={materiales} optionTitle={titleMateriales} />
             <Listados lista={colores} optionTitle={titleColores} />
-            <Listados lista={medidas} optionTitle={titleMedidas} />
+            <Listados lista={medidas} optionTitle={titleMedidas} /> */}
 
             <button>COTIZAR</button>
         </div >
