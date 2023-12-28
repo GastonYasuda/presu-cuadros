@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form';
 
 
-const Listados = ({ lista, setParaSumar, paraSumar }) => {
+const Listados = ({ lista, setParaSumar, paraSumar}) => {
 
     const [selectedValue, setSelectedValue] = useState('');
 
