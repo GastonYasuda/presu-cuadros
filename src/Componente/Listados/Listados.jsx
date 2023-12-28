@@ -1,10 +1,8 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form';
-import { cotizador } from '../Context/ApiContext';
-import ListItem from '../ListItem/ListItem';
 
 
-const Listados = ({ lista }) => {
+const Listados = ({ lista, setParaSumar, paraSumar }) => {
 
     const [selectedValue, setSelectedValue] = useState('');
 
@@ -12,23 +10,42 @@ const Listados = ({ lista }) => {
 
     const [elemento, setElemento] = useState('')
     const [ubicacion, setUbicacion] = useState()
+    const [optionTitle, setOptionTitle] = useState('')
 
-    const [suma, setSuma] = useState([])
 
     const handleSelectChange = (event) => {
         setSelectedValue(event.target.value);
-        //console.log(event.target.value);//me trae la ubicacion de lo seleccionado
         setUbicacion(event.target.value)
-
-        //console.log(Object.keys(lista)[0]); //me trae el optionTitle
         setElemento(Object.keys(lista)[0])
-
-        //console.log(lista);
-
     };
 
 
-    const [optionTitle, setOptionTitle] = useState('')
+
+    const precioProductoSeleccionado = (valorSeleccionado, ubicacionDelValor) => {
+        if (valorSeleccionado !== undefined && ubicacionDelValor !== undefined) {
+
+            const valorProductoSeleccionado = lista[valorSeleccionado][ubicacionDelValor]
+            const productoPrecio = (Object.keys(lista), valorProductoSeleccionado)
+            const categoria = Object.keys(lista)[0]
+            const creoObjeto = { categoria, productoPrecio }
+
+
+            setParaSumar((prevSuma) => [...prevSuma, creoObjeto]);
+
+            for (const key in paraSumar) {
+
+                if (Object.keys(lista)[0] === paraSumar[key].categoria) {
+
+                    const indiceAQuitar = [key];
+                    paraSumar.splice(indiceAQuitar, 1);
+
+                    setParaSumar([...paraSumar, creoObjeto]);
+                }
+
+            }
+        }
+    }
+
 
 
     useEffect(() => {
@@ -36,37 +53,14 @@ const Listados = ({ lista }) => {
         for (const key in lista) {
 
             setValores(lista[key])
-            // console.log(lista[key]);
-            // console.log(lista[key][0]);
-
         }
-
-        if (elemento !== undefined && ubicacion !== undefined) {
-
-            const valorProductoSeleccionado = lista[elemento][ubicacion]
-            console.log(valorProductoSeleccionado[Object.keys(valorProductoSeleccionado)]);
-
-            const precioSeleccionado = valorProductoSeleccionado[Object.keys(valorProductoSeleccionado)]
-
-
-            setSuma((prevSuma) => [...prevSuma, precioSeleccionado]);
-
-
-
-        }
-
-
-      
 
         setOptionTitle(Object.keys(lista))
-    }, [ubicacion, elemento, lista])
 
-    useEffect(() => {
-        if (suma.length !== 0) {
-            console.log(suma);
-        }
-        
-    }, [suma]);
+        precioProductoSeleccionado(elemento, ubicacion)
+
+    }, [elemento, ubicacion])
+
 
     return (
         <Form.Select

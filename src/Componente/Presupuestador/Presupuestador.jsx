@@ -11,9 +11,6 @@ const Presupuestador = () => {
     useEffect(() => {
         if (presu.length !== 0) {
 
-
-
-
         }
     }, [presu, usuario])
 
