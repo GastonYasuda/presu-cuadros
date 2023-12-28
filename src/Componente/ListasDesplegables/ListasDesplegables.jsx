@@ -7,10 +7,12 @@ const ListasDesplegables = ({ presu }) => {
     const [paraSumar, setParaSumar] = useState([])
 
     useEffect(() => {
-        if (paraSumar.length !== 0) {
+        if (presu.precios !== undefined) {
+            if (paraSumar.length === presu.precios.length) {
 
-            console.log(paraSumar);
+                console.log(paraSumar);
 
+            }
         }
     }, [paraSumar])
 

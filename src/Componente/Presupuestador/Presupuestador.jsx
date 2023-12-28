@@ -10,7 +10,8 @@ const Presupuestador = () => {
 
     useEffect(() => {
         if (presu.length !== 0) {
-
+            //  console.log(presu);
+            // console.log(presu.precios.length);
         }
     }, [presu, usuario])
 
