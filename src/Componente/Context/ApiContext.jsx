@@ -8,13 +8,14 @@ export const cotizador = createContext()
 
 const ApiContext = ({ children }) => {
 
-    const [presu, setPresu] = useState([])
+    const [precioData, setPrecioData] = useState([])
+
     const [usuario, setUsuario] = useState([])
 
 
     useEffect(() => {
 
-        searchCollections("presu", "precio")
+        searchCollections("presu", "precioData")
         searchCollections("usuario", "usuario")
 
     }, [])
@@ -33,12 +34,13 @@ const ApiContext = ({ children }) => {
 
             datoFirebase.push(dato)
 
+
         })
 
-        if (state === "precio") {
-            setPresu(datoFirebase[0])
-        } else if (state === "usuario")
+        if (state === "precioData") {
+            setPrecioData(datoFirebase[0])
 
+        } else if (state === "usuario")
             setUsuario(datoFirebase[0])
 
     }
@@ -47,7 +49,7 @@ const ApiContext = ({ children }) => {
 
 
     return (
-        <cotizador.Provider value={{ presu, usuario }}>
+        <cotizador.Provider value={{ precioData, usuario }}>
             {children}
         </cotizador.Provider>
     )
