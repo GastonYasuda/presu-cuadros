@@ -1,11 +1,23 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import List from '../List/List';
 
-const ListSelect = ({ paraSumar, categoria, datosParaSumar, setDatosParaSumar }) => {
+const ListSelect = ({ paraSumar, setParaSumar, categoria, datosParaSumar, setDatosParaSumar, precioBase, setResultado }) => {
 
 
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('')
     const [descripcionSeleccionada, setDescripcionSeleccionada] = useState()
+
+
+
+    const sumarTodo = (cotiFinal, precioBase) => {
+        const initialValue = precioBase;
+        const sumWithInitial = cotiFinal.reduce(
+            (accumulator, currentValue) => accumulator + currentValue,
+            initialValue,
+        );
+
+        setResultado(sumWithInitial)
+    }
 
 
 
@@ -15,6 +27,8 @@ const ListSelect = ({ paraSumar, categoria, datosParaSumar, setDatosParaSumar })
         const productoPrecio = (Object.keys(categoria), itemPrecioSeleccionado)
         const category = Object.keys(categoria)
         const creoObjeto = { category, productoPrecio }
+
+
 
         setDatosParaSumar((prevSuma) => [...prevSuma, creoObjeto]);
 
@@ -26,10 +40,13 @@ const ListSelect = ({ paraSumar, categoria, datosParaSumar, setDatosParaSumar })
             if (Object.keys(categoria)[0] === datosParaSumar[key].category[0]) {
 
                 console.log("hola");
+                setParaSumar([])
                 const indiceAQuitar = [key];
                 datosParaSumar.splice(indiceAQuitar, 1);
 
+
                 setDatosParaSumar([...datosParaSumar, creoObjeto]);
+
             }
 
         }
@@ -40,16 +57,18 @@ const ListSelect = ({ paraSumar, categoria, datosParaSumar, setDatosParaSumar })
     useEffect(() => {
         if (paraSumar.length !== 0) {
 
-            console.log("paraSumar:", paraSumar);
+            console.log(paraSumar);
+            sumarTodo(paraSumar, precioBase)
 
         }
-    }, [paraSumar])
+    }, [paraSumar, datosParaSumar])
 
 
 
 
 
     useEffect(() => {
+
         if (categoriaSeleccionada !== undefined && descripcionSeleccionada !== undefined) {
             // console.log(categoriaSeleccionada);
             //console.log(descripcionSeleccionada);
@@ -92,7 +111,6 @@ const ListSelect = ({ paraSumar, categoria, datosParaSumar, setDatosParaSumar })
                     )
                 })
             }
-
         </div>
     )
 }

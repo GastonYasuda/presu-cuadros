@@ -14,19 +14,6 @@ const ListSelectContainer = () => {
     const [resultado, setResultado] = useState()
 
 
-    const sumarTodo = (cotiFinal) => {
-        const initialValue = precioData.base;
-        const sumWithInitial = cotiFinal.reduce(
-            (accumulator, currentValue) => accumulator + currentValue,
-            initialValue,
-        );
-
-        setResultado(sumWithInitial)
-    }
-
-
-
-
 
     useEffect(() => {
         if (precioData !== undefined && precioData.length !== 0) {
@@ -37,37 +24,19 @@ const ListSelectContainer = () => {
         }
 
         if (datosParaSumar.length !== 0 && precioData.precios.length === datosParaSumar.length) {
-            //   console.log(datosParaSumar);
-         
+            console.log(datosParaSumar);
+
             for (const key in datosParaSumar) {
-                // console.log(datosParaSumar[key].productoPrecio);
-                // const select = (datosParaSumar[key].productoPrecio);
-                // const selectValue = datosParaSumar[key].productoPrecio[Object.keys(select)]
 
-
-                // setParaSumar([...paraSumar, selectValue]);
-
-
-                // Obtén el objeto productoPrecio
                 const productoPrecio = datosParaSumar[key].productoPrecio;
 
-                // Supongo que deseas obtener el valor asociado a la primera clave del objeto productoPrecio
                 const primeraClave = Object.keys(productoPrecio)[0];
                 const selectValue = productoPrecio[primeraClave];
 
-                // Agrega el nuevo elemento al array paraSumar
-                
+
                 setParaSumar(prevParaSumar => [...prevParaSumar, selectValue]);
-              
-
             }
-
-
-
-
-
         }
-
 
 
     }, [precioData, categorias, datosParaSumar])
@@ -77,19 +46,26 @@ const ListSelectContainer = () => {
     return (
         <div>
             <h1>HOLA PRESU!</h1>
+            <h6>Precio Base: ${precioData.base} -</h6>
             {
                 categorias !== undefined &&
                 categorias.map((categoria, i) => {
                     return (
                         <Fragment key={i}>
-                            <ListSelect paraSumar={paraSumar} categoria={categoria} datosParaSumar={datosParaSumar} setDatosParaSumar={setDatosParaSumar} />
+                            <ListSelect paraSumar={paraSumar} setParaSumar={setParaSumar}
+                                categoria={categoria} datosParaSumar={datosParaSumar} setDatosParaSumar={setDatosParaSumar}
+                                setResultado={setResultado} precioBase={precioData.base} />
                         </Fragment>
                     )
 
                 })
 
             }
-            {/* <h1>{resultado}</h1> */}
+            {
+                resultado !== undefined &&
+                <h1>Cotización Final: ${resultado}-</h1>
+
+            }
 
         </div>
     )
