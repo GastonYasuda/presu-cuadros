@@ -67,7 +67,12 @@ const ListSelectContainer = () => {
 
             }
 
-        </div>
+            <br />
+            <br />
+            <h5>PROXIMOS PASOS:</h5>
+            <p> - CAMBIAR PRECIOS < br /> - AGREGAR CATEGORIAS</p >
+
+        </div >
     )
 }
 
