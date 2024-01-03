@@ -28,8 +28,6 @@ const ListSelect = ({ paraSumar, setParaSumar, categoria, datosParaSumar, setDat
         const category = Object.keys(categoria)
         const creoObjeto = { category, productoPrecio }
 
-
-
         setDatosParaSumar((prevSuma) => [...prevSuma, creoObjeto]);
 
         for (const key in datosParaSumar) {
@@ -39,7 +37,7 @@ const ListSelect = ({ paraSumar, setParaSumar, categoria, datosParaSumar, setDat
 
             if (Object.keys(categoria)[0] === datosParaSumar[key].category[0]) {
 
-                console.log("hola");
+                // console.log("hola");
                 setParaSumar([])
                 const indiceAQuitar = [key];
                 datosParaSumar.splice(indiceAQuitar, 1);

@@ -1,7 +1,8 @@
 import './App.css';
 import ApiContext from './Componente/Context/ApiContext';
-import { BrowserRouter, Routes, Rote, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ListSelectContainer from './Container/ListSelectContainer/ListSelectContainer';
+import ChangePriceContainer from './Container/ChangePriceContainer/ChangePriceContainer';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Routes>
 
           <Route path='/' element={<ListSelectContainer />} />
+          <Route path='/:update-price' element={<ChangePriceContainer />} />
 
 
         </Routes>

@@ -1,6 +1,8 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react'
 import ListSelect from '../../Componente/ListSelect/ListSelect'
 import { cotizador } from '../../Componente/Context/ApiContext'
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 const ListSelectContainer = () => {
 
@@ -71,6 +73,11 @@ const ListSelectContainer = () => {
             <br />
             <h5>PROXIMOS PASOS:</h5>
             <p> - CAMBIAR PRECIOS < br /> - AGREGAR CATEGORIAS</p >
+
+            <Button variant="primary">
+                <Link to='/update-price' style={{ color: '#ffff', textDecoration: 'none' }}>Change Price</Link>
+            </Button >
+
 
         </div >
     )
