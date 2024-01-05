@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { db } from '../../Config/config.js'
-import { getDocs, collection } from 'firebase/firestore';
+import { getDocs, collection, doc, setDoc } from 'firebase/firestore';
 
 
 
@@ -19,6 +19,16 @@ const ApiContext = ({ children }) => {
         searchCollections("usuario", "usuario")
 
     }, [])
+
+    const changePriceFunction = async () => {
+        // AGREGAR O ELIMINAR UN FAVORITO O UN PRODUCTO AL CARRITO O A LOS FAVORITOS DE CIERTO USUARIO
+        const user = doc(db, 'presu', 'W2yRgNdFQ0DIN8NTOdLz');
+      //  await setDoc(user, { "precios": 'hola' });
+      //me actualiza
+
+    }
+
+
 
 
 
@@ -49,7 +59,7 @@ const ApiContext = ({ children }) => {
 
 
     return (
-        <cotizador.Provider value={{ precioData, usuario }}>
+        <cotizador.Provider value={{ precioData, usuario, changePriceFunction }}>
             {children}
         </cotizador.Provider>
     )

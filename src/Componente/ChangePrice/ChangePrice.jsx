@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
@@ -13,15 +13,13 @@ const ChangePrice = ({ cadaLlave }) => {
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
 
 
     useEffect(() => {
         if (cadaLlave !== undefined) {
 
-            console.log(Object.keys(cadaLlave)[0]);
+          //  console.log(Object.keys(cadaLlave)[0]);
 
             for (const key in cadaLlave) {
                 //  console.log(cadaLlave[key]);
@@ -38,7 +36,7 @@ const ChangePrice = ({ cadaLlave }) => {
     }, [cadaLlave])
 
     const getNewPrice = (e) => {
-        console.log(e.target.value);
+       // console.log(e.target.value);
         setSelectedValue(e.target.value)
     }
 
@@ -74,7 +72,7 @@ const ChangePrice = ({ cadaLlave }) => {
 
                             </div>
 
-                            <ChangePriceModal handleClose={handleClose} show={show} selectedValue={selectedValue} llave={Object.keys(myKey)} titulo={Object.keys(cadaLlave)[0]} />
+                            <ChangePriceModal setShow={setShow} show={show} selectedValue={selectedValue} llave={Object.keys(myKey)} titulo={Object.keys(cadaLlave)[0]} />
                         </div>
                     )
                 })

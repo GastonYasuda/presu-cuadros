@@ -9,17 +9,10 @@ const ChangePriceContainer = () => {
 
     const { precioData } = useContext(cotizador)
 
-    // useEffect(() => {
-    //     if (precioData !== undefined && precioData.length !== 0) {
-    //         //console.log(precioData.precios);
-    //         const precios = precioData.precios
-
-    //         for (const key in precios) {
-    //             console.log(precios[key]);
-    //             console.log(Object.keys(precios[key]));
-    //         }
-    //     }
-    // }, [precioData])
+    useEffect(() => {
+        if (precioData !== undefined && precioData.length !== 0) {
+        }
+    }, [precioData])
 
     return (
         <div>
