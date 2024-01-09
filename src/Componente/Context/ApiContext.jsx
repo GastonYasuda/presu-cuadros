@@ -13,6 +13,8 @@ const ApiContext = ({ children }) => {
     const [usuario, setUsuario] = useState([])
 
 
+
+
     useEffect(() => {
 
         searchCollections("presu", "precioData")
@@ -33,6 +35,8 @@ const ApiContext = ({ children }) => {
 
 
     const searchCollections = async (nameCollection, state) => {
+
+        
         const querySnapshot = await getDocs(collection(db, nameCollection))
         const datoFirebase = []
         querySnapshot.forEach((doc) => {

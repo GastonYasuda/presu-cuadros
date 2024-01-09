@@ -72,7 +72,7 @@ const ChangePrice = ({ cadaLlave }) => {
 
                             </div>
 
-                            <ChangePriceModal setShow={setShow} show={show} selectedValue={selectedValue} llave={Object.keys(myKey)} titulo={Object.keys(cadaLlave)[0]} />
+                            <ChangePriceModal setShow={setShow} show={show} selectedValue={selectedValue} llave={Object.keys(myKey)} titulo={cadaLlave} />
                         </div>
                     )
                 })
