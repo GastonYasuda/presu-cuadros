@@ -35,7 +35,7 @@ const ChangePriceModal = ({ setShow, show, titulo, llave, selectedValue }) => {
                     // Reemplazar el valor de "negro" en precios[0]["color"]
 
                     let nuevoColor = llave[0]
-                    let nuevoValor = selectedValue;
+                    let nuevoValor = Number(selectedValue);
 
 
                     for (const key0 in datosActuales.precios) {
