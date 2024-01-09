@@ -4,6 +4,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button } from 'react-bootstrap';
 import ChangePriceModal from '../ChangePriceModal/ChangePriceModal';
+import { cotizador } from '../Context/ApiContext';
 
 const ChangePrice = ({ cadaLlave }) => {
 
@@ -13,13 +14,13 @@ const ChangePrice = ({ cadaLlave }) => {
 
     const [show, setShow] = useState(false);
 
-
+    const { presuData } = useContext(cotizador)
 
 
     useEffect(() => {
         if (cadaLlave !== undefined) {
 
-          //  console.log(Object.keys(cadaLlave)[0]);
+            //  console.log(Object.keys(cadaLlave)[0]);
 
             for (const key in cadaLlave) {
                 //  console.log(cadaLlave[key]);
@@ -29,14 +30,16 @@ const ChangePrice = ({ cadaLlave }) => {
                 for (const key2 in llave) {
                     //   console.log(llave[key2]);
                     //   console.log(Object.keys(llave[key2]));
-                    //    console.log(llave[key2][Object.keys(llave[key2])])
+                    console.log(llave[key2][Object.keys(llave[key2])])
                 }
             }
         }
-    }, [cadaLlave])
+        // console.log(cadaKey[0]["10x10"]);
+
+    }, [cadaLlave, presuData])
 
     const getNewPrice = (e) => {
-       // console.log(e.target.value);
+        // console.log(e.target.value);
         setSelectedValue(e.target.value)
     }
 

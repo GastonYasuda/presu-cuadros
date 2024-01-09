@@ -78,6 +78,7 @@ const ChangePriceModal = ({ setShow, show, titulo, llave, selectedValue }) => {
                         }
                     }
                 }
+                window.location.reload();
             }
         } catch (error) {
             console.error('Error al actualizar el valor de "negro":', error);
@@ -99,10 +100,9 @@ const ChangePriceModal = ({ setShow, show, titulo, llave, selectedValue }) => {
                 <Button variant="secondary" onClick={() => { setShow(false) }}>
                     Cancelar
                 </Button>
-                <Button variant="primary" onClick={() => { setShow(false) }}>
+                <Button variant="primary" onClick={() => { actualizarValorNegro(), setShow(false) }}>
                     Actualizar
                 </Button>
-                <Button onClick={actualizarValorNegro}>hola</Button>
             </Modal.Footer>
         </Modal>)
 }
