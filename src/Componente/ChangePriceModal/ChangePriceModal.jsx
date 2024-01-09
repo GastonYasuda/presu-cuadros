@@ -37,52 +37,47 @@ const ChangePriceModal = ({ setShow, show, titulo, llave, selectedValue }) => {
                     let nuevoColor = llave[0]
                     let nuevoValor = selectedValue;
 
-           
-                        for (const key0 in datosActuales.precios) {
-                            // console.log(Object.keys(datosActuales.precios[key0])[0])
-                            // console.log(Object.keys(titulo)[0]);
 
-                            if (Object.keys(datosActuales.precios[key0])[0] === Object.keys(titulo)[0]) {
-                                // console.log(Object.keys(datosActuales.precios[key0])[0])//color
-                                // console.log(datosActuales.precios[key0]);
+                    for (const key0 in datosActuales.precios) {
+                        // console.log(Object.keys(datosActuales.precios[key0])[0])
+                        // console.log(Object.keys(titulo)[0]);
 
-                                for (const key in datosActuales.precios[key0]) {
-                                    // console.log(datosActuales.precios[key0][key]);
-                                    //console.log(datosActuales.precios[key0][key][1]);
-                                    // console.log(llave[0]);
+                        if (Object.keys(datosActuales.precios[key0])[0] === Object.keys(titulo)[0]) {
+                            // console.log(Object.keys(datosActuales.precios[key0])[0])//color
+                            // console.log(datosActuales.precios[key0]);
 
-                                    for (const key2 in datosActuales.precios[key0][key]) {
-                                        // console.log(Object.keys(datosActuales.precios[key0][key][key2])[0]);
-                                        //    console.log(llave[0]);
+                            for (const key in datosActuales.precios[key0]) {
+                                // console.log(datosActuales.precios[key0][key]);
+                                //console.log(datosActuales.precios[key0][key][1]);
+                                // console.log(llave[0]);
 
-                                        if (Object.keys(datosActuales.precios[key0][key][key2])[0] === llave[0]) {
-                                            //   console.log(`Hola! soy ${Object.keys(datosActuales.precios[key0][key][key2])} y pertenezco a ${Object.keys(datosActuales.precios[key0])[0]}!!!`);//negro
+                                for (const key2 in datosActuales.precios[key0][key]) {
+                                    // console.log(Object.keys(datosActuales.precios[key0][key][key2])[0]);
+                                    //    console.log(llave[0]);
 
-
-                                            //  console.log(datosActuales.precios[key0][0][Object.keys(titulo)][key])
-                                            //TENGO QUE VER EN QUE POSISION ESTA BLANCO Y QUE POSICION ESTA NEGRO con KEY!!
-
-                                            datosActuales.precios[key0][key][key2] = { [nuevoColor]: nuevoValor };
-
-                                            //   datosActuales.precios[0][Object.keys(titulo)[0]][Object.keys(titulo)][Object.keys(llave)] = { [nuevoColor]: nuevoValor }; //color[1] tiene que ser dinamico----- negro: tambien-----el valor 15 tambien
-                                            console.log('Datos actuales:', datosActuales.precios[key0][Object.keys(titulo)[0]][Object.keys(llave)]);
+                                    if (Object.keys(datosActuales.precios[key0][key][key2])[0] === llave[0]) {
+                                        //   console.log(`Hola! soy ${Object.keys(datosActuales.precios[key0][key][key2])} y pertenezco a ${Object.keys(datosActuales.precios[key0])[0]}!!!`);//negro
 
 
-                                            // Actualizar el documento con los nuevos datos
-                                            await updateDoc(documentoRef, datosActuales);
+                                        //  console.log(datosActuales.precios[key0][0][Object.keys(titulo)][key])
+                                        //TENGO QUE VER EN QUE POSISION ESTA BLANCO Y QUE POSICION ESTA NEGRO con KEY!!
 
-                                            console.log('Valor de "negro" en precios[0]["color"] actualizado exitosamente.');
-                                        }
+                                        datosActuales.precios[key0][key][key2] = { [nuevoColor]: nuevoValor };
+
+                                        //   datosActuales.precios[0][Object.keys(titulo)[0]][Object.keys(titulo)][Object.keys(llave)] = { [nuevoColor]: nuevoValor }; //color[1] tiene que ser dinamico----- negro: tambien-----el valor 15 tambien
+                                        console.log('Datos actuales:', datosActuales.precios[key0][Object.keys(titulo)[0]][Object.keys(llave)]);
+
+
+                                        // Actualizar el documento con los nuevos datos
+                                        await updateDoc(documentoRef, datosActuales);
+
+                                        console.log('Valor de "negro" en precios[0]["color"] actualizado exitosamente.');
                                     }
                                 }
                             }
-               
+                        }
                     }
-                } else {
-                    console.log('El campo "precios" no existe o está vacío.');
                 }
-            } else {
-                console.log('El documento no existe.');
             }
         } catch (error) {
             console.error('Error al actualizar el valor de "negro":', error);
