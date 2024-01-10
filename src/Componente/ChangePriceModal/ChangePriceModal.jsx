@@ -72,7 +72,7 @@ const ChangePriceModal = ({ setShow, show, titulo, llave, selectedValue }) => {
                 console.error('Error al actualizar el valor', error);
             }
         }
-
+        setShow(false)
     };
 
 
@@ -90,7 +90,7 @@ const ChangePriceModal = ({ setShow, show, titulo, llave, selectedValue }) => {
                 <Button variant="secondary" onClick={() => { setShow(false) }}>
                     Cancelar
                 </Button>
-                <Button variant="primary" onClick={() => { actualizarValorNegro(), setShow(false) }}>
+                <Button variant="primary" onClick={() => { actualizarValorNegro() }}>
                     Actualizar
                 </Button>
             </Modal.Footer>
