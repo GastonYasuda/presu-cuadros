@@ -30,7 +30,7 @@ const ChangePrice = ({ cadaLlave }) => {
                 for (const key2 in llave) {
                     //   console.log(llave[key2]);
                     //   console.log(Object.keys(llave[key2]));
-                    console.log(llave[key2][Object.keys(llave[key2])])
+                    //console.log(llave[key2][Object.keys(llave[key2])])
                 }
             }
         }
@@ -75,7 +75,7 @@ const ChangePrice = ({ cadaLlave }) => {
 
                             </div>
 
-                            <ChangePriceModal setShow={setShow} show={show} selectedValue={selectedValue} llave={Object.keys(myKey)} titulo={cadaLlave} />
+                            <ChangePriceModal setShow={setShow} show={show} selectedValue={selectedValue} llave={Object.keys(myKey)} titulo={Object.keys(cadaLlave)} />
                         </div>
                     )
                 })

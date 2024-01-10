@@ -22,21 +22,8 @@ const ApiContext = ({ children }) => {
 
     }, [])
 
-    const changePriceFunction = async () => {
-        // AGREGAR O ELIMINAR UN FAVORITO O UN PRODUCTO AL CARRITO O A LOS FAVORITOS DE CIERTO USUARIO
-        const user = doc(db, 'presu', 'W2yRgNdFQ0DIN8NTOdLz');
-      //  await setDoc(user, { "precios": 'hola' });
-      //me actualiza
-
-    }
-
-
-
-
-
     const searchCollections = async (nameCollection, state) => {
 
-        
         const querySnapshot = await getDocs(collection(db, nameCollection))
         const datoFirebase = []
         querySnapshot.forEach((doc) => {
@@ -63,7 +50,7 @@ const ApiContext = ({ children }) => {
 
 
     return (
-        <cotizador.Provider value={{ precioData, usuario, changePriceFunction }}>
+        <cotizador.Provider value={{ precioData, usuario }}>
             {children}
         </cotizador.Provider>
     )

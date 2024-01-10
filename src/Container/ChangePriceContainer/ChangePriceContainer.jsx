@@ -3,6 +3,7 @@ import { cotizador } from '../../Componente/Context/ApiContext'
 import ChangePrice from '../../Componente/ChangePrice/ChangePrice'
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import ChangeBasePrice from '../ChangeBasePrice/ChangeBasePrice';
 
 
 const ChangePriceContainer = () => {
@@ -16,6 +17,8 @@ const ChangePriceContainer = () => {
 
     return (
         <div>
+            <h1>CAMBIAR PRECIOS!!</h1>
+            <ChangeBasePrice precioData={precioData} />
             {
                 precioData.precios !== undefined &&
                 precioData.precios.map((cadaLlave, i) => {
