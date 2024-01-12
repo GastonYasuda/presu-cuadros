@@ -4,6 +4,7 @@ import ChangePrice from '../../Componente/ChangePrice/ChangePrice'
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import ChangeBasePrice from '../ChangeBasePrice/ChangeBasePrice';
+import AddNewPrice from '../../Componente/AddNewPrice/AddNewPrice';
 
 
 const ChangePriceContainer = () => {
@@ -25,6 +26,7 @@ const ChangePriceContainer = () => {
                     return (
                         <div key={i}>
                             <h1>{Object.keys(cadaLlave)}</h1>
+                            <AddNewPrice titulo={Object.keys(cadaLlave)}/>
                             <ChangePrice cadaLlave={cadaLlave} />
                         </div>
                     )

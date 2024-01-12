@@ -94,7 +94,8 @@ const ChangePriceModal = ({ setShow, show, titulo, llave, selectedValue }) => {
                     Actualizar
                 </Button>
             </Modal.Footer>
-        </Modal>)
+        </Modal>
+    )
 }
 
 export default ChangePriceModal
