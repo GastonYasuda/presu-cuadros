@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect,  useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button, InputGroup } from 'react-bootstrap'
@@ -14,6 +14,8 @@ const AddNewPriceModal = ({ show, setShow, titulo }) => {
     const [caracteristicaIngresado, setCaracteristicaIngresado] = useState('')
     const [caracteisticaValor, setCaracteristicaValor] = useState()
 
+
+
     useEffect(() => {
         //  console.log(precioData.precios);
     }, [])
@@ -23,13 +25,14 @@ const AddNewPriceModal = ({ show, setShow, titulo }) => {
 
 
         addNewCharacteristic(caracteristicaIngresado, caracteisticaValor, titulo)
+
     }
 
 
 
 
     return (
-        <Modal show={show} >
+        <Modal show={show}  >
             <Modal.Header>
                 <Modal.Title>Agregar nueva caracteristica</Modal.Title>
             </Modal.Header>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { cotizador } from '../../Componente/Context/ApiContext'
 import ChangePrice from '../../Componente/ChangePrice/ChangePrice'
 import Button from 'react-bootstrap/Button';
@@ -9,12 +9,15 @@ import AddNewPrice from '../../Componente/AddNewPrice/AddNewPrice';
 
 const ChangePriceContainer = () => {
 
+
     const { precioData } = useContext(cotizador)
 
     useEffect(() => {
         if (precioData !== undefined && precioData.length !== 0) {
         }
     }, [precioData])
+
+
 
     return (
         <div>
@@ -24,9 +27,9 @@ const ChangePriceContainer = () => {
                 precioData.precios !== undefined &&
                 precioData.precios.map((cadaLlave, i) => {
                     return (
-                        <div key={i}>
+                        <div key={i} >
                             <h1>{Object.keys(cadaLlave)}</h1>
-                            <AddNewPrice titulo={Object.keys(cadaLlave)}/>
+                            <AddNewPrice titulo={Object.keys(cadaLlave)} />
                             <ChangePrice cadaLlave={cadaLlave} />
                         </div>
                     )

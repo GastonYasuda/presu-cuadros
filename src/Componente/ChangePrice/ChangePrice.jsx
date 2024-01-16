@@ -4,7 +4,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button } from 'react-bootstrap';
 import ChangePriceModal from '../ChangePriceModal/ChangePriceModal';
-import { cotizador } from '../Context/ApiContext';
+import { cotizador } from '../Context/ApiContext.jsx';
+import DeleteModal from '../DeleteModal/DeleteModal.jsx';
 
 const ChangePrice = ({ cadaLlave }) => {
 
@@ -13,6 +14,8 @@ const ChangePrice = ({ cadaLlave }) => {
     const [myKey, setMyKey] = useState('')
 
     const [show, setShow] = useState(false);
+
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
 
     const { presuData } = useContext(cotizador)
 
@@ -66,6 +69,7 @@ const ChangePrice = ({ cadaLlave }) => {
                                     >
                                         <Form.Control type="" placeholder="" />
                                     </FloatingLabel>
+                                    <Button onClick={() => { setShowDeleteModal(true) }}>Eliminar</Button>
 
                                     <Button variant="outline-secondary" id="button-addon2" onClick={() => { setShow(true); setMyKey(llave) }} >
                                         Actualizar
@@ -74,7 +78,7 @@ const ChangePrice = ({ cadaLlave }) => {
                                 </InputGroup>
 
                             </div>
-
+                            <DeleteModal showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} />
                             <ChangePriceModal setShow={setShow} show={show} selectedValue={selectedValue} llave={Object.keys(myKey)} titulo={Object.keys(cadaLlave)} />
                         </div>
                     )
