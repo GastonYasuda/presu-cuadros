@@ -38,6 +38,9 @@ const ChangePriceContainer = () => {
             <Button variant="primary">
                 <Link to='/' style={{ color: '#ffff', textDecoration: 'none' }}>Back</Link>
             </Button >
+            <Button variant='primary' onClick={() => { console.log("que abra un modal consultando descripcion y caracteristica y precio"); }}>
+                Add new description
+            </Button>
 
         </div >
     )
