@@ -51,9 +51,9 @@ const ApiContext = ({ children }) => {
 
 
 
+
     const addNewCharacteristic = async (caracteristicaIngresado, caracteisticaValor, titulo) => {
         const documentoRef = doc(db, 'presu', precioData.id);
-
 
 
         try {
@@ -87,21 +87,52 @@ const ApiContext = ({ children }) => {
                             await setDoc(documentoRef, datosActuales);
                         }
                     }
-
                 }
-
-               // miComponenteRef.current && miComponenteRef.current.forceUpdate();
-
             }
         } catch (error) {
             console.error('Error al actualizar el valor', error);
         }
     };
 
+    const deleteCharacteristic = async (characteristic) => {
+        const documentoRef = doc(db, 'presu', precioData.id);
+        // console.log(`Borramos desde apicontex ${characteristic}`);
+        if (characteristic !== undefined) {
+            for (const key in precioData.precios) {
+                //  console.log(Object.keys(precioData.precios[key])[0]);
+                for (const key2 in precioData.precios[key]) {
+                    for (const key3 in precioData.precios[key][key2]) {
+
+                        if (Object.keys(precioData.precios[key][key2][key3])[0] === characteristic) {
+
+                            console.log(`Hola! soy ${Object.keys(precioData.precios[key][key2][key3])[0]} y estoy en la posicion ${key3} de ${Object.keys(precioData.precios[key])[0]}`);
+
+                            // console.log(Object.keys(precioData.precios[key])[0]);
+                            //console.log(precioData.precios[key]);
+                            //const indiceAEliminar = miArray.indexOf('elemento2');
+
+                            precioData.precios[key][key2].splice([key3] , 1);
+                            //me elimina la posicion [0]
+
+
+                            console.log(precioData.precios[key][key2]);
+                            // await setDoc(documentoRef, precioData.precios[key][key2]);
+
+
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+    }
+
 
 
     return (
-        <cotizador.Provider value={{ precioData, usuario, addNewCharacteristic }}>
+        <cotizador.Provider value={{ precioData, usuario, addNewCharacteristic, deleteCharacteristic }}>
             {children}
         </cotizador.Provider>
     )

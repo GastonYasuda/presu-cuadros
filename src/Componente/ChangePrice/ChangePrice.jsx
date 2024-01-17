@@ -69,7 +69,10 @@ const ChangePrice = ({ cadaLlave }) => {
                                     >
                                         <Form.Control type="" placeholder="" />
                                     </FloatingLabel>
-                                    <Button onClick={() => { setShowDeleteModal(true) }}>Eliminar</Button>
+
+                                    <Button onClick={() => { setShowDeleteModal(true); setMyKey(llave) }}>
+                                        Eliminar
+                                    </Button>
 
                                     <Button variant="outline-secondary" id="button-addon2" onClick={() => { setShow(true); setMyKey(llave) }} >
                                         Actualizar
@@ -78,7 +81,7 @@ const ChangePrice = ({ cadaLlave }) => {
                                 </InputGroup>
 
                             </div>
-                            <DeleteModal showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} />
+                            <DeleteModal setShowDeleteModal={setShowDeleteModal} showDeleteModal={showDeleteModal} llave={Object.keys(myKey)} titulo={cadaLlave} />
                             <ChangePriceModal setShow={setShow} show={show} selectedValue={selectedValue} llave={Object.keys(myKey)} titulo={Object.keys(cadaLlave)} />
                         </div>
                     )
