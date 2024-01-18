@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { db } from '../../Config/config.js'
-import { getDocs, collection, doc, setDoc, getDoc } from 'firebase/firestore';
+import { getDocs, collection, doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
 
 
 
@@ -96,34 +96,76 @@ const ApiContext = ({ children }) => {
 
     const deleteCharacteristic = async (characteristic) => {
         const documentoRef = doc(db, 'presu', precioData.id);
+        const documento = await getDoc(documentoRef);
+
         // console.log(`Borramos desde apicontex ${characteristic}`);
-        if (characteristic !== undefined) {
-            for (const key in precioData.precios) {
-                //  console.log(Object.keys(precioData.precios[key])[0]);
-                for (const key2 in precioData.precios[key]) {
-                    for (const key3 in precioData.precios[key][key2]) {
+        try {
+            const datosActuales = documento.data();
 
-                        if (Object.keys(precioData.precios[key][key2][key3])[0] === characteristic) {
+            if (characteristic !== undefined) {
+                for (const key in datosActuales.precios) {
+                    //  console.log(Object.keys(datosActuales.precios[key])[0]);
+                    for (const key2 in datosActuales.precios[key]) {
+                        for (const key3 in datosActuales.precios[key][key2]) {
 
-                            console.log(`Hola! soy ${Object.keys(precioData.precios[key][key2][key3])[0]} y estoy en la posicion ${key3} de ${Object.keys(precioData.precios[key])[0]}`);
+                            // if (Object.keys(datosActuales.precios[key][key2][key3])[0] === characteristic) {
+                            //     console.log(`Hola! Soy ${Object.keys(datosActuales.precios[key][key2][key3])[0]} y estoy en la posición ${key3} de ${Object.keys(datosActuales.precios[key])[0]}`);
 
-                            // console.log(Object.keys(precioData.precios[key])[0]);
-                            //console.log(precioData.precios[key]);
-                            //const indiceAEliminar = miArray.indexOf('elemento2');
+                            //     // Eliminar el elemento del array
+                            //     datosActuales.precios[key][key2].splice([key3], 1);
 
-                            precioData.precios[key][key2].splice([key3] , 1);
-                            //me elimina la posicion [0]
-
-
-                            console.log(precioData.precios[key][key2]);
-                            // await setDoc(documentoRef, precioData.precios[key][key2]);
+                            //     console.log(datosActuales.precios[key][key2]);
 
 
+                            //     // Actualizar el documento en Firestore
+                            //     await updateDoc(datosActuales,
+                            //         datosActuales.precios[key][key2]
+                            //     );
+                            // }
+                            if (Object.keys(datosActuales.precios[key][key2][key3])[0] === characteristic) {
+                                console.log(`Hola! Soy ${Object.keys(datosActuales.precios[key][key2][key3])[0]} y estoy en la posición ${key3} de ${Object.keys(datosActuales.precios[key])[0]}`);
+
+                                // Eliminar el elemento del array
+                                datosActuales.precios[key][key2].splice(key3, 1);
+
+                                console.log(datosActuales.precios[key][key2]);
+
+
+                                datosActuales.precios[key][key2] = [...datosActuales.precios[key][key2]]
+                                // Actualizar el documento en Firestore
+
+                                console.log(documentoRef, datosActuales);
+                                await setDoc(documentoRef, datosActuales);
+                            }
                         }
                     }
                 }
             }
+
+        } catch (error) {
+            console.error(`Error`, error)
         }
+    }
+
+    const AddNewDescriptionFn = () => {
+        console.log("agregamos de apiContext");
+        //tengo que hacer como addNewCharacteristic y actualizar todo el array con la nueva caracteristica agregada
+
+
+        // Supongamos que tienes un array existente
+        let miArray = [{ nombre: 'Ejemplo1', edad: 25 }, { nombre: 'Ejemplo2', edad: 30 }];
+
+        // Nuevo objeto que quieres agregar
+        let nuevoObjeto = { nombre: 'Ejemplo3', edad: 22 };
+
+        // Obtener la longitud actual del array
+        let longitudAnterior = miArray.length;
+
+        // Asignar el nuevo objeto directamente al índice correspondiente
+        miArray[longitudAnterior] = nuevoObjeto;
+
+        // Mostrar el array después de la adición
+        console.log(miArray);
 
 
 
@@ -132,7 +174,10 @@ const ApiContext = ({ children }) => {
 
 
     return (
-        <cotizador.Provider value={{ precioData, usuario, addNewCharacteristic, deleteCharacteristic }}>
+        <cotizador.Provider value={{
+            precioData, usuario, addNewCharacteristic, deleteCharacteristic,
+            AddNewDescriptionFn
+        }}>
             {children}
         </cotizador.Provider>
     )

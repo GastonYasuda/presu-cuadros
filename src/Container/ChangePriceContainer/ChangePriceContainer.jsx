@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { cotizador } from '../../Componente/Context/ApiContext'
 import ChangePrice from '../../Componente/ChangePrice/ChangePrice'
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import ChangeBasePrice from '../ChangeBasePrice/ChangeBasePrice';
 import AddNewPrice from '../../Componente/AddNewPrice/AddNewPrice';
+import AddNewDescriptionModal from '../../Componente/AddNewDescriptionModal/AddNewDescriptionModal';
 
 
 const ChangePriceContainer = () => {
@@ -12,10 +13,9 @@ const ChangePriceContainer = () => {
 
     const { precioData } = useContext(cotizador)
 
-    useEffect(() => {
-        if (precioData !== undefined && precioData.length !== 0) {
-        }
-    }, [precioData])
+    const [showNewDescriptionModal, setShowNewDescriptionModal] = useState(false)
+
+
 
 
 
@@ -38,9 +38,14 @@ const ChangePriceContainer = () => {
             <Button variant="primary">
                 <Link to='/' style={{ color: '#ffff', textDecoration: 'none' }}>Back</Link>
             </Button >
-            <Button variant='primary' onClick={() => { console.log("que abra un modal consultando descripcion y caracteristica y precio"); }}>
+            <Button variant='primary' onClick={() => { setShowNewDescriptionModal(true) }}>
                 Add new description
             </Button>
+
+
+            <AddNewDescriptionModal showNewDescriptionModal={showNewDescriptionModal} setShowNewDescriptionModal={setShowNewDescriptionModal} />
+
+
 
         </div >
     )

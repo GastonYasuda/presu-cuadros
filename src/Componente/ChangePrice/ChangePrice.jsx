@@ -6,6 +6,7 @@ import { Button } from 'react-bootstrap';
 import ChangePriceModal from '../ChangePriceModal/ChangePriceModal';
 import { cotizador } from '../Context/ApiContext.jsx';
 import DeleteModal from '../DeleteModal/DeleteModal.jsx';
+import AddNewDescriptionModal from '../AddNewDescriptionModal/AddNewDescriptionModal.jsx';
 
 const ChangePrice = ({ cadaLlave }) => {
 
@@ -13,8 +14,7 @@ const ChangePrice = ({ cadaLlave }) => {
     const [selectedValue, setSelectedValue] = useState('');
     const [myKey, setMyKey] = useState('')
 
-    const [show, setShow] = useState(false);
-
+    const [show, setShow] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
 
     const { presuData } = useContext(cotizador)
@@ -81,8 +81,8 @@ const ChangePrice = ({ cadaLlave }) => {
                                 </InputGroup>
 
                             </div>
-                            <DeleteModal setShowDeleteModal={setShowDeleteModal} showDeleteModal={showDeleteModal} llave={Object.keys(myKey)} titulo={cadaLlave} />
-                            <ChangePriceModal setShow={setShow} show={show} selectedValue={selectedValue} llave={Object.keys(myKey)} titulo={Object.keys(cadaLlave)} />
+                            <DeleteModal showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} llave={Object.keys(myKey)} titulo={cadaLlave} />
+                            <ChangePriceModal show={show} setShow={setShow} selectedValue={selectedValue} llave={Object.keys(myKey)} titulo={Object.keys(cadaLlave)} />
                         </div>
                     )
                 })

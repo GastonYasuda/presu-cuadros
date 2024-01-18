@@ -14,7 +14,6 @@ const DeleteModal = ({ showDeleteModal, setShowDeleteModal, llave, titulo }) => 
     const deleteButton = () => {
 
 
-
         deleteCharacteristic(llave[0])
         setShowDeleteModal(false)
     }
