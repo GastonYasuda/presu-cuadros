@@ -147,28 +147,26 @@ const ApiContext = ({ children }) => {
         }
     }
 
-    const AddNewDescriptionFn = () => {
-        console.log("agregamos de apiContext");
-        //tengo que hacer como addNewCharacteristic y actualizar todo el array con la nueva caracteristica agregada
+    const AddNewDescriptionFn = async (newDescription, newCharacteristic, newValue) => {
 
+        const documentoRef = doc(db, 'presu', precioData.id);
+        const documento = await getDoc(documentoRef);
 
-        // Supongamos que tienes un array existente
-        let miArray = [{ nombre: 'Ejemplo1', edad: 25 }, { nombre: 'Ejemplo2', edad: 30 }];
+        let arrayContainer = {};
 
-        // Nuevo objeto que quieres agregar
-        let nuevoObjeto = { nombre: 'Ejemplo3', edad: 22 };
+        try {
+            const datosActuales = documento.data();
 
-        // Obtener la longitud actual del array
-        let longitudAnterior = miArray.length;
+            arrayContainer[newDescription] = [{ [newCharacteristic]: Number(newValue) }]
 
-        // Asignar el nuevo objeto directamente al índice correspondiente
-        miArray[longitudAnterior] = nuevoObjeto;
+            datosActuales.precios = [...datosActuales.precios, arrayContainer]
 
-        // Mostrar el array después de la adición
-        console.log(miArray);
+            console.log(documentoRef, datosActuales);
+            await setDoc(documentoRef, datosActuales);
 
-
-
+        } catch (error) {
+            console.error(`Error`, error)
+        }
     }
 
 
