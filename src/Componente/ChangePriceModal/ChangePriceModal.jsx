@@ -11,75 +11,20 @@ const ChangePriceModal = ({ setShow, show, titulo, llave, selectedValue }) => {
 
 
 
-    const { precioData, updateValue } = useContext(cotizador)
+    const { updateValue } = useContext(cotizador)
 
     //PASAR ESTA FUNCION AL APICONTEXT
 
 
 
 
-    const actualizarValorNegro = async () => {
+    const actualizarValorNegro = () => {
 
 
-        updateValue()
-
-
-        const documentoRef = doc(db, 'presu', precioData.id);
-
-        let nuevoValor = Number(selectedValue);
-
-        if (titulo === "precio base") {
-
-            await updateDoc(documentoRef, {
-                base: nuevoValor
-            });
+        updateValue(titulo, llave, selectedValue)
 
 
 
-        } else {
-
-
-            try {
-                const documento = await getDoc(documentoRef);
-
-                if (documento !== undefined) {
-                    const datosActuales = documento.data();
-
-
-                    if (datosActuales.precios && datosActuales.precios.length > 0) {
-                        let nuevoColor = llave[0]
-                        let nuevoValor = Number(selectedValue);
-
-
-                        for (const key0 in datosActuales.precios) {
-                            if (Object.keys(datosActuales.precios[key0])[0] === titulo[0]) {
-
-
-                                for (const key in datosActuales.precios[key0]) {
-
-                                    for (const key2 in datosActuales.precios[key0][key]) {
-
-                                        if (Object.keys(datosActuales.precios[key0][key][key2])[0] === llave[0]) {
-
-                                            datosActuales.precios[key0][key][key2] = { [nuevoColor]: nuevoValor };
-
-                                            console.log('Datos actuales:', datosActuales.precios[key0][titulo[0]][Object.keys(llave)]);
-
-
-                                            await updateDoc(documentoRef, datosActuales);
-
-                                            console.log('Valor actualizado exitosamente.');
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } catch (error) {
-                console.error('Error al actualizar el valor', error);
-            }
-        }
         setShow(false)
     };
 

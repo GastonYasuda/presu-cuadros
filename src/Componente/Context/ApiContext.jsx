@@ -54,12 +54,52 @@ const ApiContext = ({ children }) => {
     //------------------------------------------------------UPDATE VALUE
 
 
-    const updateValue = () => {
-        console.log("PASAR LA FUNCION DE changePriceModal A LA APICONTEXT");
+    const updateValue = async (title, characteristic, selectedValue) => {
+
+        const documentRef = doc(db, 'presu', precioData.id);
+
+        let newValue = Number(selectedValue);
+
+        if (title === "precio base") {
+
+            await updateDoc(documentRef, {
+                base: newValue
+            });
+            
+        } else {
+            try {
+                const document = await getDoc(documentRef);
+
+                if (document !== undefined) {
+                    const actualData = document.data();
+
+                    if (actualData.precios && actualData.precios.length > 0) {
+                        let newCharacteristic = characteristic[0]
+                        let newCharacteristicValue = Number(selectedValue);
+
+                        for (const priceArray of actualData.precios) {
+                            if (Object.keys(priceArray)[0] === title[0]) {
+
+
+                                for (const key in priceArray) {
+                                    for (const key2 in priceArray[key]) {
+
+                                        if (Object.keys(priceArray[key][key2])[0] === characteristic[0]) {
+
+                                            priceArray[key][key2] = { [newCharacteristic]: newCharacteristicValue }
+                                            await updateDoc(documentRef, actualData)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error updating value', error);
+            }
+        }
     }
-
-
-
 
 
     //------------------------------------------------------ADD NEW CHARACTERIST
