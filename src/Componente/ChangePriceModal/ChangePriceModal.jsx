@@ -11,11 +11,19 @@ const ChangePriceModal = ({ setShow, show, titulo, llave, selectedValue }) => {
 
 
 
-    const { precioData } = useContext(cotizador)
+    const { precioData, updateValue } = useContext(cotizador)
+
+    //PASAR ESTA FUNCION AL APICONTEXT
+
 
 
 
     const actualizarValorNegro = async () => {
+
+
+        updateValue()
+
+
         const documentoRef = doc(db, 'presu', precioData.id);
 
         let nuevoValor = Number(selectedValue);
@@ -26,7 +34,6 @@ const ChangePriceModal = ({ setShow, show, titulo, llave, selectedValue }) => {
                 base: nuevoValor
             });
 
-            // window.location.reload();
 
 
         } else {
@@ -68,7 +75,6 @@ const ChangePriceModal = ({ setShow, show, titulo, llave, selectedValue }) => {
                             }
                         }
                     }
-                    // window.location.reload();
                 }
             } catch (error) {
                 console.error('Error al actualizar el valor', error);

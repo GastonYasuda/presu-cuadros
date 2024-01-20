@@ -9,10 +9,7 @@ export const cotizador = createContext()
 const ApiContext = ({ children }) => {
 
     const [precioData, setPrecioData] = useState([])
-
-    const [usuario, setUsuario] = useState([])
-
-
+    const [user, setUser] = useState([])
 
 
     useEffect(() => {
@@ -20,7 +17,7 @@ const ApiContext = ({ children }) => {
         searchCollections("presu", "precioData")
         searchCollections("usuario", "usuario")
 
-    }, [])
+    }, [precioData])
 
 
     //------------------------------------------------------SEARCH COLLECTION
@@ -45,7 +42,7 @@ const ApiContext = ({ children }) => {
                 setPrecioData(datoFirebase[0])
 
             } else if (state === "usuario") {
-                setUsuario(datoFirebase[0])
+                setUser(datoFirebase[0])
             }
         } catch (error) {
             console.log(error);
@@ -54,148 +51,132 @@ const ApiContext = ({ children }) => {
     }
 
 
-    //------------------------------------------------------ADD NEW CHARACTERISTIC
+    //------------------------------------------------------UPDATE VALUE
+
+
+    const updateValue = () => {
+        console.log("PASAR LA FUNCION DE changePriceModal A LA APICONTEXT");
+    }
 
 
 
 
-    const addNewCharacteristic = async (caracteristicaIngresado, caracteisticaValor, titulo) => {
-        const documentoRef = doc(db, 'presu', precioData.id);
 
+    //------------------------------------------------------ADD NEW CHARACTERIST
+
+
+    const addNewCharacteristic = async (inputCharacteristic, characteristicValue, title) => {
+        const documentRef = doc(db, 'presu', precioData.id);
 
         try {
-            const documento = await getDoc(documentoRef);
+            const document = await getDoc(documentRef);
 
+            if (document !== undefined) {
+                const actualData = document.data();
 
-            if (documento !== undefined) {
-                const datosActuales = documento.data();
+                for (const priceArray of actualData.precios) {
+                    if (Object.keys(priceArray)[0] === title[0]) {
+                        for (const key in priceArray) {
+                            const newObject = { [inputCharacteristic]: Number(characteristicValue) };
 
-                // console.log(datosActuales);
-                // console.log(datosActuales.precios);
+                            priceArray[key] = [...priceArray[key], newObject]
 
-                for (const key in datosActuales.precios) {
-                    // console.log(Object.keys(datosActuales.precios[key])[0]);
-                    //console.log(titulo[0]);
-                    if (Object.keys(datosActuales.precios[key])[0] === titulo[0]) {
-                        //console.log(`hola! soy ${Object.keys(datosActuales.precios[key])[0]}`);
-                        for (const key2 in datosActuales.precios[key]) {
-                            // console.log(datosActuales.precios[key]);
-
-                            //.log(datosActuales.precios[key][key2]);
-
-                            // Crear un nuevo objeto
-                            const nuevo = { [caracteristicaIngresado]: Number(caracteisticaValor) };
-
-                            // Agregar el nuevo objeto al mapa datosActuales.precios[key]
-                            datosActuales.precios[key][key2] = [...datosActuales.precios[key][key2], nuevo]
-                            // Actualizar el documento en Firestore
-
-                            console.log(documentoRef, datosActuales);
-                            await setDoc(documentoRef, datosActuales);
+                            await setDoc(documentRef, actualData);
                         }
                     }
                 }
             }
         } catch (error) {
-            console.error('Error al actualizar el valor', error);
+            console.error('Error adding new characterist', error);
         }
     };
 
-    const deleteCharacteristic = async (characteristic) => {
-        const documentoRef = doc(db, 'presu', precioData.id);
-        const documento = await getDoc(documentoRef);
 
-        // console.log(`Borramos desde apicontex ${characteristic}`);
+    //------------------------------------------------------DELETE CHARACTERIST
+
+
+
+    const deleteCharacteristic = async (characteristic) => {
+        const documentRef = doc(db, 'presu', precioData.id);
+        const document = await getDoc(documentRef);
+
         try {
-            const datosActuales = documento.data();
+            const actualData = document.data();
 
             if (characteristic !== undefined) {
-                for (const key in datosActuales.precios) {
-                    //  console.log(Object.keys(datosActuales.precios[key])[0]);
-                    for (const key2 in datosActuales.precios[key]) {
-                        for (const key3 in datosActuales.precios[key][key2]) {
+                for (const key in actualData.precios) {
+                    for (const key2 in actualData.precios[key]) {
+                        for (const key3 in actualData.precios[key][key2]) {
 
-                            if (Object.keys(datosActuales.precios[key][key2][key3])[0] === characteristic) {
-                                console.log(`Hola! Soy ${Object.keys(datosActuales.precios[key][key2][key3])[0]} y estoy en la posición ${key3} de ${Object.keys(datosActuales.precios[key])[0]}`);
+                            if (Object.keys(actualData.precios[key][key2][key3])[0] === characteristic) {
 
-                                // Eliminar el elemento del array
-                                datosActuales.precios[key][key2].splice(key3, 1);
+                                actualData.precios[key][key2].splice(key3, 1);
 
-                                console.log(datosActuales.precios[key][key2]);
-
-
-                                datosActuales.precios[key][key2] = [...datosActuales.precios[key][key2]]
-                                // Actualizar el documento en Firestore
-
-                                console.log(documentoRef, datosActuales);
-                                await setDoc(documentoRef, datosActuales);
+                                console.log(actualData.precios);
+                                await updateDoc(documentRef, { precios: actualData.precios });
                             }
                         }
                     }
                 }
             }
-
         } catch (error) {
-            console.error(`Error`, error)
+            console.error(`Error deleting characterist`, error)
         }
     }
 
+
+    //------------------------------------------------------ADD NEW DESCRIPTION
+
+
     const AddNewDescriptionFn = async (newDescription, newCharacteristic, newValue) => {
 
-        const documentoRef = doc(db, 'presu', precioData.id);
-        const documento = await getDoc(documentoRef);
+        const documentRef = doc(db, 'presu', precioData.id);
+        const document = await getDoc(documentRef);
 
         let arrayContainer = {};
 
         try {
-            const datosActuales = documento.data();
+            const actualData = document.data();
 
             arrayContainer[newDescription] = [{ [newCharacteristic]: Number(newValue) }]
 
-            datosActuales.precios = [...datosActuales.precios, arrayContainer]
+            actualData.precios = [...actualData.precios, arrayContainer]
 
-            console.log(documentoRef, datosActuales);
-            await setDoc(documentoRef, datosActuales);
+            await setDoc(documentRef, actualData);
 
         } catch (error) {
-            console.error(`Error`, error)
+            console.error(`Error adding new description`, error)
         }
     }
 
 
-    const deleteDescriptionFn = async (titulo) => {
-        const documentoRef = doc(db, 'presu', precioData.id);
-        const documento = await getDoc(documentoRef);
+    //------------------------------------------------------DELETE DESCRIPTION
+
+
+    const deleteDescriptionFn = async (title) => {
+        const documentRef = doc(db, 'presu', precioData.id);
+        const document = await getDoc(documentRef);
 
         try {
-            const datosActuales = documento.data();
+            const actualData = document.data();
 
-            for (const key in datosActuales.precios) {
+            for (const key in actualData.precios) {
+                if (Object.keys(actualData.precios[key])[0] === title[0]) {
+                    actualData.precios.splice(key, 1);
 
-                if (Object.keys(datosActuales.precios[key])[0] === titulo[0]) {
-                    datosActuales.precios.splice(key, 1);
-                    datosActuales.precios = [...datosActuales.precios]
-
-                    console.log(documentoRef, datosActuales);
-                    await setDoc(documentoRef, datosActuales);
+                    await updateDoc(documentRef, actualData);
                 }
             }
-
         } catch (error) {
-            console.error(`Error`, error)
-
+            console.error(`Error deleting description`, error)
         }
-
-
-
-
     }
 
 
 
     return (
         <cotizador.Provider value={{
-            precioData, usuario, addNewCharacteristic, deleteCharacteristic,
+            precioData, user, addNewCharacteristic, updateValue, deleteCharacteristic,
             AddNewDescriptionFn, deleteDescriptionFn
         }}>
             {children}
