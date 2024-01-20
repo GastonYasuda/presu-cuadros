@@ -108,20 +108,6 @@ const ApiContext = ({ children }) => {
                     for (const key2 in datosActuales.precios[key]) {
                         for (const key3 in datosActuales.precios[key][key2]) {
 
-                            // if (Object.keys(datosActuales.precios[key][key2][key3])[0] === characteristic) {
-                            //     console.log(`Hola! Soy ${Object.keys(datosActuales.precios[key][key2][key3])[0]} y estoy en la posición ${key3} de ${Object.keys(datosActuales.precios[key])[0]}`);
-
-                            //     // Eliminar el elemento del array
-                            //     datosActuales.precios[key][key2].splice([key3], 1);
-
-                            //     console.log(datosActuales.precios[key][key2]);
-
-
-                            //     // Actualizar el documento en Firestore
-                            //     await updateDoc(datosActuales,
-                            //         datosActuales.precios[key][key2]
-                            //     );
-                            // }
                             if (Object.keys(datosActuales.precios[key][key2][key3])[0] === characteristic) {
                                 console.log(`Hola! Soy ${Object.keys(datosActuales.precios[key][key2][key3])[0]} y estoy en la posición ${key3} de ${Object.keys(datosActuales.precios[key])[0]}`);
 
@@ -170,11 +156,21 @@ const ApiContext = ({ children }) => {
     }
 
 
+    const deleteDescriptionFn = (titulo) => {
+        console.log(`Eliminamos ${titulo} del array correspondiente con slip`);
+
+
+
+
+
+    }
+
+
 
     return (
         <cotizador.Provider value={{
             precioData, usuario, addNewCharacteristic, deleteCharacteristic,
-            AddNewDescriptionFn
+            AddNewDescriptionFn, deleteDescriptionFn
         }}>
             {children}
         </cotizador.Provider>

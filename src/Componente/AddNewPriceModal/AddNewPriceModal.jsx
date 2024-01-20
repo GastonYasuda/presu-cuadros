@@ -1,4 +1,4 @@
-import React, { useContext, useEffect,  useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button, InputGroup } from 'react-bootstrap'
@@ -34,7 +34,7 @@ const AddNewPriceModal = ({ show, setShow, titulo }) => {
     return (
         <Modal show={show}  >
             <Modal.Header>
-                <Modal.Title>Agregar nueva caracteristica</Modal.Title>
+                <Modal.Title>Agregar nueva caracteristica de {titulo}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <InputGroup className="mb-3" >
@@ -70,7 +70,8 @@ const AddNewPriceModal = ({ show, setShow, titulo }) => {
                     Actualizar
                 </Button>
             </Modal.Footer>
-        </Modal>)
+        </Modal>
+    )
 }
 
 export default AddNewPriceModal
