@@ -39,11 +39,18 @@ const ApiContext = ({ children }) => {
             datoFirebase.push(dato)
         })
 
-        if (state === "precioData") {
-            setPrecioData(datoFirebase[0])
+        try {
 
-        } else if (state === "usuario")
-            setUsuario(datoFirebase[0])
+            if (state === "precioData") {
+                setPrecioData(datoFirebase[0])
+
+            } else if (state === "usuario") {
+                setUsuario(datoFirebase[0])
+            }
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
 
@@ -156,9 +163,28 @@ const ApiContext = ({ children }) => {
     }
 
 
-    const deleteDescriptionFn = (titulo) => {
-        console.log(`Eliminamos ${titulo} del array correspondiente con slip`);
+    const deleteDescriptionFn = async (titulo) => {
+        const documentoRef = doc(db, 'presu', precioData.id);
+        const documento = await getDoc(documentoRef);
 
+        try {
+            const datosActuales = documento.data();
+
+            for (const key in datosActuales.precios) {
+
+                if (Object.keys(datosActuales.precios[key])[0] === titulo[0]) {
+                    datosActuales.precios.splice(key, 1);
+                    datosActuales.precios = [...datosActuales.precios]
+
+                    console.log(documentoRef, datosActuales);
+                    await setDoc(documentoRef, datosActuales);
+                }
+            }
+
+        } catch (error) {
+            console.error(`Error`, error)
+
+        }
 
 
 
