@@ -95,17 +95,12 @@ const ListSelect = ({ paraSumar, setParaSumar, categoria, datosParaSumar, setDat
             {
                 Object.keys(categoria).map((cadaCat, i) => {
                     return (
-                        <Fragment key={i}>
-
-                            <List
-                                tituloCat={cadaCat}
-                                valorCat={categoria[cadaCat]}
-                                setCategoriaSeleccionada={setCategoriaSeleccionada}
-                                setDescripcionSeleccionada={setDescripcionSeleccionada}
-                            // setItemSeleccionado={setItemSeleccionado} 
-                            />
-
-                        </Fragment>
+                        <List key={i}
+                            tituloCat={cadaCat}
+                            valorCat={categoria[cadaCat]}
+                            setCategoriaSeleccionada={setCategoriaSeleccionada}
+                            setDescripcionSeleccionada={setDescripcionSeleccionada}                       
+                        />
                     )
                 })
             }

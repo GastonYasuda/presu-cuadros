@@ -20,6 +20,13 @@ const ApiContext = ({ children }) => {
     }, [precioData])
 
 
+    //------------------------------------------------------ADD PRICE 
+    
+
+
+
+
+
     //------------------------------------------------------SEARCH COLLECTION
 
     const searchCollections = async (nameCollection, state) => {

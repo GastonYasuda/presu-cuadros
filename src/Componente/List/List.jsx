@@ -28,8 +28,6 @@ const List = ({ valorCat, tituloCat, setCategoriaSeleccionada, setDescripcionSel
 
     return (
         <div>
-
-
             <Form.Select
                 aria-label="Default select example"
                 value={selectedValue}
@@ -49,7 +47,6 @@ const List = ({ valorCat, tituloCat, setCategoriaSeleccionada, setDescripcionSel
                 }
 
             </Form.Select>
-
         </div>
 
     )

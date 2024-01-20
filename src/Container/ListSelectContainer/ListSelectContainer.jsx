@@ -19,10 +19,9 @@ const ListSelectContainer = () => {
 
     useEffect(() => {
         if (precioData !== undefined && precioData.length !== 0) {
-            //  console.log(precioData);
 
             setCategorias(precioData.precios)
-            //  console.log(precioData.precios);
+
         }
 
         if (datosParaSumar.length !== 0 && precioData.precios.length === datosParaSumar.length) {
@@ -49,6 +48,8 @@ const ListSelectContainer = () => {
         <div>
             <h1>HOLA PRESU!</h1>
             <h6>Precio Base: ${precioData.base} -</h6>
+
+
             {
                 categorias !== undefined &&
                 categorias.map((categoria, i) => {
@@ -59,20 +60,33 @@ const ListSelectContainer = () => {
                                 setResultado={setResultado} precioBase={precioData.base} />
                         </Fragment>
                     )
-
                 })
-
             }
+
+            {
+                precioData.precios.map((description, i) => {
+                    return (
+                        <ListSelect key={i} description={description} />
+                    )
+                })
+            }
+
+
+
+
+
+
+
+
+
+
             {
                 resultado !== undefined &&
                 <h1>Cotización Final: ${resultado}-</h1>
-
             }
 
             <br />
             <br />
-            <h5>PROXIMOS PASOS:</h5>
-            <p> - CAMBIAR PRECIOS < br /> - AGREGAR CATEGORIAS</p >
 
             <Button variant="primary">
                 <Link to='/update-price' style={{ color: '#ffff', textDecoration: 'none' }}>Change Price</Link>
