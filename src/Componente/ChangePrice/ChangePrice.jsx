@@ -6,7 +6,6 @@ import { Button } from 'react-bootstrap';
 import ChangePriceModal from '../ChangePriceModal/ChangePriceModal';
 import { cotizador } from '../Context/ApiContext.jsx';
 import DeleteModal from '../DeleteModal/DeleteModal.jsx';
-import AddNewDescriptionModal from '../AddNewDescriptionModal/AddNewDescriptionModal.jsx';
 
 const ChangePrice = ({ cadaLlave }) => {
 
@@ -22,27 +21,16 @@ const ChangePrice = ({ cadaLlave }) => {
 
     useEffect(() => {
         if (cadaLlave !== undefined) {
-
-            //  console.log(Object.keys(cadaLlave)[0]);
-
             for (const key in cadaLlave) {
                 //  console.log(cadaLlave[key]);
                 const llave = cadaLlave[key]
                 setCadaKey(cadaLlave[key])
-
-                for (const key2 in llave) {
-                    //   console.log(llave[key2]);
-                    //   console.log(Object.keys(llave[key2]));
-                    //console.log(llave[key2][Object.keys(llave[key2])])
-                }
             }
         }
-        // console.log(cadaKey[0]["10x10"]);
 
     }, [cadaLlave, presuData])
 
     const getNewPrice = (e) => {
-        // console.log(e.target.value);
         setSelectedValue(e.target.value)
     }
 
@@ -53,34 +41,30 @@ const ChangePrice = ({ cadaLlave }) => {
                 cadaLlave !== undefined &&
                 cadaKey.map((llave, i) => {
                     return (
-
                         <div key={i}>
-                            <div>
-                                <InputGroup className="mb-3" >
+                            <InputGroup className="mb-3" >
 
-                                    <InputGroup.Text>{Object.keys(llave)}</InputGroup.Text>
-                                    <InputGroup.Text>$</InputGroup.Text>
+                                <InputGroup.Text>{Object.keys(llave)}</InputGroup.Text>
+                                <InputGroup.Text>$</InputGroup.Text>
 
 
-                                    <FloatingLabel
-                                        controlId="floatingInput"
-                                        label={llave[Object.keys(llave)]}
-                                        onChange={(e) => { getNewPrice(e) }}
-                                    >
-                                        <Form.Control type="" placeholder="" />
-                                    </FloatingLabel>
+                                <FloatingLabel
+                                    controlId="floatingInput"
+                                    label={llave[Object.keys(llave)]}
+                                    onChange={(e) => { getNewPrice(e) }}
+                                >
+                                    <Form.Control type="" placeholder="" />
+                                </FloatingLabel>
 
-                                    <Button onClick={() => { setShowDeleteModal(true); setMyKey(llave) }}>
-                                        Eliminar
-                                    </Button>
+                                <Button onClick={() => { setShowDeleteModal(true); setMyKey(llave) }}>
+                                    Eliminar
+                                </Button>
 
-                                    <Button variant="outline-secondary" id="button-addon2" onClick={() => { setShow(true); setMyKey(llave) }} >
-                                        Actualizar
-                                    </Button>
+                                <Button variant="outline-secondary" id="button-addon2" onClick={() => { setShow(true); setMyKey(llave) }} >
+                                    Actualizar
+                                </Button>
 
-                                </InputGroup>
-
-                            </div>
+                            </InputGroup>
                             <DeleteModal showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} llave={Object.keys(myKey)} titulo={cadaLlave} />
                             <ChangePriceModal show={show} setShow={setShow} selectedValue={selectedValue} llave={Object.keys(myKey)} titulo={Object.keys(cadaLlave)} />
                         </div>

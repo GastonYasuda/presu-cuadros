@@ -1,37 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext} from 'react'
 import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { cotizador } from '../Context/ApiContext';
-import { db } from '../../Config/config';
-import { doc, updateDoc, getDoc } from 'firebase/firestore';
-
 
 
 const ChangePriceModal = ({ setShow, show, titulo, llave, selectedValue }) => {
 
-
-
     const { updateValue } = useContext(cotizador)
-
-    //PASAR ESTA FUNCION AL APICONTEXT
-
-
-
 
     const actualizarValorNegro = () => {
 
-
         updateValue(titulo, llave, selectedValue)
-
-
-
         setShow(false)
     };
-
-
-
-
-
 
     return (
         <Modal show={show} >

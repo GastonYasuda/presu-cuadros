@@ -11,15 +11,8 @@ import DeletePrice from '../../Componente/DeletePrice/DeletePrice';
 
 const ChangePriceContainer = () => {
 
-
     const { precioData } = useContext(cotizador)
-
     const [showNewDescriptionModal, setShowNewDescriptionModal] = useState(false)
-   
-
-
-
-
 
     return (
         <div>
@@ -46,12 +39,7 @@ const ChangePriceContainer = () => {
                 Add new description
             </Button>
 
-
-
             <AddNewDescriptionModal showNewDescriptionModal={showNewDescriptionModal} setShowNewDescriptionModal={setShowNewDescriptionModal} />
-
-
-
         </div >
     )
 }

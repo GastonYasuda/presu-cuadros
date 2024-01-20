@@ -3,42 +3,32 @@ import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button, InputGroup } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal';
-import { cotizador } from '../Context/ApiContext';
+import { cotizador } from '../Context/ApiContext.jsx';
 
 
 const AddNewPriceModal = ({ show, setShow, titulo }) => {
 
-    const { precioData, addNewCharacteristic } = useContext(cotizador)
+    const {  addNewCharacteristic } = useContext(cotizador)
 
 
     const [caracteristicaIngresado, setCaracteristicaIngresado] = useState('')
     const [caracteisticaValor, setCaracteristicaValor] = useState()
 
 
-
-    useEffect(() => {
-        //  console.log(precioData.precios);
-    }, [])
-
-
     const getNewCharacteristic = () => {
-
-
         addNewCharacteristic(caracteristicaIngresado, caracteisticaValor, titulo)
-
     }
-
-
 
 
     return (
         <Modal show={show}  >
+            
             <Modal.Header>
                 <Modal.Title>Agregar nueva caracteristica de {titulo}</Modal.Title>
             </Modal.Header>
+
             <Modal.Body>
                 <InputGroup className="mb-3" >
-
                     <FloatingLabel
                         controlId="floatingInput"
                         label={"Nueva caracteristica"}
@@ -54,14 +44,9 @@ const AddNewPriceModal = ({ show, setShow, titulo }) => {
                     >
                         <Form.Control type="" placeholder="" />
                     </FloatingLabel>
-
                 </InputGroup>
-
-
-
-
-
             </Modal.Body>
+
             <Modal.Footer>
                 <Button variant="secondary" onClick={() => { setShow(false) }}>
                     Cancelar
@@ -70,6 +55,7 @@ const AddNewPriceModal = ({ show, setShow, titulo }) => {
                     Actualizar
                 </Button>
             </Modal.Footer>
+
         </Modal>
     )
 }

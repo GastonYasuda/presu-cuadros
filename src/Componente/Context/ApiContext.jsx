@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { db } from '../../Config/config.js'
-import { getDocs, collection, doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
+import { getDocs, collection, doc, setDoc, getDoc, updateDoc } from 'firebase/firestore'
 
 
 
@@ -45,9 +45,8 @@ const ApiContext = ({ children }) => {
                 setUser(datoFirebase[0])
             }
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
-
     }
 
 
@@ -56,30 +55,29 @@ const ApiContext = ({ children }) => {
 
     const updateValue = async (title, characteristic, selectedValue) => {
 
-        const documentRef = doc(db, 'presu', precioData.id);
+        const documentRef = doc(db, 'presu', precioData.id)
 
-        let newValue = Number(selectedValue);
+        let newValue = Number(selectedValue)
 
         if (title === "precio base") {
 
             await updateDoc(documentRef, {
                 base: newValue
-            });
-            
+            })
+
         } else {
             try {
-                const document = await getDoc(documentRef);
+                const document = await getDoc(documentRef)
 
                 if (document !== undefined) {
-                    const actualData = document.data();
+                    const actualData = document.data()
 
                     if (actualData.precios && actualData.precios.length > 0) {
                         let newCharacteristic = characteristic[0]
-                        let newCharacteristicValue = Number(selectedValue);
+                        let newCharacteristicValue = Number(selectedValue)
 
                         for (const priceArray of actualData.precios) {
                             if (Object.keys(priceArray)[0] === title[0]) {
-
 
                                 for (const key in priceArray) {
                                     for (const key2 in priceArray[key]) {
@@ -96,7 +94,7 @@ const ApiContext = ({ children }) => {
                     }
                 }
             } catch (error) {
-                console.error('Error updating value', error);
+                console.error('Error updating value', error)
             }
         }
     }
@@ -106,30 +104,30 @@ const ApiContext = ({ children }) => {
 
 
     const addNewCharacteristic = async (inputCharacteristic, characteristicValue, title) => {
-        const documentRef = doc(db, 'presu', precioData.id);
+        const documentRef = doc(db, 'presu', precioData.id)
 
         try {
-            const document = await getDoc(documentRef);
+            const document = await getDoc(documentRef)
 
             if (document !== undefined) {
-                const actualData = document.data();
+                const actualData = document.data()
 
                 for (const priceArray of actualData.precios) {
                     if (Object.keys(priceArray)[0] === title[0]) {
                         for (const key in priceArray) {
-                            const newObject = { [inputCharacteristic]: Number(characteristicValue) };
+                            const newObject = { [inputCharacteristic]: Number(characteristicValue) }
 
                             priceArray[key] = [...priceArray[key], newObject]
 
-                            await setDoc(documentRef, actualData);
+                            await setDoc(documentRef, actualData)
                         }
                     }
                 }
             }
         } catch (error) {
-            console.error('Error adding new characterist', error);
+            console.error('Error adding new characterist', error)
         }
-    };
+    }
 
 
     //------------------------------------------------------DELETE CHARACTERIST
@@ -137,11 +135,11 @@ const ApiContext = ({ children }) => {
 
 
     const deleteCharacteristic = async (characteristic) => {
-        const documentRef = doc(db, 'presu', precioData.id);
-        const document = await getDoc(documentRef);
+        const documentRef = doc(db, 'presu', precioData.id)
+        const document = await getDoc(documentRef)
 
         try {
-            const actualData = document.data();
+            const actualData = document.data()
 
             if (characteristic !== undefined) {
                 for (const key in actualData.precios) {
@@ -150,10 +148,10 @@ const ApiContext = ({ children }) => {
 
                             if (Object.keys(actualData.precios[key][key2][key3])[0] === characteristic) {
 
-                                actualData.precios[key][key2].splice(key3, 1);
+                                actualData.precios[key][key2].splice(key3, 1)
 
-                                console.log(actualData.precios);
-                                await updateDoc(documentRef, { precios: actualData.precios });
+                                console.log(actualData.precios)
+                                await updateDoc(documentRef, { precios: actualData.precios })
                             }
                         }
                     }
@@ -170,19 +168,19 @@ const ApiContext = ({ children }) => {
 
     const AddNewDescriptionFn = async (newDescription, newCharacteristic, newValue) => {
 
-        const documentRef = doc(db, 'presu', precioData.id);
-        const document = await getDoc(documentRef);
+        const documentRef = doc(db, 'presu', precioData.id)
+        const document = await getDoc(documentRef)
 
-        let arrayContainer = {};
+        let arrayContainer = {}
 
         try {
-            const actualData = document.data();
+            const actualData = document.data()
 
             arrayContainer[newDescription] = [{ [newCharacteristic]: Number(newValue) }]
 
             actualData.precios = [...actualData.precios, arrayContainer]
 
-            await setDoc(documentRef, actualData);
+            await setDoc(documentRef, actualData)
 
         } catch (error) {
             console.error(`Error adding new description`, error)
@@ -194,17 +192,17 @@ const ApiContext = ({ children }) => {
 
 
     const deleteDescriptionFn = async (title) => {
-        const documentRef = doc(db, 'presu', precioData.id);
-        const document = await getDoc(documentRef);
+        const documentRef = doc(db, 'presu', precioData.id)
+        const document = await getDoc(documentRef)
 
         try {
-            const actualData = document.data();
+            const actualData = document.data()
 
             for (const key in actualData.precios) {
                 if (Object.keys(actualData.precios[key])[0] === title[0]) {
-                    actualData.precios.splice(key, 1);
+                    actualData.precios.splice(key, 1)
 
-                    await updateDoc(documentRef, actualData);
+                    await updateDoc(documentRef, actualData)
                 }
             }
         } catch (error) {

@@ -1,17 +1,12 @@
 import React, { useContext } from 'react'
-import Form from 'react-bootstrap/Form';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import { Button, InputGroup } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal';
 import { cotizador } from '../Context/ApiContext';
 
 
-
 const DeleteDescriptionModal = ({ showDeleteModal, setShowDeleteModal, titulo }) => {
 
-
     const { deleteDescriptionFn } = useContext(cotizador)
-
 
     const deleteTitle = () => {
         deleteDescriptionFn(titulo)
@@ -21,12 +16,15 @@ const DeleteDescriptionModal = ({ showDeleteModal, setShowDeleteModal, titulo })
 
     return (
         <Modal show={showDeleteModal}  >
+
             <Modal.Header>
                 <Modal.Title>CUIDADO!</Modal.Title>
             </Modal.Header>
+
             <Modal.Body>
                 Esta seguro de eliminar la descripcion {titulo}?
             </Modal.Body>
+            
             <Modal.Footer>
                 <Button variant="secondary" onClick={() => { setShowDeleteModal(false) }}>
                     Cancelar
@@ -35,6 +33,7 @@ const DeleteDescriptionModal = ({ showDeleteModal, setShowDeleteModal, titulo })
                     Borrar
                 </Button>
             </Modal.Footer>
+
         </Modal>
     )
 }
