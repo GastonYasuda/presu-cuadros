@@ -1,34 +1,46 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap';
 
-const List = ({ valorCat, tituloCat, setCategoriaSeleccionada, setDescripcionSeleccionada }) => {
+const List = ({ characteristic, descriptionValue, setSelectedDescription, setSelectedCharacteristic }) => {
 
 
-    const [selectedValue, setSelectedValue] = useState('');
-
-
+    // useEffect(() => {
+    //     console.log(characteristic);
+    //     console.log(description);
+    //     console.log(descriptionValue);
+    // }, [])
 
 
 
     const handleSelectChange = (event) => {
 
-      //  console.log(tituloCat);
-        setCategoriaSeleccionada(tituloCat)
-
-      //  console.log(event.target.value);
-        setDescripcionSeleccionada(event.target.value)
-
-
-        setSelectedValue(event.target.value);
-        // setUbicacion(event.target.value)
-        // setElemento(Object.keys(lista)[0])
+        setSelectedDescription(event.target.value)
+        setSelectedCharacteristic(characteristic)
     };
 
 
 
     return (
         <div>
+
             <Form.Select
+                aria-label="Default select example"
+                onChange={handleSelectChange}>
+
+                <option>{characteristic}</option>
+
+                {
+                    descriptionValue.map((value, i) => {
+                        return (
+                            <option value={i} key={i}>{Object.keys(value)}</option>
+                        )
+                    })
+                }
+
+            </Form.Select>
+
+
+            {/* <Form.Select
                 aria-label="Default select example"
                 value={selectedValue}
                 onChange={handleSelectChange}>
@@ -45,8 +57,7 @@ const List = ({ valorCat, tituloCat, setCategoriaSeleccionada, setDescripcionSel
                         )
                     })
                 }
-
-            </Form.Select>
+            </Form.Select> */}
         </div>
 
     )

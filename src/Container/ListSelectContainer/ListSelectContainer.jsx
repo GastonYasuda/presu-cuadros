@@ -9,38 +9,39 @@ const ListSelectContainer = () => {
 
     const { precioData } = useContext(cotizador)
 
-    const [categorias, setCategorias] = useState([])
+    // const [categorias, setCategorias] = useState([])
 
-    const [datosParaSumar, setDatosParaSumar] = useState([])
-    const [paraSumar, setParaSumar] = useState([]) //solo guardo los montos para que me sumen
-    const [resultado, setResultado] = useState()
-
-
-
-    useEffect(() => {
-        if (precioData !== undefined && precioData.length !== 0) {
-
-            setCategorias(precioData.precios)
-
-        }
-
-        if (datosParaSumar.length !== 0 && precioData.precios.length === datosParaSumar.length) {
-            console.log(datosParaSumar);
-
-            for (const key in datosParaSumar) {
-
-                const productoPrecio = datosParaSumar[key].productoPrecio;
-
-                const primeraClave = Object.keys(productoPrecio)[0];
-                const selectValue = productoPrecio[primeraClave];
+    // const [datosParaSumar, setDatosParaSumar] = useState([])
+    // const [paraSumar, setParaSumar] = useState([]) //solo guardo los montos para que me sumen
+    // const [resultado, setResultado] = useState()
 
 
-                setParaSumar(prevParaSumar => [...prevParaSumar, selectValue]);
-            }
-        }
 
 
-    }, [precioData, categorias, datosParaSumar])
+    // useEffect(() => {
+    //     if (precioData !== undefined && precioData.length !== 0) {
+
+    //         setCategorias(precioData.precios)
+
+    //     }
+
+    //     if (datosParaSumar.length !== 0 && precioData.precios.length === datosParaSumar.length) {
+    //         console.log(datosParaSumar);
+
+    //         for (const key in datosParaSumar) {
+
+    //             const productoPrecio = datosParaSumar[key].productoPrecio;
+
+    //             const primeraClave = Object.keys(productoPrecio)[0];
+    //             const selectValue = productoPrecio[primeraClave];
+
+
+    //             setParaSumar(prevParaSumar => [...prevParaSumar, selectValue]);
+    //         }
+    //     }
+
+
+    // }, [precioData, categorias, datosParaSumar])
 
 
 
@@ -50,7 +51,7 @@ const ListSelectContainer = () => {
             <h6>Precio Base: ${precioData.base} -</h6>
 
 
-            {
+            {/* {
                 categorias !== undefined &&
                 categorias.map((categoria, i) => {
                     return (
@@ -61,9 +62,10 @@ const ListSelectContainer = () => {
                         </Fragment>
                     )
                 })
-            }
+            } */}
 
             {
+                precioData.precios !== undefined &&
                 precioData.precios.map((description, i) => {
                     return (
                         <ListSelect key={i} description={description} />
@@ -79,11 +81,11 @@ const ListSelectContainer = () => {
 
 
 
-
+            {/* 
             {
                 resultado !== undefined &&
                 <h1>Cotización Final: ${resultado}-</h1>
-            }
+            } */}
 
             <br />
             <br />

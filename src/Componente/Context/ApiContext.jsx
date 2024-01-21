@@ -17,17 +17,88 @@ const ApiContext = ({ children }) => {
         searchCollections("presu", "precioData")
         searchCollections("usuario", "usuario")
 
-    }, [precioData])
+    }, [])
 
 
     //------------------------------------------------------ADD PRICE 
-    
+
+    const [addPrices, setAddPrices] = useState([])
+
+
+    const addPriceArrayResult = async (characteristic, description) => {
+
+        // console.log(characteristic, description);
+        //  console.log(description); // me marca la ubicacion
+        //tengo characteristica y descripcion
+
+        const documentRef = doc(db, 'presu', precioData.id)
+        try {
+            const document = await getDoc(documentRef)
+
+            if (document !== undefined) {
+                const actualData = document.data()
+
+                for (const priceArray of actualData.precios) {
+                    // console.log(Object.keys(priceArray)[0]);
+
+                    if (Object.keys(priceArray)[0] === characteristic) {
+                        // console.log(`hola! soy ${characteristic}`);
+
+                        for (const key in priceArray) {
+                            // console.log(priceArray[key]);
+
+                            console.log(priceArray[key][description][Object.keys(priceArray[key][description])[0]]);
+                            let selectedValue = priceArray[key][description][Object.keys(priceArray[key][description])[0]]
 
 
 
+                            setAddPrices([...addPrices, selectedValue])
+
+
+
+                            console.log(addPrices);
+
+                            //**************************************************** */
+
+
+
+                            // const initialValue = actualData.base;
+                            // const sumWithInitial = addPrices.reduce(
+                            //     (accumulator, currentValue) => accumulator + currentValue,
+                            //     initialValue,
+                            // );
+
+                            // return (sumWithInitial)
+
+
+
+
+                            //**************************************************** */
+
+
+                            //a este array addPrices tengo que hacerle la funcion de sumarTodo que esta en ListSelect
+
+                            //   if(Object.keys(priceArray[key])===description)
+                        }
+
+
+
+                    }
+
+
+
+
+
+                }
+            }
+        } catch (error) {
+            console.error('Error adding new characterist', error)
+        }
+    }
 
 
     //------------------------------------------------------SEARCH COLLECTION
+
 
     const searchCollections = async (nameCollection, state) => {
 
@@ -44,7 +115,6 @@ const ApiContext = ({ children }) => {
         })
 
         try {
-
             if (state === "precioData") {
                 setPrecioData(datoFirebase[0])
 
@@ -221,7 +291,7 @@ const ApiContext = ({ children }) => {
 
     return (
         <cotizador.Provider value={{
-            precioData, user, addNewCharacteristic, updateValue, deleteCharacteristic,
+            precioData, user, addPriceArrayResult, addNewCharacteristic, updateValue, deleteCharacteristic,
             AddNewDescriptionFn, deleteDescriptionFn
         }}>
             {children}
