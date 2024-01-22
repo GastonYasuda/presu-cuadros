@@ -17,7 +17,7 @@ const ApiContext = ({ children }) => {
         searchCollections("presu", "precioData")
         searchCollections("usuario", "usuario")
 
-    }, [precioData])
+    }, [])
 
 
     //------------------------------------------------------ADD PRICE 
