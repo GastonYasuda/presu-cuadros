@@ -12,90 +12,89 @@ const ApiContext = ({ children }) => {
     const [user, setUser] = useState([])
 
 
-    useEffect(() => {
 
+    useEffect(() => {
         searchCollections("presu", "precioData")
         searchCollections("usuario", "usuario")
 
     }, [])
 
 
+    const sumarTodo = (cotiFinal, precioBase) => {
+        const initialValue = precioBase;
+        // const sumWithInitial = cotiFinal.reduce(
+        //     (accumulator, currentValue) => accumulator + currentValue,
+        //     initialValue,
+        // );
+
+        console.log(cotiFinal)
+    }
+
     //------------------------------------------------------ADD PRICE 
 
-    const [addPrices, setAddPrices] = useState([])
 
+    const [addPrices, setAddPrices] = useState([])
+    const [addArray, setAddArray] = useState([])
+
+    useEffect(() => {
+
+        if (addArray.length !== 0) {
+
+            console.log(addArray);
+        }
+    }, [addArray])
 
     const addPriceArrayResult = async (characteristic, description) => {
-
-        // console.log(characteristic, description);
-        //  console.log(description); // me marca la ubicacion
+        //console.log(characteristic, description);
+        //console.log(description); // me marca la ubicacion
         //tengo characteristica y descripcion
 
-        const documentRef = doc(db, 'presu', precioData.id)
         try {
+            const documentRef = doc(db, 'presu', precioData.id)
             const document = await getDoc(documentRef)
 
             if (document !== undefined) {
                 const actualData = document.data()
 
-                for (const priceArray of actualData.precios) {
-                    // console.log(Object.keys(priceArray)[0]);
+                for (const key in actualData.precios) {
+                    if (Object.keys(actualData.precios[key])[0] === characteristic) {
 
-                    if (Object.keys(priceArray)[0] === characteristic) {
-                        // console.log(`hola! soy ${characteristic}`);
+                        for (const key2 in actualData.precios[key]) {
+                            for (const key3 in actualData.precios[key][key2]) {
 
-                        for (const key in priceArray) {
-                            // console.log(priceArray[key]);
-
-                            console.log(priceArray[key][description][Object.keys(priceArray[key][description])[0]]);
-                            let selectedValue = priceArray[key][description][Object.keys(priceArray[key][description])[0]]
+                                if (actualData.precios[key][key2][key3] === actualData.precios[key][key2][description]) {
+                                    //  console.log(`soy ${Object.keys(actualData.precios[key])[0]} y me eligieron ${Object.keys(actualData.precios[key][key2][key3])}`); //color=>negro
 
 
+                                    const characterEqual = Object.keys(actualData.precios[key])[0]
+                                    const descriptionValue = actualData.precios[key][key2][key3]
 
-                            setAddPrices([...addPrices, selectedValue])
+                                    const newObj = { characterEqual, descriptionValue }
 
+                                    for (const key in addArray) {
+                                        if (addArray[key].characterEqual === characteristic) {
 
+                                            addArray.splice(key, 1);
+                                            setAddArray([...addArray, newObj])
+                                        }
+                                    }
+                                    setAddArray([...addArray, newObj])
 
-                            console.log(addPrices);
-
-                            //**************************************************** */
-
-
-
-                            // const initialValue = actualData.base;
-                            // const sumWithInitial = addPrices.reduce(
-                            //     (accumulator, currentValue) => accumulator + currentValue,
-                            //     initialValue,
-                            // );
-
-                            // return (sumWithInitial)
-
-
-
-
-                            //**************************************************** */
-
-
-                            //a este array addPrices tengo que hacerle la funcion de sumarTodo que esta en ListSelect
-
-                            //   if(Object.keys(priceArray[key])===description)
+                                }
+                            }
                         }
-
-
-
                     }
-
-
-
-
-
                 }
+
+                sumarTodo(addArray, actualData.base)
             }
+
+
         } catch (error) {
             console.error('Error adding new characterist', error)
         }
-    }
 
+    }
 
     //------------------------------------------------------SEARCH COLLECTION
 
@@ -227,7 +226,7 @@ const ApiContext = ({ children }) => {
 
                                 actualData.precios[key][key2].splice(key3, 1)
 
-                                console.log(actualData.precios)
+                                //  console.log(actualData.precios)
                                 await updateDoc(documentRef, { precios: actualData.precios })
                             }
                         }

@@ -13,10 +13,9 @@ const ListSelect = ({ description }) => {
 
         if (selectedCharacteristic !== undefined && selectedDescription !== undefined) {
 
-
-
             addPriceArrayResult(selectedCharacteristic, selectedDescription);
         }
+
     }, [selectedCharacteristic, selectedDescription])
 
 
@@ -47,7 +46,7 @@ const ListSelect = ({ description }) => {
         // const category = Object.keys(description)
         // const creoObjeto = { category, productoPrecio }
 
-        // setDatosParaSumar((prevSuma) => [...prevSuma, creoObjeto]);
+        // setDatosParaSumar((prevSuma) => [...prevSuma, creoObjeto]);*******
 
         // for (const key in datosParaSumar) {
 

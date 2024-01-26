@@ -50,7 +50,6 @@ const ListSelectContainer = () => {
             <h1>HOLA PRESU!</h1>
             <h6>Precio Base: ${precioData.base} -</h6>
 
-
             {/* {
                 categorias !== undefined &&
                 categorias.map((categoria, i) => {
