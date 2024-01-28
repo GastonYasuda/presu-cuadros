@@ -4,8 +4,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button } from 'react-bootstrap';
 import ChangePriceModal from '../ChangePriceModal/ChangePriceModal';
-import { cotizador } from '../Context/ApiContext.jsx';
 import DeleteModal from '../DeleteModal/DeleteModal.jsx';
+import { cotizador } from '../../Context/ApiContext.jsx';
 
 const ChangePrice = ({ cadaLlave }) => {
 
@@ -16,7 +16,7 @@ const ChangePrice = ({ cadaLlave }) => {
     const [show, setShow] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
 
-    const { presuData } = useContext(cotizador)
+    const { presuData, sweety } = useContext(cotizador)
 
 
     useEffect(() => {
@@ -32,6 +32,14 @@ const ChangePrice = ({ cadaLlave }) => {
 
     const getNewPrice = (e) => {
         setSelectedValue(e.target.value)
+    }
+
+    const updateIsNum = () => {
+        if (isNaN(selectedValue)) {
+            sweety("ERROR", "Debes ingresar un número", "error")
+        } else {
+            setShow(true)
+        }
     }
 
 
@@ -60,7 +68,7 @@ const ChangePrice = ({ cadaLlave }) => {
                                     Eliminar
                                 </Button>
 
-                                <Button variant="outline-secondary" id="button-addon2" onClick={() => { setShow(true); setMyKey(llave) }} >
+                                <Button variant="outline-secondary" id="button-addon2" onClick={() => { updateIsNum(); setMyKey(llave) }} >
                                     Actualizar
                                 </Button>
 

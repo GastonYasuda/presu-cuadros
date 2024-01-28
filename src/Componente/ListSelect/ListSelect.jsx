@@ -1,6 +1,6 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react'
 import List from '../List/List';
-import { cotizador } from '../Context/ApiContext';
+import { cotizador } from '../../Context/ApiContext';
 
 const ListSelect = ({ description }) => {
 

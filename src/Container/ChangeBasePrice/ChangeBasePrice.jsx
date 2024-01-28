@@ -1,18 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, FloatingLabel } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import ChangePriceModal from '../../Componente/ChangePriceModal/ChangePriceModal';
+import Swal from 'sweetalert2';
+import { cotizador } from '../../Context/ApiContext';
 
 const ChangeBasePrice = ({ precioData }) => {
 
-    // if (precioData !== undefined) {
-
-    //     console.log(precioData.base)
-
-    //     console.log(Object.keys(precioData));
-    //     console.log(precioData);
-    // }
+    const { sweety } = useContext(cotizador)
 
     const [cadaKey, setCadaKey] = useState([])
     const [selectedValue, setSelectedValue] = useState('');
@@ -22,9 +18,24 @@ const ChangeBasePrice = ({ precioData }) => {
 
     const getNewPrice = (e) => {
         // console.log(e.target.value);
-        setSelectedValue(e.target.value)
+
+        setSelectedValue(Number(e.target.value))
+
+
     }
 
+    const updateIsNum = () => {
+
+
+        if (isNaN(selectedValue)) {
+            sweety("ERROR", "Debes ingresar un número", "error")
+        } else {
+            setShow(true)
+        }
+
+
+
+    }
 
     return (
         <div>
@@ -42,7 +53,7 @@ const ChangeBasePrice = ({ precioData }) => {
                     <Form.Control type="" placeholder="" />
                 </FloatingLabel>
 
-                <Button variant="outline-secondary" id="button-addon2" onClick={() => { setShow(true) }} >
+                <Button variant="outline-secondary" id="button-addon2" onClick={updateIsNum} >
                     Actualizar
                 </Button>
 

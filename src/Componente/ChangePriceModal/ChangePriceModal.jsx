@@ -1,7 +1,7 @@
-import React, { useContext} from 'react'
+import React, { useContext } from 'react'
 import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
-import { cotizador } from '../Context/ApiContext';
+import { cotizador } from '../../Context/ApiContext';
 
 
 const ChangePriceModal = ({ setShow, show, titulo, llave, selectedValue }) => {
@@ -10,6 +10,7 @@ const ChangePriceModal = ({ setShow, show, titulo, llave, selectedValue }) => {
 
     const actualizarValorNegro = () => {
 
+       
         updateValue(titulo, llave, selectedValue)
         setShow(false)
     };

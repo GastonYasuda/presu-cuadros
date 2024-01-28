@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { db } from '../../Config/config.js'
+import { db } from '../Config/config.js'
 import { getDocs, collection, doc, setDoc, getDoc, updateDoc } from 'firebase/firestore'
+import Swal from 'sweetalert2'
 
 
 
@@ -118,7 +119,7 @@ const ApiContext = ({ children }) => {
 
         const documentRef = doc(db, 'presu', precioData.id)
 
-        let newValue = Number(selectedValue)
+        let newValue = selectedValue
 
         if (title === "precio base") {
 
@@ -135,7 +136,7 @@ const ApiContext = ({ children }) => {
 
                     if (actualData.precios && actualData.precios.length > 0) {
                         let newCharacteristic = characteristic[0]
-                        let newCharacteristicValue = Number(selectedValue)
+                        let newCharacteristicValue = selectedValue
 
                         for (const priceArray of actualData.precios) {
                             if (Object.keys(priceArray)[0] === title[0]) {
@@ -271,12 +272,23 @@ const ApiContext = ({ children }) => {
         }
     }
 
+    //------------------------------------------------------SWEET ALERT
+    const sweety = (title, txt, ico) => {
+
+        Swal.fire({
+            title: title,
+            text: txt,
+            icon: ico
+        });
+    }
+
+
 
 
     return (
         <cotizador.Provider value={{
             precioData, user, addArray, addPriceArrayResult, addNewCharacteristic, updateValue, deleteCharacteristic,
-            AddNewDescriptionFn, deleteDescriptionFn, sumarTodo, quoterResult
+            AddNewDescriptionFn, deleteDescriptionFn, sumarTodo, quoterResult, sweety
         }}>
             {children}
         </cotizador.Provider>

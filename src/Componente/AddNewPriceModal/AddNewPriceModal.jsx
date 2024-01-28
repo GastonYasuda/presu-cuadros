@@ -3,12 +3,12 @@ import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button, InputGroup } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal';
-import { cotizador } from '../Context/ApiContext.jsx';
+import { cotizador } from '../../Context/ApiContext';
 
 
 const AddNewPriceModal = ({ show, setShow, titulo }) => {
 
-    const {  addNewCharacteristic } = useContext(cotizador)
+    const { addNewCharacteristic, sweety } = useContext(cotizador)
 
 
     const [caracteristicaIngresado, setCaracteristicaIngresado] = useState('')
@@ -16,13 +16,23 @@ const AddNewPriceModal = ({ show, setShow, titulo }) => {
 
 
     const getNewCharacteristic = () => {
-        addNewCharacteristic(caracteristicaIngresado, caracteisticaValor, titulo)
+
+
+        if (caracteristicaIngresado === '') {
+            sweety("ERROR", "Debes ingresar nombre de la nueva característica", "error")
+        } else if (isNaN(caracteisticaValor) || caracteisticaValor === '') {
+            sweety("ERROR", "Debes ingresar un número", "error")
+        } else {
+            addNewCharacteristic(caracteristicaIngresado, caracteisticaValor, titulo)
+            setShow(false)
+        }
+
     }
 
 
     return (
         <Modal show={show}  >
-            
+
             <Modal.Header>
                 <Modal.Title>Agregar nueva caracteristica de {titulo}</Modal.Title>
             </Modal.Header>
@@ -52,7 +62,7 @@ const AddNewPriceModal = ({ show, setShow, titulo }) => {
                     Cancelar
                 </Button>
                 <Button variant="primary" onClick={getNewCharacteristic}>
-                    Actualizar
+                    Agregar
                 </Button>
             </Modal.Footer>
 
