@@ -27,7 +27,7 @@ const ChangeBasePrice = ({ precioData }) => {
     const updateIsNum = () => {
 
 
-        if (isNaN(selectedValue)) {
+        if (isNaN(selectedValue) || selectedValue === '') {
             sweety("ERROR", "Debes ingresar un número", "error")
         } else {
             setShow(true)

@@ -30,7 +30,7 @@ const DeleteModal = ({ showDeleteModal, setShowDeleteModal, llave, titulo }) => 
                     Cancelar
                 </Button>
                 <Button variant="primary" onClick={deleteButton}>
-                    Actualizar
+                    Eliminar
                 </Button>
             </Modal.Footer>
         </Modal >
