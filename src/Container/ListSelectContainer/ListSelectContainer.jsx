@@ -13,9 +13,9 @@ const ListSelectContainer = () => {
 
     useEffect(() => {
         if (sumarTodosLosPrecios.length !== 0) {
-            console.log(sumarTodosLosPrecios);
+            // console.log(sumarTodosLosPrecios);
             sumarTodo(sumarTodosLosPrecios, precioData.base)
-            console.log(precioData.base);
+            //console.log(precioData.base);
         }
     }, [sumarTodosLosPrecios, addArray])
 

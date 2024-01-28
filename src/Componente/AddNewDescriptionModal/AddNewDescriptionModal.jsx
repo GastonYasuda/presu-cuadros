@@ -7,7 +7,7 @@ import { cotizador } from '../../Context/ApiContext';
 
 const AddNewDescriptionModal = ({ showNewDescriptionModal, setShowNewDescriptionModal }) => {
 
-    const { AddNewDescriptionFn } = useContext(cotizador)
+    const { AddNewDescriptionFn, firstUpper, sweety } = useContext(cotizador)
 
     const [newDescription, setNewDescription] = useState('')
     const [newCharacteristic, setNewCharacteristic] = useState('')
@@ -16,8 +16,19 @@ const AddNewDescriptionModal = ({ showNewDescriptionModal, setShowNewDescription
 
     const AddDescriptionButton = () => {
 
-        AddNewDescriptionFn(newDescription, newCharacteristic, newValue)
-        setShowNewDescriptionModal(false)
+
+
+        if (newDescription === '') {
+            sweety("ERROR", "Debes ingresar nombre de la nueva caracteristica", "error")
+        } else if (newCharacteristic === '') {
+            sweety("ERROR", "Debes ingresar nombre de la nueva descripción", "error")
+
+        } else if (isNaN(newValue) || newValue === '') {
+            sweety("ERROR", "Debes ingresar un número", "error")
+        } else {
+            AddNewDescriptionFn(newDescription, newCharacteristic, newValue)
+            setShowNewDescriptionModal(false)
+        }
     }
 
 
@@ -31,7 +42,7 @@ const AddNewDescriptionModal = ({ showNewDescriptionModal, setShowNewDescription
                     <FloatingLabel
                         controlId="floatingInput"
                         label={"Nueva DESCRIPCION"}
-                        onChange={(e) => { setNewDescription(e.target.value) }}
+                        onChange={(e) => { setNewDescription(firstUpper(e.target.value)) }}
                     >
                         <Form.Control type="" placeholder="" />
                     </FloatingLabel>
@@ -39,7 +50,7 @@ const AddNewDescriptionModal = ({ showNewDescriptionModal, setShowNewDescription
                     <FloatingLabel
                         controlId="floatingInput"
                         label={"Nueva CARACTERISTICA"}
-                        onChange={(e) => { setNewCharacteristic(e.target.value) }}
+                        onChange={(e) => { setNewCharacteristic(firstUpper(e.target.value)) }}
                     >
                         <Form.Control type="" placeholder="" />
                     </FloatingLabel>

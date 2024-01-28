@@ -1,14 +1,7 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React from 'react'
 import { Form } from 'react-bootstrap';
 
 const List = ({ characteristic, descriptionValue, setSelectedDescription, setSelectedCharacteristic }) => {
-
-
-    // useEffect(() => {
-    //     console.log(characteristic);
-    //     console.log(description);
-    //     console.log(descriptionValue);
-    // }, [])
 
 
 
@@ -18,48 +11,22 @@ const List = ({ characteristic, descriptionValue, setSelectedDescription, setSel
         setSelectedCharacteristic(characteristic)
     };
 
-
-
     return (
-        <div>
+        <Form.Select
+            aria-label="Default select example"
+            onChange={handleSelectChange}>
 
-            <Form.Select
-                aria-label="Default select example"
-                onChange={handleSelectChange}>
+            <option>{characteristic}</option>
 
-                <option>{characteristic}</option>
+            {
+                descriptionValue.map((value, i) => {
+                    return (
+                        <option value={i} key={i}>{Object.keys(value)}</option>
+                    )
+                })
+            }
 
-                {
-                    descriptionValue.map((value, i) => {
-                        return (
-                            <option value={i} key={i}>{Object.keys(value)}</option>
-                        )
-                    })
-                }
-
-            </Form.Select>
-
-
-            {/* <Form.Select
-                aria-label="Default select example"
-                value={selectedValue}
-                onChange={handleSelectChange}>
-
-                <option>{tituloCat}</option>
-
-                {
-                    valorCat !== undefined &&
-                    valorCat.map((valor, i) => {
-                        return (
-                            <Fragment key={i}>
-                                <option value={i} key={i}>{Object.keys(valor)}</option>
-                            </Fragment>
-                        )
-                    })
-                }
-            </Form.Select> */}
-        </div>
-
+        </Form.Select>
     )
 }
 

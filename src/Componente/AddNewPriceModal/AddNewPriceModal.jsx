@@ -8,7 +8,7 @@ import { cotizador } from '../../Context/ApiContext';
 
 const AddNewPriceModal = ({ show, setShow, titulo }) => {
 
-    const { addNewCharacteristic, sweety } = useContext(cotizador)
+    const { addNewCharacteristic, sweety, firstUpper } = useContext(cotizador)
 
 
     const [caracteristicaIngresado, setCaracteristicaIngresado] = useState('')
@@ -42,7 +42,7 @@ const AddNewPriceModal = ({ show, setShow, titulo }) => {
                     <FloatingLabel
                         controlId="floatingInput"
                         label={"Nueva caracteristica"}
-                        onChange={(e) => { setCaracteristicaIngresado(e.target.value) }}
+                        onChange={(e) => { setCaracteristicaIngresado(firstUpper(e.target.value)) }}
                     >
                         <Form.Control type="" placeholder="" />
                     </FloatingLabel>

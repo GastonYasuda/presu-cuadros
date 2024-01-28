@@ -272,7 +272,10 @@ const ApiContext = ({ children }) => {
         }
     }
 
+
     //------------------------------------------------------SWEET ALERT
+
+
     const sweety = (title, txt, ico) => {
 
         Swal.fire({
@@ -283,12 +286,19 @@ const ApiContext = ({ children }) => {
     }
 
 
+    //------------------------------------------------------UPPER CASE
+
+
+    const firstUpper = (str) => {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
 
 
     return (
         <cotizador.Provider value={{
             precioData, user, addArray, addPriceArrayResult, addNewCharacteristic, updateValue, deleteCharacteristic,
-            AddNewDescriptionFn, deleteDescriptionFn, sumarTodo, quoterResult, sweety
+            AddNewDescriptionFn, deleteDescriptionFn, sumarTodo, quoterResult, sweety, firstUpper
         }}>
             {children}
         </cotizador.Provider>

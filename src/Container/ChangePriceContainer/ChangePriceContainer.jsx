@@ -23,7 +23,7 @@ const ChangePriceContainer = () => {
                 precioData.precios.map((cadaLlave, i) => {
                     return (
                         <div key={i} >
-                            <h1>{Object.keys(cadaLlave)}</h1>
+                            <h1>{(Object.keys(cadaLlave))}</h1>
                             <AddNewPrice titulo={Object.keys(cadaLlave)} />
                             <DeletePrice titulo={Object.keys(cadaLlave)} />
                             <ChangePrice cadaLlave={cadaLlave} />
