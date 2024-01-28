@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { db } from '../Config/config.js'
+import { db } from '../../Config/config.js'
 import { getDocs, collection, doc, setDoc, getDoc, updateDoc } from 'firebase/firestore'
-import Swal from 'sweetalert2'
 
 
 
@@ -12,78 +11,23 @@ const ApiContext = ({ children }) => {
     const [precioData, setPrecioData] = useState([])
     const [user, setUser] = useState([])
 
-    const [quoterResult, setQuoterResult] = useState([])
-    const [addArray, setAddArray] = useState([])
-
 
     useEffect(() => {
+
         searchCollections("presu", "precioData")
         searchCollections("usuario", "usuario")
 
-    }, [])
+    }, [precioData])
 
-
-    const sumarTodo = (cotiFinal, precioBase) => {
-
-
-        const initialValue = precioBase;
-        // console.log(cotiFinal);
-        const sumWithInitial = cotiFinal.reduce(
-            (accumulator, currentValue) => accumulator + currentValue,
-            initialValue,
-        );
-
-        setQuoterResult(sumWithInitial)
-    }
 
     //------------------------------------------------------ADD PRICE 
+    
 
 
-    const addPriceArrayResult = async (characteristic, description) => {
 
-        try {
-            const documentRef = doc(db, 'presu', precioData.id)
-            const document = await getDoc(documentRef)
 
-            if (document !== undefined) {
-                const actualData = document.data()
-
-                for (const key in actualData.precios) {
-                    if (Object.keys(actualData.precios[key])[0] === characteristic) {
-
-                        for (const key2 in actualData.precios[key]) {
-                            for (const key3 in actualData.precios[key][key2]) {
-
-                                if (actualData.precios[key][key2][key3] === actualData.precios[key][key2][description]) {
-                                    //  console.log(`soy ${Object.keys(actualData.precios[key])[0]} y me eligieron ${Object.keys(actualData.precios[key][key2][key3])}`); //color=>negro
-
-                                    const characterEqual = Object.keys(actualData.precios[key])[0]
-                                    const descriptionValue = actualData.precios[key][key2][key3]
-
-                                    const newObj = { characterEqual, descriptionValue }
-
-                                    for (const key4 in addArray) {
-                                        if (addArray[key4].characterEqual === characteristic) {
-
-                                            addArray.splice(key4, 1);
-                                            setAddArray([...addArray, newObj])
-                                        }
-                                    }
-                                    setAddArray([...addArray, newObj])
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (error) {
-            console.error('Error adding new characterist', error)
-        }
-
-    }
 
     //------------------------------------------------------SEARCH COLLECTION
-
 
     const searchCollections = async (nameCollection, state) => {
 
@@ -100,6 +44,7 @@ const ApiContext = ({ children }) => {
         })
 
         try {
+
             if (state === "precioData") {
                 setPrecioData(datoFirebase[0])
 
@@ -119,7 +64,7 @@ const ApiContext = ({ children }) => {
 
         const documentRef = doc(db, 'presu', precioData.id)
 
-        let newValue = selectedValue
+        let newValue = Number(selectedValue)
 
         if (title === "precio base") {
 
@@ -136,7 +81,7 @@ const ApiContext = ({ children }) => {
 
                     if (actualData.precios && actualData.precios.length > 0) {
                         let newCharacteristic = characteristic[0]
-                        let newCharacteristicValue = selectedValue
+                        let newCharacteristicValue = Number(selectedValue)
 
                         for (const priceArray of actualData.precios) {
                             if (Object.keys(priceArray)[0] === title[0]) {
@@ -212,7 +157,7 @@ const ApiContext = ({ children }) => {
 
                                 actualData.precios[key][key2].splice(key3, 1)
 
-                                //  console.log(actualData.precios)
+                                console.log(actualData.precios)
                                 await updateDoc(documentRef, { precios: actualData.precios })
                             }
                         }
@@ -273,32 +218,11 @@ const ApiContext = ({ children }) => {
     }
 
 
-    //------------------------------------------------------SWEET ALERT
-
-
-    const sweety = (title, txt, ico) => {
-
-        Swal.fire({
-            title: title,
-            text: txt,
-            icon: ico
-        });
-    }
-
-
-    //------------------------------------------------------UPPER CASE
-
-
-    const firstUpper = (str) => {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-    }
-
-
 
     return (
         <cotizador.Provider value={{
-            precioData, user, addArray, addPriceArrayResult, addNewCharacteristic, updateValue, deleteCharacteristic,
-            AddNewDescriptionFn, deleteDescriptionFn, sumarTodo, quoterResult, sweety, firstUpper
+            precioData, user, addNewCharacteristic, updateValue, deleteCharacteristic,
+            AddNewDescriptionFn, deleteDescriptionFn
         }}>
             {children}
         </cotizador.Provider>
