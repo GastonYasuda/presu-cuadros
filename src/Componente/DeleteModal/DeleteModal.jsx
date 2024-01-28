@@ -8,12 +8,8 @@ const DeleteModal = ({ showDeleteModal, setShowDeleteModal, llave, titulo }) => 
 
     const { deleteCharacteristic, precioData } = useContext(cotizador)
 
-    const [queUbicacion, setQueUbicacion] = useState()
-
 
     const deleteButton = () => {
-
-
         deleteCharacteristic(llave[0])
         setShowDeleteModal(false)
     }

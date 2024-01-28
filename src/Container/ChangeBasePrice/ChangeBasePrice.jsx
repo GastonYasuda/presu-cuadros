@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, FloatingLabel } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -8,33 +8,22 @@ import { cotizador } from '../../Context/ApiContext';
 
 const ChangeBasePrice = ({ precioData }) => {
 
-    const { sweety } = useContext(cotizador)
+    const { sweety, searchCollections } = useContext(cotizador)
 
-    const [cadaKey, setCadaKey] = useState([])
     const [selectedValue, setSelectedValue] = useState('');
-    const [myKey, setMyKey] = useState('')
-
     const [show, setShow] = useState(false);
 
     const getNewPrice = (e) => {
         // console.log(e.target.value);
-
         setSelectedValue(Number(e.target.value))
-
-
     }
 
     const updateIsNum = () => {
-
-
         if (isNaN(selectedValue) || selectedValue === '') {
             sweety("ERROR", "Debes ingresar un número", "error")
         } else {
             setShow(true)
         }
-
-
-
     }
 
     return (
