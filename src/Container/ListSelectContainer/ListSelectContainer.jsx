@@ -7,41 +7,32 @@ import { Link } from 'react-router-dom';
 const ListSelectContainer = () => {
 
 
-    const { precioData } = useContext(cotizador)
+    const { precioData, addArray, sumarTodo, quoterResult } = useContext(cotizador)
 
-    // const [categorias, setCategorias] = useState([])
+    const [sumarTodosLosPrecios, setSumarTodosLosPrecios] = useState([])
 
-    // const [datosParaSumar, setDatosParaSumar] = useState([])
-    // const [paraSumar, setParaSumar] = useState([]) //solo guardo los montos para que me sumen
-    // const [resultado, setResultado] = useState()
-
-
-
-
-    // useEffect(() => {
-    //     if (precioData !== undefined && precioData.length !== 0) {
-
-    //         setCategorias(precioData.precios)
-
-    //     }
-
-    //     if (datosParaSumar.length !== 0 && precioData.precios.length === datosParaSumar.length) {
-    //         console.log(datosParaSumar);
-
-    //         for (const key in datosParaSumar) {
-
-    //             const productoPrecio = datosParaSumar[key].productoPrecio;
-
-    //             const primeraClave = Object.keys(productoPrecio)[0];
-    //             const selectValue = productoPrecio[primeraClave];
+    useEffect(() => {
+        if (sumarTodosLosPrecios.length !== 0) {
+            console.log(sumarTodosLosPrecios);
+            sumarTodo(sumarTodosLosPrecios, precioData.base)
+            console.log(precioData.base);
+        }
+    }, [sumarTodosLosPrecios, addArray])
 
 
-    //             setParaSumar(prevParaSumar => [...prevParaSumar, selectValue]);
-    //         }
-    //     }
 
+    const calcularPresupuesto = () => {
+        console.log("traigo el addArray[key].descriptionValue y los sumo", addArray);
 
-    // }, [precioData, categorias, datosParaSumar])
+        let nuevoNuevo = []
+        for (const key in addArray) {
+            let nombre = Object.keys(addArray[key].descriptionValue)[0]
+            let elPrecio = addArray[key].descriptionValue[nombre]
+
+            nuevoNuevo = [...nuevoNuevo, elPrecio]
+        }
+        setSumarTodosLosPrecios(nuevoNuevo)
+    }
 
 
 
@@ -49,19 +40,6 @@ const ListSelectContainer = () => {
         <div>
             <h1>HOLA PRESU!</h1>
             <h6>Precio Base: ${precioData.base} -</h6>
-
-            {/* {
-                categorias !== undefined &&
-                categorias.map((categoria, i) => {
-                    return (
-                        <Fragment key={i}>
-                            <ListSelect paraSumar={paraSumar} setParaSumar={setParaSumar}
-                                categoria={categoria} datosParaSumar={datosParaSumar} setDatosParaSumar={setDatosParaSumar}
-                                setResultado={setResultado} precioBase={precioData.base} />
-                        </Fragment>
-                    )
-                })
-            } */}
 
             {
                 precioData.precios !== undefined &&
@@ -73,21 +51,15 @@ const ListSelectContainer = () => {
             }
 
 
-
-
-
-
-
-
-
-            {/* 
             {
-                resultado !== undefined &&
-                <h1>Cotización Final: ${resultado}-</h1>
-            } */}
+                quoterResult !== undefined &&
+                <h1>Cotización Final: ${quoterResult}-</h1>
+            }
 
             <br />
             <br />
+
+            <Button onClick={calcularPresupuesto}>CALCULAR PRESU</Button>
 
             <Button variant="primary">
                 <Link to='/update-price' style={{ color: '#ffff', textDecoration: 'none' }}>Change Price</Link>

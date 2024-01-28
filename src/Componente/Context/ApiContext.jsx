@@ -11,6 +11,8 @@ const ApiContext = ({ children }) => {
     const [precioData, setPrecioData] = useState([])
     const [user, setUser] = useState([])
 
+    const [quoterResult, setQuoterResult] = useState([])
+    const [addArray, setAddArray] = useState([])
 
 
     useEffect(() => {
@@ -21,33 +23,22 @@ const ApiContext = ({ children }) => {
 
 
     const sumarTodo = (cotiFinal, precioBase) => {
-        const initialValue = precioBase;
-        // const sumWithInitial = cotiFinal.reduce(
-        //     (accumulator, currentValue) => accumulator + currentValue,
-        //     initialValue,
-        // );
 
-        console.log(cotiFinal)
+
+        const initialValue = precioBase;
+        // console.log(cotiFinal);
+        const sumWithInitial = cotiFinal.reduce(
+            (accumulator, currentValue) => accumulator + currentValue,
+            initialValue,
+        );
+
+        setQuoterResult(sumWithInitial)
     }
 
     //------------------------------------------------------ADD PRICE 
 
 
-    const [addPrices, setAddPrices] = useState([])
-    const [addArray, setAddArray] = useState([])
-
-    useEffect(() => {
-
-        if (addArray.length !== 0) {
-
-            console.log(addArray);
-        }
-    }, [addArray])
-
     const addPriceArrayResult = async (characteristic, description) => {
-        //console.log(characteristic, description);
-        //console.log(description); // me marca la ubicacion
-        //tengo characteristica y descripcion
 
         try {
             const documentRef = doc(db, 'presu', precioData.id)
@@ -65,31 +56,25 @@ const ApiContext = ({ children }) => {
                                 if (actualData.precios[key][key2][key3] === actualData.precios[key][key2][description]) {
                                     //  console.log(`soy ${Object.keys(actualData.precios[key])[0]} y me eligieron ${Object.keys(actualData.precios[key][key2][key3])}`); //color=>negro
 
-
                                     const characterEqual = Object.keys(actualData.precios[key])[0]
                                     const descriptionValue = actualData.precios[key][key2][key3]
 
                                     const newObj = { characterEqual, descriptionValue }
 
-                                    for (const key in addArray) {
-                                        if (addArray[key].characterEqual === characteristic) {
+                                    for (const key4 in addArray) {
+                                        if (addArray[key4].characterEqual === characteristic) {
 
-                                            addArray.splice(key, 1);
+                                            addArray.splice(key4, 1);
                                             setAddArray([...addArray, newObj])
                                         }
                                     }
                                     setAddArray([...addArray, newObj])
-
                                 }
                             }
                         }
                     }
                 }
-
-                sumarTodo(addArray, actualData.base)
             }
-
-
         } catch (error) {
             console.error('Error adding new characterist', error)
         }
@@ -290,8 +275,8 @@ const ApiContext = ({ children }) => {
 
     return (
         <cotizador.Provider value={{
-            precioData, user, addPriceArrayResult, addNewCharacteristic, updateValue, deleteCharacteristic,
-            AddNewDescriptionFn, deleteDescriptionFn
+            precioData, user, addArray, addPriceArrayResult, addNewCharacteristic, updateValue, deleteCharacteristic,
+            AddNewDescriptionFn, deleteDescriptionFn, sumarTodo, quoterResult
         }}>
             {children}
         </cotizador.Provider>
