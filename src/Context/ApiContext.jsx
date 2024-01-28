@@ -119,7 +119,7 @@ const ApiContext = ({ children }) => {
 
         const documentRef = doc(db, 'presu', precioData.id)
 
-        let newValue = selectedValue
+        let newValue = Number(selectedValue)
 
         if (title === "precio base") {
 
@@ -136,7 +136,7 @@ const ApiContext = ({ children }) => {
 
                     if (actualData.precios && actualData.precios.length > 0) {
                         let newCharacteristic = characteristic[0]
-                        let newCharacteristicValue = selectedValue
+                        let newCharacteristicValue = Number(selectedValue)
 
                         for (const priceArray of actualData.precios) {
                             if (Object.keys(priceArray)[0] === title[0]) {
