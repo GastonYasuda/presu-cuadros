@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ListSelect from '../../Componente/ListSelect/ListSelect'
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
@@ -7,19 +7,20 @@ import { cotizador } from '../../Context/ApiContext';
 const ListSelectContainer = () => {
 
 
-    const { precioData, addArray, sumarTodo, quoterResult } = useContext(cotizador)
+    const { precioData, addArray, sumarTodo, sweety, quoterResult } = useContext(cotizador)
 
     const [sumarTodosLosPrecios, setSumarTodosLosPrecios] = useState([])
 
     useEffect(() => {
+
         if (sumarTodosLosPrecios.length !== 0) {
             // console.log(sumarTodosLosPrecios);
             sumarTodo(sumarTodosLosPrecios, precioData.base)
             //console.log(precioData.base);
         }
-    }, [sumarTodosLosPrecios, addArray])
 
 
+    }, [sumarTodosLosPrecios, addArray, quoterResult])
 
     const calcularPresupuesto = () => {
         console.log("traigo el addArray[key].descriptionValue y los sumo", addArray);
@@ -31,7 +32,13 @@ const ListSelectContainer = () => {
 
             nuevoNuevo = [...nuevoNuevo, elPrecio]
         }
-        setSumarTodosLosPrecios(nuevoNuevo)
+
+        if ((precioData.precios).length === addArray.length) {
+            setSumarTodosLosPrecios(nuevoNuevo)
+        } else {
+            sweety("ERROR", "Debes seleccionar todos los campos", "error")
+
+        }
     }
 
 
@@ -50,9 +57,8 @@ const ListSelectContainer = () => {
                 })
             }
 
-
             {
-                quoterResult !== undefined &&
+                quoterResult != 0 &&
                 <h1>Cotización Final: ${quoterResult}-</h1>
             }
 
@@ -62,7 +68,7 @@ const ListSelectContainer = () => {
             <Button onClick={calcularPresupuesto}>CALCULAR PRESU</Button>
 
             <Button variant="primary">
-                <Link to='/update-price' style={{ color: '#ffff', textDecoration: 'none' }}>Change Price</Link>
+                <Link to='/update-price' style={{ color: '#ffff', textDecoration: 'none' }}>ABM precios</Link>
             </Button >
 
 

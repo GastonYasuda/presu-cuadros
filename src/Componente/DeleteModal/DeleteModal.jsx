@@ -6,7 +6,7 @@ import { cotizador } from '../../Context/ApiContext';
 const DeleteModal = ({ showDeleteModal, setShowDeleteModal, llave, titulo }) => {
 
 
-    const { deleteCharacteristic, precioData } = useContext(cotizador)
+    const { deleteCharacteristic } = useContext(cotizador)
 
 
     const deleteButton = () => {

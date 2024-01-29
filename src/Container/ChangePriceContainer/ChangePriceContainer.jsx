@@ -32,12 +32,10 @@ const ChangePriceContainer = () => {
                 })
             }
             <Button variant="primary">
-                <Link to='/' style={{ color: '#ffff', textDecoration: 'none' }}>Back</Link>
+                <Link to='/' style={{ color: '#ffff', textDecoration: 'none' }}>Volver al cotizador</Link>
             </Button >
 
-            <Button variant='primary' onClick={() => { setShowNewDescriptionModal(true) }}>
-                Add new description
-            </Button>
+            <Button variant='primary' onClick={() => { setShowNewDescriptionModal(true) }}>Agregar nueva descripción</Button>
 
             <AddNewDescriptionModal showNewDescriptionModal={showNewDescriptionModal} setShowNewDescriptionModal={setShowNewDescriptionModal} />
         </div >

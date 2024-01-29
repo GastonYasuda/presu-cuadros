@@ -24,15 +24,11 @@ const ApiContext = ({ children }) => {
 
 
     const sumarTodo = (cotiFinal, precioBase) => {
-
-
-        const initialValue = precioBase;
-        // console.log(cotiFinal);
+        const initialValue = precioBase
         const sumWithInitial = cotiFinal.reduce(
             (accumulator, currentValue) => accumulator + currentValue,
             initialValue,
-        );
-
+        )
         setQuoterResult(sumWithInitial)
     }
 

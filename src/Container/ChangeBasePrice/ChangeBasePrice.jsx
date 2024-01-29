@@ -3,12 +3,11 @@ import { Button, FloatingLabel } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import ChangePriceModal from '../../Componente/ChangePriceModal/ChangePriceModal';
-import Swal from 'sweetalert2';
 import { cotizador } from '../../Context/ApiContext';
 
 const ChangeBasePrice = ({ precioData }) => {
 
-    const { sweety, searchCollections } = useContext(cotizador)
+    const { sweety } = useContext(cotizador)
 
     const [selectedValue, setSelectedValue] = useState('');
     const [show, setShow] = useState(false);
