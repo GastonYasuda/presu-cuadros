@@ -10,10 +10,15 @@ export const cotizador = createContext()
 const ApiContext = ({ children }) => {
 
     const [precioData, setPrecioData] = useState([])
+
+    const [precioDataLocal, setPrecioDataLocal] = useState([])
+
+
     const [user, setUser] = useState([])
 
     const [quoterResult, setQuoterResult] = useState([])
     const [addArray, setAddArray] = useState([])
+
 
 
     useEffect(() => {
@@ -98,6 +103,10 @@ const ApiContext = ({ children }) => {
         try {
             if (state === "precioData") {
                 setPrecioData(datoFirebase[0])
+                //  setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
+                localStorage.setItem(`HOLA`, JSON.stringify(datoFirebase[0]))
+
+
 
             } else if (state === "usuario") {
                 setUser(datoFirebase[0])
@@ -109,6 +118,97 @@ const ApiContext = ({ children }) => {
 
 
     //------------------------------------------------------UPDATE VALUE
+
+
+
+
+
+    const updateValue2 = async (title, characteristic, selectedValue) => {
+
+        const documentRef = doc(db, 'presu', precioData.id)
+
+        let newValue = Number(selectedValue)
+
+        if (title === "precio base") {
+
+            precioDataLocal.base = newValue
+            await updateDoc(documentRef, {
+                base: newValue
+            })
+            localStorage.setItem(`HOLA`, JSON.stringify(precioDataLocal))
+
+
+        } else {
+            try {
+                if (precioDataLocal.precios && precioDataLocal.precios.length > 0) {
+                    let newCharacteristic = characteristic[0]
+                    let newCharacteristicValue = Number(selectedValue)
+
+                    for (const priceArray of precioDataLocal.precios) {
+                        if (Object.keys(priceArray)[0] === title[0]) {
+
+                            for (const key in priceArray) {
+                                for (const key2 in priceArray[key]) {
+
+                                    if (Object.keys(priceArray[key][key2])[0] === characteristic[0]) {
+
+                                        priceArray[key][key2] = { [newCharacteristic]: newCharacteristicValue }
+                                        // await updateDoc(documentRef, precioDataLocal)
+                                        localStorage.setItem(`HOLA`, JSON.stringify(precioDataLocal))
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error updating value', error)
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     const updateValue = async (title, characteristic, selectedValue) => {
@@ -294,7 +394,7 @@ const ApiContext = ({ children }) => {
     return (
         <cotizador.Provider value={{
             precioData, user, addArray, addPriceArrayResult, addNewCharacteristic, updateValue, deleteCharacteristic,
-            AddNewDescriptionFn, deleteDescriptionFn, sumarTodo, quoterResult, sweety, firstUpper
+            AddNewDescriptionFn, deleteDescriptionFn, sumarTodo, quoterResult, sweety, firstUpper, updateValue2, precioDataLocal, setPrecioDataLocal
         }}>
             {children}
         </cotizador.Provider>

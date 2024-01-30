@@ -5,15 +5,16 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import ChangePriceModal from '../../Componente/ChangePriceModal/ChangePriceModal';
 import { cotizador } from '../../Context/ApiContext';
 
-const ChangeBasePrice = ({ precioData }) => {
+const ChangeBasePrice = ({ precioDataLocal }) => {
 
     const { sweety } = useContext(cotizador)
 
     const [selectedValue, setSelectedValue] = useState('');
     const [show, setShow] = useState(false);
 
+
+
     const getNewPrice = (e) => {
-        // console.log(e.target.value);
         setSelectedValue(Number(e.target.value))
     }
 
@@ -21,6 +22,7 @@ const ChangeBasePrice = ({ precioData }) => {
         if (isNaN(selectedValue) || selectedValue === '') {
             sweety("ERROR", "Debes ingresar un número", "error")
         } else {
+            console.log(precioDataLocal);
             setShow(true)
         }
     }
@@ -35,7 +37,7 @@ const ChangeBasePrice = ({ precioData }) => {
 
                 <FloatingLabel
                     controlId="floatingInput"
-                    label={precioData.base}
+                    label={precioDataLocal.base}
                     onChange={(e) => { getNewPrice(e) }}
                 >
                     <Form.Control type="" placeholder="" />

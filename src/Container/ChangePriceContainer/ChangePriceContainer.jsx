@@ -11,16 +11,22 @@ import { cotizador } from '../../Context/ApiContext';
 
 const ChangePriceContainer = () => {
 
-    const { precioData } = useContext(cotizador)
+    const { precioDataLocal, setPrecioDataLocal } = useContext(cotizador)
     const [showNewDescriptionModal, setShowNewDescriptionModal] = useState(false)
+
+
+    useEffect(() => {
+        setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
+    }, [])
+
 
     return (
         <div>
             <h1>CAMBIAR PRECIOS!!</h1>
-            <ChangeBasePrice precioData={precioData} />
+            <ChangeBasePrice precioDataLocal={precioDataLocal} />
             {
-                precioData.precios !== undefined &&
-                precioData.precios.map((cadaLlave, i) => {
+                precioDataLocal.precios !== undefined &&
+                precioDataLocal.precios.map((cadaLlave, i) => {
                     return (
                         <div key={i} >
                             <h1>{(Object.keys(cadaLlave))}</h1>

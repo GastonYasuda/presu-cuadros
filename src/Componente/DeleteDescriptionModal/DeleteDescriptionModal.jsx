@@ -24,7 +24,7 @@ const DeleteDescriptionModal = ({ showDeleteModal, setShowDeleteModal, titulo })
             <Modal.Body>
                 Esta seguro de eliminar la descripcion {titulo}?
             </Modal.Body>
-            
+
             <Modal.Footer>
                 <Button variant="secondary" onClick={() => { setShowDeleteModal(false) }}>
                     Cancelar

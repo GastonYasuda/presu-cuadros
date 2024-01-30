@@ -16,19 +16,21 @@ const ChangePrice = ({ cadaLlave }) => {
     const [show, setShow] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
 
-    const { presuData, sweety } = useContext(cotizador)
+
+    const { sweety } = useContext(cotizador)
 
 
     useEffect(() => {
         if (cadaLlave !== undefined) {
             for (const key in cadaLlave) {
                 //  console.log(cadaLlave[key]);
-                const llave = cadaLlave[key]
                 setCadaKey(cadaLlave[key])
+
+
             }
         }
 
-    }, [cadaLlave, presuData])
+    }, [cadaLlave])
 
     const getNewPrice = (e) => {
         setSelectedValue(e.target.value)
@@ -38,6 +40,8 @@ const ChangePrice = ({ cadaLlave }) => {
         if (isNaN(selectedValue) || selectedValue === '') {
             sweety("ERROR", "Debes ingresar un número", "error")
         } else {
+            //tengo que hacer que actualice getItem
+
             setShow(true)
         }
     }
@@ -74,6 +78,7 @@ const ChangePrice = ({ cadaLlave }) => {
 
                             </InputGroup>
                             <DeleteModal showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} llave={Object.keys(myKey)} titulo={cadaLlave} />
+
                             <ChangePriceModal show={show} setShow={setShow} selectedValue={selectedValue} llave={Object.keys(myKey)} titulo={Object.keys(cadaLlave)} />
                         </div>
                     )
