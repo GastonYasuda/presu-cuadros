@@ -6,12 +6,11 @@ import { cotizador } from '../../Context/ApiContext';
 
 const ChangePriceModal = ({ setShow, show, titulo, llave, selectedValue }) => {
 
-    const { updateValue, updateValue2 } = useContext(cotizador)
+    const { updateValue } = useContext(cotizador)
 
     const actualizarValorNegro = () => {
 
-        // updateValue(titulo, llave, selectedValue)
-        updateValue2(titulo, llave, selectedValue)
+        updateValue(titulo, llave, selectedValue)
 
         setShow(false)
     };

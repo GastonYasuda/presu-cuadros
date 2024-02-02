@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { Fragment, useContext, useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
@@ -21,12 +21,13 @@ const ChangePrice = ({ cadaLlave }) => {
 
 
     useEffect(() => {
+
+        //setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
+
         if (cadaLlave !== undefined) {
             for (const key in cadaLlave) {
                 //  console.log(cadaLlave[key]);
                 setCadaKey(cadaLlave[key])
-
-
             }
         }
 
@@ -34,6 +35,7 @@ const ChangePrice = ({ cadaLlave }) => {
 
     const getNewPrice = (e) => {
         setSelectedValue(e.target.value)
+
     }
 
     const updateIsNum = () => {
@@ -41,22 +43,21 @@ const ChangePrice = ({ cadaLlave }) => {
             sweety("ERROR", "Debes ingresar un número", "error")
         } else {
             //tengo que hacer que actualice getItem
-
             setShow(true)
         }
     }
 
 
     return (
-        <div>
+        <>
             {
                 cadaLlave !== undefined &&
                 cadaKey.map((llave, i) => {
                     return (
-                        <div key={i}>
+                        <Fragment key={i}>
                             <InputGroup className="mb-3" >
 
-                                <InputGroup.Text>{Object.keys(llave)}</InputGroup.Text>
+                                <InputGroup.Text>ooooo{Object.keys(llave)}</InputGroup.Text>
                                 <InputGroup.Text>$</InputGroup.Text>
 
 
@@ -80,11 +81,11 @@ const ChangePrice = ({ cadaLlave }) => {
                             <DeleteModal showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} llave={Object.keys(myKey)} titulo={cadaLlave} />
 
                             <ChangePriceModal show={show} setShow={setShow} selectedValue={selectedValue} llave={Object.keys(myKey)} titulo={Object.keys(cadaLlave)} />
-                        </div>
+                        </Fragment>
                     )
                 })
             }
-        </div >
+        </ >
     )
 }
 

@@ -123,7 +123,7 @@ const ApiContext = ({ children }) => {
 
 
 
-    const updateValue2 = async (title, characteristic, selectedValue) => {
+    const updateValue = async (title, characteristic, selectedValue) => {
 
         const documentRef = doc(db, 'presu', precioData.id)
 
@@ -153,7 +153,7 @@ const ApiContext = ({ children }) => {
                                     if (Object.keys(priceArray[key][key2])[0] === characteristic[0]) {
 
                                         priceArray[key][key2] = { [newCharacteristic]: newCharacteristicValue }
-                                        // await updateDoc(documentRef, precioDataLocal)
+                                        await updateDoc(documentRef, precioDataLocal)
                                         localStorage.setItem(`HOLA`, JSON.stringify(precioDataLocal))
 
                                     }
@@ -162,95 +162,8 @@ const ApiContext = ({ children }) => {
                         }
                     }
                 }
-            } catch (error) {
-                console.error('Error updating value', error)
-            }
-        }
-    }
+                setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    const updateValue = async (title, characteristic, selectedValue) => {
-
-        const documentRef = doc(db, 'presu', precioData.id)
-
-        let newValue = Number(selectedValue)
-
-        if (title === "precio base") {
-
-            await updateDoc(documentRef, {
-                base: newValue
-            })
-
-        } else {
-            try {
-                const document = await getDoc(documentRef)
-
-                if (document !== undefined) {
-                    const actualData = document.data()
-
-                    if (actualData.precios && actualData.precios.length > 0) {
-                        let newCharacteristic = characteristic[0]
-                        let newCharacteristicValue = Number(selectedValue)
-
-                        for (const priceArray of actualData.precios) {
-                            if (Object.keys(priceArray)[0] === title[0]) {
-
-                                for (const key in priceArray) {
-                                    for (const key2 in priceArray[key]) {
-
-                                        if (Object.keys(priceArray[key][key2])[0] === characteristic[0]) {
-
-                                            priceArray[key][key2] = { [newCharacteristic]: newCharacteristicValue }
-                                            await updateDoc(documentRef, actualData)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             } catch (error) {
                 console.error('Error updating value', error)
             }
@@ -263,25 +176,25 @@ const ApiContext = ({ children }) => {
 
     const addNewCharacteristic = async (inputCharacteristic, characteristicValue, title) => {
         const documentRef = doc(db, 'presu', precioData.id)
+        // const document = await getDoc(documentRef)
 
         try {
-            const document = await getDoc(documentRef)
 
-            if (document !== undefined) {
-                const actualData = document.data()
+            for (const priceArray of precioDataLocal.precios) {
+                if (Object.keys(priceArray)[0] === title[0]) {
+                    for (const key in priceArray) {
+                        const newObject = { [inputCharacteristic]: Number(characteristicValue) }
 
-                for (const priceArray of actualData.precios) {
-                    if (Object.keys(priceArray)[0] === title[0]) {
-                        for (const key in priceArray) {
-                            const newObject = { [inputCharacteristic]: Number(characteristicValue) }
+                        priceArray[key] = [...priceArray[key], newObject]
 
-                            priceArray[key] = [...priceArray[key], newObject]
+                        await setDoc(documentRef, precioDataLocal)
+                        localStorage.setItem(`HOLA`, JSON.stringify(precioDataLocal))
 
-                            await setDoc(documentRef, actualData)
-                        }
                     }
                 }
             }
+            setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
+
         } catch (error) {
             console.error('Error adding new characterist', error)
         }
@@ -310,11 +223,15 @@ const ApiContext = ({ children }) => {
 
                                 //  console.log(actualData.precios)
                                 await updateDoc(documentRef, { precios: actualData.precios })
+                                localStorage.setItem(`HOLA`, JSON.stringify(actualData))
+
                             }
                         }
                     }
                 }
+                setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
             }
+
         } catch (error) {
             console.error(`Error deleting characterist`, error)
         }
@@ -339,6 +256,9 @@ const ApiContext = ({ children }) => {
             actualData.precios = [...actualData.precios, arrayContainer]
 
             await setDoc(documentRef, actualData)
+            localStorage.setItem(`HOLA`, JSON.stringify(actualData))
+            setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
+
 
         } catch (error) {
             console.error(`Error adding new description`, error)
@@ -361,8 +281,10 @@ const ApiContext = ({ children }) => {
                     actualData.precios.splice(key, 1)
 
                     await updateDoc(documentRef, actualData)
+                    localStorage.setItem(`HOLA`, JSON.stringify(actualData))
                 }
             }
+            setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
         } catch (error) {
             console.error(`Error deleting description`, error)
         }
@@ -394,7 +316,7 @@ const ApiContext = ({ children }) => {
     return (
         <cotizador.Provider value={{
             precioData, user, addArray, addPriceArrayResult, addNewCharacteristic, updateValue, deleteCharacteristic,
-            AddNewDescriptionFn, deleteDescriptionFn, sumarTodo, quoterResult, sweety, firstUpper, updateValue2, precioDataLocal, setPrecioDataLocal
+            AddNewDescriptionFn, deleteDescriptionFn, sumarTodo, quoterResult, sweety, firstUpper, precioDataLocal, setPrecioDataLocal
         }}>
             {children}
         </cotizador.Provider>

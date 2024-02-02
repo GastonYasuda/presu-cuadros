@@ -24,6 +24,7 @@ const AddNewPriceModal = ({ show, setShow, titulo }) => {
             sweety("ERROR", "Debes ingresar un número", "error")
         } else {
             addNewCharacteristic(caracteristicaIngresado, caracteisticaValor, titulo)
+
             setShow(false)
         }
 
@@ -34,7 +35,7 @@ const AddNewPriceModal = ({ show, setShow, titulo }) => {
         <Modal show={show}  >
 
             <Modal.Header>
-                <Modal.Title>Agregar nueva caracteristica de {titulo}</Modal.Title>
+                <Modal.Title>Agregar nueva descripción de {titulo}</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>

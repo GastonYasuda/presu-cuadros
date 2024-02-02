@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, InputGroup } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -14,9 +14,9 @@ const AddNewDescriptionModal = ({ showNewDescriptionModal, setShowNewDescription
     const [newValue, setNewValue] = useState()
 
 
+
+
     const AddDescriptionButton = () => {
-
-
 
         if (newDescription === '') {
             sweety("ERROR", "Debes ingresar nombre de la nueva caracteristica", "error")
