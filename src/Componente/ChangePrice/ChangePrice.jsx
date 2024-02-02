@@ -57,7 +57,7 @@ const ChangePrice = ({ cadaLlave }) => {
                         <Fragment key={i}>
                             <InputGroup className="mb-3" >
 
-                                <InputGroup.Text>ooooo{Object.keys(llave)}</InputGroup.Text>
+                                <InputGroup.Text>{Object.keys(llave)}</InputGroup.Text>
                                 <InputGroup.Text>$</InputGroup.Text>
 
 
