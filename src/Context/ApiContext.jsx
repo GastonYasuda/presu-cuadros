@@ -76,6 +76,8 @@ const ApiContext = ({ children }) => {
                         }
                     }
                 }
+                setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
+
             }
         } catch (error) {
             console.error('Error adding new characterist', error)
@@ -111,6 +113,9 @@ const ApiContext = ({ children }) => {
             } else if (state === "usuario") {
                 setUser(datoFirebase[0])
             }
+
+            setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
+
         } catch (error) {
             console.log(error)
         }

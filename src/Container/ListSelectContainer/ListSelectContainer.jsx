@@ -7,7 +7,7 @@ import { cotizador } from '../../Context/ApiContext';
 const ListSelectContainer = () => {
 
 
-    const { precioData, addArray, sumarTodo, sweety, quoterResult } = useContext(cotizador)
+    const { precioDataLocal, addArray, sumarTodo, sweety, quoterResult } = useContext(cotizador)
 
     const [sumarTodosLosPrecios, setSumarTodosLosPrecios] = useState([])
 
@@ -15,8 +15,8 @@ const ListSelectContainer = () => {
 
         if (sumarTodosLosPrecios.length !== 0) {
             // console.log(sumarTodosLosPrecios);
-            sumarTodo(sumarTodosLosPrecios, precioData.base)
-            //console.log(precioData.base);
+            sumarTodo(sumarTodosLosPrecios, precioDataLocal.base)
+            //console.log(precioDataLocal.base);
         }
 
 
@@ -33,7 +33,10 @@ const ListSelectContainer = () => {
             nuevoNuevo = [...nuevoNuevo, elPrecio]
         }
 
-        if ((precioData.precios).length === addArray.length) {
+        console.log(precioDataLocal.precios.length);
+        console.log(addArray.length);
+
+        if ((precioDataLocal.precios).length === addArray.length) {
             setSumarTodosLosPrecios(nuevoNuevo)
         } else {
             sweety("ERROR", "Debes seleccionar todos los campos", "error")
@@ -46,11 +49,11 @@ const ListSelectContainer = () => {
     return (
         <div>
             <h1>HOLA PRESU!</h1>
-            <h6>Precio Base: ${precioData.base} -</h6>
+            <h6>Precio Base: ${precioDataLocal.base} -</h6>
 
             {
-                precioData.precios !== undefined &&
-                precioData.precios.map((description, i) => {
+                precioDataLocal.precios !== undefined &&
+                precioDataLocal.precios.map((description, i) => {
                     return (
                         <ListSelect key={i} description={description} />
                     )
