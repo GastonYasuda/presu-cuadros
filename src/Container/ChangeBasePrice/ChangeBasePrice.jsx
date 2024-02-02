@@ -7,7 +7,7 @@ import { cotizador } from '../../Context/ApiContext';
 
 const ChangeBasePrice = () => {
 
-    const { sweety, precioDataLocal } = useContext(cotizador)
+    const { sweety, dataPriceLocal } = useContext(cotizador)
 
     const [selectedValue, setSelectedValue] = useState('');
     const [show, setShow] = useState(false);
@@ -22,7 +22,6 @@ const ChangeBasePrice = () => {
         if (isNaN(selectedValue) || selectedValue === '') {
             sweety("ERROR", "Debes ingresar un número", "error")
         } else {
-           // console.log(precioDataLocal);
             setShow(true)
         }
     }
@@ -37,7 +36,7 @@ const ChangeBasePrice = () => {
 
                 <FloatingLabel
                     controlId="floatingInput"
-                    label={precioDataLocal.base}
+                    label={dataPriceLocal.base}
                     onChange={(e) => { getNewPrice(e) }}
                 >
                     <Form.Control type="" placeholder="" />
@@ -49,7 +48,7 @@ const ChangeBasePrice = () => {
 
             </InputGroup>
 
-            <ChangePriceModal setShow={setShow} show={show} selectedValue={selectedValue} titulo={"precio base"} />
+            <ChangePriceModal setShow={setShow} show={show} selectedValue={selectedValue} descriptionTitle={"precio base"} />
 
         </div>
     )

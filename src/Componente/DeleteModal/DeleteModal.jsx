@@ -1,16 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { cotizador } from '../../Context/ApiContext';
 
-const DeleteModal = ({ showDeleteModal, setShowDeleteModal, llave }) => {
+const DeleteModal = ({ showDeleteModal, setShowDeleteModal, forEachKey }) => {
 
 
     const { deleteCharacteristic } = useContext(cotizador)
 
 
     const deleteButton = () => {
-        deleteCharacteristic(llave[0])
+        deleteCharacteristic(forEachKey[0])
         setShowDeleteModal(false)
     }
 
@@ -20,7 +20,7 @@ const DeleteModal = ({ showDeleteModal, setShowDeleteModal, llave }) => {
             <Modal.Header>
                 <Modal.Title>Eliminar caracteristica?</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Seguro desea eliminar {llave[0]}?</Modal.Body>
+            <Modal.Body>Seguro desea eliminar {forEachKey[0]}?</Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={() => { setShowDeleteModal(false) }}>
                     Cancelar

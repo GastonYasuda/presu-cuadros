@@ -4,9 +4,7 @@ import { Form } from 'react-bootstrap';
 const List = ({ characteristic, descriptionValue, setSelectedDescription, setSelectedCharacteristic }) => {
 
 
-
     const handleSelectChange = (event) => {
-
         setSelectedDescription(event.target.value)
         setSelectedCharacteristic(characteristic)
     };

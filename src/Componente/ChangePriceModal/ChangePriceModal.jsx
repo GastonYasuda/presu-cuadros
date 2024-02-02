@@ -4,14 +4,13 @@ import Modal from 'react-bootstrap/Modal';
 import { cotizador } from '../../Context/ApiContext';
 
 
-const ChangePriceModal = ({ setShow, show, titulo, llave, selectedValue }) => {
+const ChangePriceModal = ({ setShow, show, descriptionTitle, forEachKey, selectedValue }) => {
 
     const { updateValue } = useContext(cotizador)
 
-    const actualizarValorNegro = () => {
+    const updateInputValue = () => {
 
-        updateValue(titulo, llave, selectedValue)
-
+        updateValue(descriptionTitle, forEachKey, selectedValue)
         setShow(false)
     };
 
@@ -20,12 +19,12 @@ const ChangePriceModal = ({ setShow, show, titulo, llave, selectedValue }) => {
             <Modal.Header>
                 <Modal.Title>Actualizar precio</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Esta seguro de actualizar {titulo} {llave} a ${selectedValue}?</Modal.Body>
+            <Modal.Body>Esta seguro de actualizar {descriptionTitle} {forEachKey} a ${selectedValue}?</Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={() => { setShow(false) }}>
                     Cancelar
                 </Button>
-                <Button variant="primary" onClick={() => { actualizarValorNegro() }}>
+                <Button variant="primary" onClick={() => { updateInputValue() }}>
                     Actualizar
                 </Button>
             </Modal.Footer>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button, InputGroup } from 'react-bootstrap'
@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import { cotizador } from '../../Context/ApiContext';
 
 
-const AddNewPriceModal = ({ show, setShow, titulo }) => {
+const AddNewPriceModal = ({ show, setShow, myTitle }) => {
 
     const { addNewCharacteristic, sweety, firstUpper } = useContext(cotizador)
 
@@ -17,17 +17,16 @@ const AddNewPriceModal = ({ show, setShow, titulo }) => {
 
     const getNewCharacteristic = () => {
 
-
         if (caracteristicaIngresado === '') {
             sweety("ERROR", "Debes ingresar nombre de la nueva característica", "error")
+
         } else if (isNaN(caracteisticaValor) || caracteisticaValor === '') {
             sweety("ERROR", "Debes ingresar un número", "error")
-        } else {
-            addNewCharacteristic(caracteristicaIngresado, caracteisticaValor, titulo)
 
+        } else {
+            addNewCharacteristic(caracteristicaIngresado, caracteisticaValor, myTitle)
             setShow(false)
         }
-
     }
 
 
@@ -35,7 +34,7 @@ const AddNewPriceModal = ({ show, setShow, titulo }) => {
         <Modal show={show}  >
 
             <Modal.Header>
-                <Modal.Title>Agregar nueva descripción de {titulo}</Modal.Title>
+                <Modal.Title>Agregar nueva descripción de {myTitle}</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>

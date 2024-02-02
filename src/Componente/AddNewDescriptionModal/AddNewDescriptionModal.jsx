@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, InputGroup } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -60,7 +60,7 @@ const AddNewDescriptionModal = ({ showNewDescriptionModal, setShowNewDescription
                         label={"Nuevo VALOR"}
                         onChange={(e) => { setNewValue(e.target.value) }}
                     >
-                        <Form.Control type="texto" placeholder="holaaaaa" />
+                        <Form.Control type="" placeholder="" />
                     </FloatingLabel>
 
                 </InputGroup>

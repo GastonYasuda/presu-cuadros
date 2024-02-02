@@ -1,23 +1,20 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react'
-import ChangePrice from '../../Componente/ChangePrice/ChangePrice'
+import React, { useContext, useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import ChangeBasePrice from '../ChangeBasePrice/ChangeBasePrice';
-import AddNewPrice from '../../Componente/AddNewPrice/AddNewPrice';
 import AddNewDescriptionModal from '../../Componente/AddNewDescriptionModal/AddNewDescriptionModal';
-import DeletePrice from '../../Componente/DeletePrice/DeletePrice';
 import { cotizador } from '../../Context/ApiContext';
 import ChangePriceListContainer from '../../Componente/ChangePriceListContainer/ChangePriceListContainer';
 
 
 const ChangePriceContainer = () => {
 
-    const { precioDataLocal, setPrecioDataLocal } = useContext(cotizador)
+    const { setDataPriceLocal } = useContext(cotizador)
     const [showNewDescriptionModal, setShowNewDescriptionModal] = useState(false)
 
 
     useEffect(() => {
-        setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
+        setDataPriceLocal(JSON.parse(localStorage.getItem('dataPriceLocalStorage')))
     }, [])
 
 

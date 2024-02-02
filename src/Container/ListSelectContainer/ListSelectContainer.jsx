@@ -6,54 +6,44 @@ import { cotizador } from '../../Context/ApiContext';
 
 const ListSelectContainer = () => {
 
-
-    const { precioDataLocal, addArray, sumarTodo, sweety, quoterResult } = useContext(cotizador)
+    const { dataPriceLocal, addArray, addAll, sweety, quoterResult } = useContext(cotizador)
 
     const [sumarTodosLosPrecios, setSumarTodosLosPrecios] = useState([])
 
     useEffect(() => {
 
         if (sumarTodosLosPrecios.length !== 0) {
-            // console.log(sumarTodosLosPrecios);
-            sumarTodo(sumarTodosLosPrecios, precioDataLocal.base)
-            //console.log(precioDataLocal.base);
+            addAll(sumarTodosLosPrecios, dataPriceLocal.base)
         }
 
 
     }, [sumarTodosLosPrecios, addArray, quoterResult])
 
-    const calcularPresupuesto = () => {
-        console.log("traigo el addArray[key].descriptionValue y los sumo", addArray);
+    const calculateBudget = () => {
 
-        let nuevoNuevo = []
+        let myNewPriceArray = []
         for (const key in addArray) {
-            let nombre = Object.keys(addArray[key].descriptionValue)[0]
-            let elPrecio = addArray[key].descriptionValue[nombre]
+            let name = Object.keys(addArray[key].descriptionValue)[0]
+            let price = addArray[key].descriptionValue[name]
 
-            nuevoNuevo = [...nuevoNuevo, elPrecio]
+            myNewPriceArray = [...myNewPriceArray, price]
         }
 
-        console.log(precioDataLocal.precios.length);
-        console.log(addArray.length);
-
-        if ((precioDataLocal.precios).length === addArray.length) {
-            setSumarTodosLosPrecios(nuevoNuevo)
+        if ((dataPriceLocal.precios).length === addArray.length) {
+            setSumarTodosLosPrecios(myNewPriceArray)
         } else {
             sweety("ERROR", "Debes seleccionar todos los campos", "error")
-
         }
     }
 
-
-
     return (
-        <div>
+        <>
             <h1>HOLA PRESU!</h1>
-            <h6>Precio Base: ${precioDataLocal.base} -</h6>
+            <h6>Precio Base: ${dataPriceLocal.base} -</h6>
 
             {
-                precioDataLocal.precios !== undefined &&
-                precioDataLocal.precios.map((description, i) => {
+                dataPriceLocal.precios !== undefined &&
+                dataPriceLocal.precios.map((description, i) => {
                     return (
                         <ListSelect key={i} description={description} />
                     )
@@ -65,17 +55,12 @@ const ListSelectContainer = () => {
                 <h1>Cotización Final: ${quoterResult}-</h1>
             }
 
-            <br />
-            <br />
-
-            <Button onClick={calcularPresupuesto}>CALCULAR PRESU</Button>
+            <Button onClick={calculateBudget}>CALCULAR PRESU</Button>
 
             <Button variant="primary">
                 <Link to='/update-price' style={{ color: '#ffff', textDecoration: 'none' }}>ABM precios</Link>
             </Button >
-
-
-        </div >
+        </ >
     )
 }
 

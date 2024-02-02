@@ -4,12 +4,12 @@ import Modal from 'react-bootstrap/Modal';
 import { cotizador } from '../../Context/ApiContext';
 
 
-const DeleteDescriptionModal = ({ showDeleteModal, setShowDeleteModal, titulo }) => {
+const DeleteDescriptionModal = ({ showDeleteModal, setShowDeleteModal, myTitle }) => {
 
     const { deleteDescriptionFn } = useContext(cotizador)
 
     const deleteTitle = () => {
-        deleteDescriptionFn(titulo)
+        deleteDescriptionFn(myTitle)
         setShowDeleteModal(false)
     }
 
@@ -22,7 +22,7 @@ const DeleteDescriptionModal = ({ showDeleteModal, setShowDeleteModal, titulo })
             </Modal.Header>
 
             <Modal.Body>
-                Esta seguro de eliminar la descripcion {titulo}?
+                Esta seguro de eliminar la descripción {myTitle}?
             </Modal.Body>
 
             <Modal.Footer>

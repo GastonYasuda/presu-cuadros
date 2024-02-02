@@ -7,9 +7,9 @@ import ChangePriceModal from '../ChangePriceModal/ChangePriceModal';
 import DeleteModal from '../DeleteModal/DeleteModal.jsx';
 import { cotizador } from '../../Context/ApiContext.jsx';
 
-const ChangePrice = ({ cadaLlave }) => {
+const ChangePrice = ({ eachKey }) => {
 
-    const [cadaKey, setCadaKey] = useState([])
+    const [myKeyState, setMyKeyState] = useState([])
     const [selectedValue, setSelectedValue] = useState('');
     const [myKey, setMyKey] = useState('')
 
@@ -22,27 +22,23 @@ const ChangePrice = ({ cadaLlave }) => {
 
     useEffect(() => {
 
-        //setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
-
-        if (cadaLlave !== undefined) {
-            for (const key in cadaLlave) {
-                //  console.log(cadaLlave[key]);
-                setCadaKey(cadaLlave[key])
+        if (eachKey !== undefined) {
+            for (const key in eachKey) {
+                //  console.log(eachKey[key]);
+                setMyKeyState(eachKey[key])
             }
         }
 
-    }, [cadaLlave])
+    }, [eachKey])
 
     const getNewPrice = (e) => {
         setSelectedValue(e.target.value)
-
     }
 
     const updateIsNum = () => {
         if (isNaN(selectedValue) || selectedValue === '') {
             sweety("ERROR", "Debes ingresar un número", "error")
         } else {
-            //tengo que hacer que actualice getItem
             setShow(true)
         }
     }
@@ -51,36 +47,36 @@ const ChangePrice = ({ cadaLlave }) => {
     return (
         <>
             {
-                cadaLlave !== undefined &&
-                cadaKey.map((llave, i) => {
+                eachKey !== undefined &&
+                myKeyState.map((forEachKey, i) => {
                     return (
                         <Fragment key={i}>
                             <InputGroup className="mb-3" >
 
-                                <InputGroup.Text>{Object.keys(llave)}</InputGroup.Text>
+                                <InputGroup.Text>{Object.keys(forEachKey)}</InputGroup.Text>
                                 <InputGroup.Text>$</InputGroup.Text>
 
 
                                 <FloatingLabel
                                     controlId="floatingInput"
-                                    label={llave[Object.keys(llave)]}
+                                    label={forEachKey[Object.keys(forEachKey)]}
                                     onChange={(e) => { getNewPrice(e) }}
                                 >
                                     <Form.Control type="" placeholder="" />
                                 </FloatingLabel>
 
-                                <Button onClick={() => { setShowDeleteModal(true); setMyKey(llave) }}>
+                                <Button onClick={() => { setShowDeleteModal(true); setMyKey(forEachKey) }}>
                                     Eliminar
                                 </Button>
 
-                                <Button variant="outline-secondary" id="button-addon2" onClick={() => { updateIsNum(); setMyKey(llave) }} >
+                                <Button variant="outline-secondary" id="button-addon2" onClick={() => { updateIsNum(); setMyKey(forEachKey) }} >
                                     Actualizar
                                 </Button>
 
                             </InputGroup>
-                            <DeleteModal showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} llave={Object.keys(myKey)} titulo={cadaLlave} />
+                            <DeleteModal showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} forEachKey={Object.keys(myKey)} />
 
-                            <ChangePriceModal show={show} setShow={setShow} selectedValue={selectedValue} llave={Object.keys(myKey)} titulo={Object.keys(cadaLlave)} />
+                            <ChangePriceModal show={show} setShow={setShow} selectedValue={selectedValue} forEachKey={Object.keys(myKey)} descriptionTitle={Object.keys(eachKey)} />
                         </Fragment>
                     )
                 })

@@ -10,25 +10,22 @@ export const cotizador = createContext()
 const ApiContext = ({ children }) => {
 
     const [precioData, setPrecioData] = useState([])
-
-    const [precioDataLocal, setPrecioDataLocal] = useState([])
-
-
+    const [dataPriceLocal, setDataPriceLocal] = useState([])
     const [user, setUser] = useState([])
-
     const [quoterResult, setQuoterResult] = useState([])
     const [addArray, setAddArray] = useState([])
-
 
 
     useEffect(() => {
         searchCollections("presu", "precioData")
         searchCollections("usuario", "usuario")
-
     }, [])
 
 
-    const sumarTodo = (cotiFinal, precioBase) => {
+    //------------------------------------------------------ADD ARRAY PRICE 
+
+
+    const addAll = (cotiFinal, precioBase) => {
         const initialValue = precioBase
         const sumWithInitial = cotiFinal.reduce(
             (accumulator, currentValue) => accumulator + currentValue,
@@ -36,6 +33,7 @@ const ApiContext = ({ children }) => {
         )
         setQuoterResult(sumWithInitial)
     }
+
 
     //------------------------------------------------------ADD PRICE 
 
@@ -56,11 +54,9 @@ const ApiContext = ({ children }) => {
                             for (const key3 in actualData.precios[key][key2]) {
 
                                 if (actualData.precios[key][key2][key3] === actualData.precios[key][key2][description]) {
-                                    //  console.log(`soy ${Object.keys(actualData.precios[key])[0]} y me eligieron ${Object.keys(actualData.precios[key][key2][key3])}`); //color=>negro
 
                                     const characterEqual = Object.keys(actualData.precios[key])[0]
                                     const descriptionValue = actualData.precios[key][key2][key3]
-
                                     const newObj = { characterEqual, descriptionValue }
 
                                     for (const key4 in addArray) {
@@ -76,14 +72,13 @@ const ApiContext = ({ children }) => {
                         }
                     }
                 }
-                setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
-
+                setDataPriceLocal(JSON.parse(localStorage.getItem('dataPriceLocalStorage')))
             }
         } catch (error) {
             console.error('Error adding new characterist', error)
         }
-
     }
+
 
     //------------------------------------------------------SEARCH COLLECTION
 
@@ -105,16 +100,13 @@ const ApiContext = ({ children }) => {
         try {
             if (state === "precioData") {
                 setPrecioData(datoFirebase[0])
-                //  setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
-                localStorage.setItem(`HOLA`, JSON.stringify(datoFirebase[0]))
-
-
+                localStorage.setItem('dataPriceLocalStorage', JSON.stringify(datoFirebase[0]))
 
             } else if (state === "usuario") {
                 setUser(datoFirebase[0])
             }
 
-            setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
+            setDataPriceLocal(JSON.parse(localStorage.getItem('dataPriceLocalStorage')))
 
         } catch (error) {
             console.log(error)
@@ -125,9 +117,6 @@ const ApiContext = ({ children }) => {
     //------------------------------------------------------UPDATE VALUE
 
 
-
-
-
     const updateValue = async (title, characteristic, selectedValue) => {
 
         const documentRef = doc(db, 'presu', precioData.id)
@@ -136,38 +125,36 @@ const ApiContext = ({ children }) => {
 
         if (title === "precio base") {
 
-            precioDataLocal.base = newValue
+            dataPriceLocal.base = newValue
             await updateDoc(documentRef, {
                 base: newValue
             })
-            localStorage.setItem(`HOLA`, JSON.stringify(precioDataLocal))
+            localStorage.setItem('dataPriceLocalStorage', JSON.stringify(dataPriceLocal))
 
 
         } else {
             try {
-                if (precioDataLocal.precios && precioDataLocal.precios.length > 0) {
+                if (dataPriceLocal.precios && dataPriceLocal.precios.length > 0) {
                     let newCharacteristic = characteristic[0]
                     let newCharacteristicValue = Number(selectedValue)
 
-                    for (const priceArray of precioDataLocal.precios) {
+                    for (const priceArray of dataPriceLocal.precios) {
                         if (Object.keys(priceArray)[0] === title[0]) {
 
                             for (const key in priceArray) {
                                 for (const key2 in priceArray[key]) {
-
                                     if (Object.keys(priceArray[key][key2])[0] === characteristic[0]) {
 
                                         priceArray[key][key2] = { [newCharacteristic]: newCharacteristicValue }
-                                        await updateDoc(documentRef, precioDataLocal)
-                                        localStorage.setItem(`HOLA`, JSON.stringify(precioDataLocal))
-
+                                        await updateDoc(documentRef, dataPriceLocal)
+                                        localStorage.setItem('dataPriceLocalStorage', JSON.stringify(dataPriceLocal))
                                     }
                                 }
                             }
                         }
                     }
                 }
-                setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
+                setDataPriceLocal(JSON.parse(localStorage.getItem('dataPriceLocalStorage')))
 
             } catch (error) {
                 console.error('Error updating value', error)
@@ -185,20 +172,19 @@ const ApiContext = ({ children }) => {
 
         try {
 
-            for (const priceArray of precioDataLocal.precios) {
+            for (const priceArray of dataPriceLocal.precios) {
                 if (Object.keys(priceArray)[0] === title[0]) {
                     for (const key in priceArray) {
                         const newObject = { [inputCharacteristic]: Number(characteristicValue) }
 
                         priceArray[key] = [...priceArray[key], newObject]
 
-                        await setDoc(documentRef, precioDataLocal)
-                        localStorage.setItem(`HOLA`, JSON.stringify(precioDataLocal))
-
+                        await setDoc(documentRef, dataPriceLocal)
+                        localStorage.setItem('dataPriceLocalStorage', JSON.stringify(dataPriceLocal))
                     }
                 }
             }
-            setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
+            setDataPriceLocal(JSON.parse(localStorage.getItem('dataPriceLocalStorage')))
 
         } catch (error) {
             console.error('Error adding new characterist', error)
@@ -228,13 +214,13 @@ const ApiContext = ({ children }) => {
 
                                 //  console.log(actualData.precios)
                                 await updateDoc(documentRef, { precios: actualData.precios })
-                                localStorage.setItem(`HOLA`, JSON.stringify(actualData))
+                                localStorage.setItem('dataPriceLocalStorage', JSON.stringify(actualData))
 
                             }
                         }
                     }
                 }
-                setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
+                setDataPriceLocal(JSON.parse(localStorage.getItem('dataPriceLocalStorage')))
             }
 
         } catch (error) {
@@ -261,8 +247,8 @@ const ApiContext = ({ children }) => {
             actualData.precios = [...actualData.precios, arrayContainer]
 
             await setDoc(documentRef, actualData)
-            localStorage.setItem(`HOLA`, JSON.stringify(actualData))
-            setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
+            localStorage.setItem('dataPriceLocalStorage', JSON.stringify(actualData))
+            setDataPriceLocal(JSON.parse(localStorage.getItem('dataPriceLocalStorage')))
 
 
         } catch (error) {
@@ -286,10 +272,11 @@ const ApiContext = ({ children }) => {
                     actualData.precios.splice(key, 1)
 
                     await updateDoc(documentRef, actualData)
-                    localStorage.setItem(`HOLA`, JSON.stringify(actualData))
+                    localStorage.setItem('dataPriceLocalStorage', JSON.stringify(actualData))
                 }
             }
-            setPrecioDataLocal(JSON.parse(localStorage.getItem('HOLA')))
+            setDataPriceLocal(JSON.parse(localStorage.getItem('dataPriceLocalStorage')))
+
         } catch (error) {
             console.error(`Error deleting description`, error)
         }
@@ -300,7 +287,6 @@ const ApiContext = ({ children }) => {
 
 
     const sweety = (title, txt, ico) => {
-
         Swal.fire({
             title: title,
             text: txt,
@@ -321,7 +307,7 @@ const ApiContext = ({ children }) => {
     return (
         <cotizador.Provider value={{
             precioData, user, addArray, addPriceArrayResult, addNewCharacteristic, updateValue, deleteCharacteristic,
-            AddNewDescriptionFn, deleteDescriptionFn, sumarTodo, quoterResult, sweety, firstUpper, precioDataLocal, setPrecioDataLocal
+            AddNewDescriptionFn, deleteDescriptionFn, addAll, quoterResult, sweety, firstUpper, dataPriceLocal, setDataPriceLocal
         }}>
             {children}
         </cotizador.Provider>
