@@ -11,9 +11,9 @@ function App() {
       <BrowserRouter>
         <Routes>
 
+
           <Route path='/' element={<ListSelectContainer />} />
           <Route path='/:update-price' element={<ChangePriceContainer />} />
-
 
         </Routes>
       </BrowserRouter>

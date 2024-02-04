@@ -5,6 +5,7 @@ import ChangeBasePrice from '../ChangeBasePrice/ChangeBasePrice';
 import AddNewDescriptionModal from '../../Componente/AddNewDescriptionModal/AddNewDescriptionModal';
 import { cotizador } from '../../Context/ApiContext';
 import ChangePriceListContainer from '../../Componente/ChangePriceListContainer/ChangePriceListContainer';
+import Header from '../../Componente/Header/Header';
 
 
 const ChangePriceContainer = () => {
@@ -20,6 +21,7 @@ const ChangePriceContainer = () => {
 
     return (
         <div>
+            <Header />
             <h1>CAMBIAR PRECIOS!!</h1>
             <ChangeBasePrice />
 

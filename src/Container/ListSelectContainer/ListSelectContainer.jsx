@@ -3,6 +3,10 @@ import ListSelect from '../../Componente/ListSelect/ListSelect'
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { cotizador } from '../../Context/ApiContext';
+import './listSelectContainer.css'
+import Header from '../../Componente/Header/Header';
+import Footer from '../../Componente/Footer/Footer';
+
 
 const ListSelectContainer = () => {
 
@@ -37,30 +41,65 @@ const ListSelectContainer = () => {
     }
 
     return (
-        <>
-            <h1>HOLA PRESU!</h1>
-            <h6>Precio Base: ${dataPriceLocal.base} -</h6>
+        <section className='mainContainer'>
 
-            {
-                dataPriceLocal.precios !== undefined &&
-                dataPriceLocal.precios.map((description, i) => {
-                    return (
-                        <ListSelect key={i} description={description} />
-                    )
-                })
-            }
+            <Header />
 
-            {
-                quoterResult != 0 &&
-                <h1>Cotización Final: ${quoterResult}-</h1>
-            }
+            <section className='titleListContainer'>
 
-            <Button onClick={calculateBudget}>CALCULAR PRESU</Button>
 
-            <Button variant="primary">
-                <Link to='/update-price' style={{ color: '#ffff', textDecoration: 'none' }}>ABM precios</Link>
-            </Button >
-        </ >
+                <div className="titleTxt">
+                    <span className='titleTxt__txt'>¡Cotizá Rápido y Fácil!</span>
+                    <img src="./Assets/presupuesto.png" alt="presupuesto image" className='titleTxt__img' />
+                </div>
+
+                <div className='optionList'>
+
+                    <span className='optionList__subtitle'>Seleccioná tus opciones.</span>
+
+                    <div className='optionList__list'>
+                        <span>Precio Base: ${dataPriceLocal.base} -</span>
+
+                        {
+                            dataPriceLocal.precios !== undefined &&
+                            dataPriceLocal.precios.map((description, i) => {
+                                return (
+                                    <ListSelect key={i} description={description} />
+                                )
+                            })
+                        }
+
+                        {
+                            quoterResult != 0 &&
+                            <span className='optionList__result'>
+                                Cotización Final:
+                                <span className='optionList__result-number'> ${quoterResult}-</span>
+                            </span>
+                        }
+
+                    </div>
+
+                    <Button onClick={calculateBudget} className='optionList__button'>CALCULAR PRESU</Button>
+
+                </div>
+            </section>
+
+            <section className='AMBChangePrice'>
+                <div className="ABMChangePrice__img-title">
+                    <img src="./Assets/infoIcon.svg" alt="info icon" className='AMBChangePrice__img' />
+                    <span className='AMBChangePrice__title'>¿Cómo utilizar?</span>
+                </div>
+
+                <span className='AMBChangePrice__txt'>
+                    Puedes cambiar los items, opciones y precios ingresando
+                    <Link to='/update-price'> aquí</Link>
+                    , y se verán reflejados automaticamente en la página del cotizador.
+                </span>
+            </section>
+
+            <Footer />
+
+        </section >
     )
 }
 
