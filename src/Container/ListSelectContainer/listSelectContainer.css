@@ -34,6 +34,7 @@
 
 .titleTxt__txt {
     width: 70%;
+    padding: 0 25px;
     font-size: 5rem;
     line-height: 100%;
     font-style: italic;
@@ -48,6 +49,7 @@
 
 @media (max-width: 600px) {
     .titleTxt__txt {
+        padding: 0 10px;
         width: 80%;
         font-size: 2.5rem;
     }
