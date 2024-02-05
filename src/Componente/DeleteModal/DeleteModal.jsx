@@ -18,7 +18,7 @@ const DeleteModal = ({ showDeleteModal, setShowDeleteModal, forEachKey }) => {
 
         <Modal show={showDeleteModal} >
             <Modal.Header>
-                <Modal.Title>Eliminar caracteristica?</Modal.Title>
+                <Modal.Title>Eliminar característica?</Modal.Title>
             </Modal.Header>
             <Modal.Body>Seguro desea eliminar {forEachKey[0]}?</Modal.Body>
             <Modal.Footer>

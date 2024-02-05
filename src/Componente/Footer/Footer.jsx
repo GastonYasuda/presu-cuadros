@@ -19,7 +19,7 @@ const Footer = () => {
                 <div className="linkedinLink">
                     <img src="./Assets/linkedin-logo.png" alt="linkedin logo" />
                     <span>
-                        Mirá mi perfir en
+                        Mirá mi perfil en
                         <Link to="https://www.linkedin.com/in/gaston-yasuda/" target="_blank"> linkedin.com/in/gaston-yasuda/ </Link>
                     </span>
                 </div>

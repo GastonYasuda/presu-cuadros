@@ -49,7 +49,7 @@ const AddNewDescriptionModal = ({ showNewDescriptionModal, setShowNewDescription
 
                     <FloatingLabel
                         controlId="floatingInput"
-                        label={"Nueva CARACTERISTICA"}
+                        label={"Nueva CARACTERÍSTICA"}
                         onChange={(e) => { setNewCharacteristic(firstUpper(e.target.value)) }}
                     >
                         <Form.Control type="" placeholder="" />

@@ -41,7 +41,7 @@ const AddNewPriceModal = ({ show, setShow, myTitle }) => {
                 <InputGroup className="mb-3" >
                     <FloatingLabel
                         controlId="floatingInput"
-                        label={"Nueva caracteristica"}
+                        label={"Nueva característica"}
                         onChange={(e) => { setCaracteristicaIngresado(firstUpper(e.target.value)) }}
                     >
                         <Form.Control type="" placeholder="" />
