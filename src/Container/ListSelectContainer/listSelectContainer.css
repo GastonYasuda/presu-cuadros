@@ -1,5 +1,6 @@
 .mainContainer {
     min-width: 100%;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,7 +33,8 @@
 }
 
 .titleTxt__txt {
-    font-size: 2.5rem;
+    width: 70%;
+    font-size: 5rem;
     line-height: 100%;
     font-style: italic;
     font-weight: 900;
@@ -40,10 +42,16 @@
 }
 
 .titleTxt__img {
-    width: 50%;
+    width: 30%;
     margin: 15px;
 }
 
+@media (max-width: 600px) {
+    .titleTxt__txt {
+        font-size: 2.5rem;
+    }
+
+}
 
 
 
