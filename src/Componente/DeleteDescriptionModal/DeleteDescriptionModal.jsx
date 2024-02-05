@@ -15,7 +15,7 @@ const DeleteDescriptionModal = ({ showDeleteModal, setShowDeleteModal, myTitle }
 
 
     return (
-        <Modal show={showDeleteModal}  >
+        <Modal show={showDeleteModal} className='modalWhere'>
 
             <Modal.Header>
                 <Modal.Title>CUIDADO!</Modal.Title>

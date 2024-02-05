@@ -15,7 +15,7 @@ const ChangePriceModal = ({ setShow, show, descriptionTitle, forEachKey, selecte
     };
 
     return (
-        <Modal show={show} >
+        <Modal show={show} className='modalWhere' >
             <Modal.Header>
                 <Modal.Title>Actualizar precio</Modal.Title>
             </Modal.Header>

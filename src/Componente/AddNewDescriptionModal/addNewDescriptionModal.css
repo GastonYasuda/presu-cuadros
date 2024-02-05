@@ -1,0 +1,13 @@
+.modalWhere {
+    translate: 0 20%;
+}
+
+.modalLabelStyleContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.floatInput {
+    width: 100% !important;
+    margin: 5px 0;
+}

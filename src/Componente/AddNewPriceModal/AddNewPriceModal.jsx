@@ -31,18 +31,19 @@ const AddNewPriceModal = ({ show, setShow, myTitle }) => {
 
 
     return (
-        <Modal show={show}  >
+        <Modal show={show} className='modalWhere'>
 
             <Modal.Header>
                 <Modal.Title>Agregar nueva descripción de {myTitle}</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>
-                <InputGroup className="mb-3" >
+                <InputGroup className="modalLabelStyleContainer" >
                     <FloatingLabel
                         controlId="floatingInput"
                         label={"Nueva característica"}
                         onChange={(e) => { setCaracteristicaIngresado(firstUpper(e.target.value)) }}
+                        className='floatInput'
                     >
                         <Form.Control type="" placeholder="" />
                     </FloatingLabel>
@@ -51,6 +52,7 @@ const AddNewPriceModal = ({ show, setShow, myTitle }) => {
                         controlId="floatingInput"
                         label={"Ingrese su valor"}
                         onChange={(e) => { setCaracteristicaValor(e.target.value) }}
+                        className='floatInput'
                     >
                         <Form.Control type="" placeholder="" />
                     </FloatingLabel>

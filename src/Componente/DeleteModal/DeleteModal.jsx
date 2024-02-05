@@ -16,7 +16,7 @@ const DeleteModal = ({ showDeleteModal, setShowDeleteModal, forEachKey }) => {
 
     return (
 
-        <Modal show={showDeleteModal} >
+        <Modal show={showDeleteModal} className='modalWhere' >
             <Modal.Header>
                 <Modal.Title>Eliminar característica?</Modal.Title>
             </Modal.Header>

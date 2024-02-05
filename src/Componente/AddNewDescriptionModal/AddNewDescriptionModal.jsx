@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { cotizador } from '../../Context/ApiContext';
+import './addNewDescriptionModal.css'
 
 const AddNewDescriptionModal = ({ showNewDescriptionModal, setShowNewDescriptionModal }) => {
 
@@ -33,24 +34,26 @@ const AddNewDescriptionModal = ({ showNewDescriptionModal, setShowNewDescription
 
 
     return (
-        <Modal show={showNewDescriptionModal} >
+        <Modal show={showNewDescriptionModal} className='modalWhere'>
             <Modal.Header>
-                <Modal.Title>Agregar nueva descripcion</Modal.Title>
+                <Modal.Title>Agregar nueva descripción</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-                <InputGroup className="mb-3" >
+            <Modal.Body >
+                <InputGroup className='modalLabelStyleContainer'>
                     <FloatingLabel
                         controlId="floatingInput"
                         label={"Nueva DESCRIPCION"}
                         onChange={(e) => { setNewDescription(firstUpper(e.target.value)) }}
+                        className='floatInput'
                     >
-                        <Form.Control type="" placeholder="" />
+                        <Form.Control type="" placeholder="" className='form' />
                     </FloatingLabel>
 
                     <FloatingLabel
                         controlId="floatingInput"
                         label={"Nueva CARACTERÍSTICA"}
                         onChange={(e) => { setNewCharacteristic(firstUpper(e.target.value)) }}
+                        className='floatInput'
                     >
                         <Form.Control type="" placeholder="" />
                     </FloatingLabel>
@@ -59,6 +62,7 @@ const AddNewDescriptionModal = ({ showNewDescriptionModal, setShowNewDescription
                         controlId="floatingInput"
                         label={"Nuevo VALOR"}
                         onChange={(e) => { setNewValue(e.target.value) }}
+                        className='floatInput'
                     >
                         <Form.Control type="" placeholder="" />
                     </FloatingLabel>
