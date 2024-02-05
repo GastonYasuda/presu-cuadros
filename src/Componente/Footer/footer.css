@@ -12,6 +12,7 @@
     color: #EFEEEE;
     width: 80%;
     margin: auto;
+    
 
     & img {
         width: 30px;
@@ -28,7 +29,7 @@
     .footer__container {
         width: 90%;
 
-        & img{
+        & img {
             margin: 7px 5px;
         }
     }

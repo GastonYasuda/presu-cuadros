@@ -4,6 +4,8 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import ChangePriceModal from '../../Componente/ChangePriceModal/ChangePriceModal';
 import { cotizador } from '../../Context/ApiContext';
+import Card from 'react-bootstrap/Card';
+import './changeBasePrice.css'
 
 const ChangeBasePrice = () => {
 
@@ -27,30 +29,35 @@ const ChangeBasePrice = () => {
     }
 
     return (
-        <div>
-            <InputGroup className="mb-3" >
+        <>
+            <Card className='changeBasePriceCard'>
+                <Card.Body>
+                    <InputGroup className="mb-3" >
 
-                <InputGroup.Text>Precio base </InputGroup.Text>
-                <InputGroup.Text>$</InputGroup.Text>
+                        <InputGroup.Text>Precio base </InputGroup.Text>
+                        <InputGroup.Text>$</InputGroup.Text>
 
 
-                <FloatingLabel
-                    controlId="floatingInput"
-                    label={dataPriceLocal.base}
-                    onChange={(e) => { getNewPrice(e) }}
-                >
-                    <Form.Control type="" placeholder="" />
-                </FloatingLabel>
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label={dataPriceLocal.base}
+                            onChange={(e) => { getNewPrice(e) }}
+                        >
+                            <Form.Control type="" placeholder="" />
+                        </FloatingLabel>
 
-                <Button variant="outline-secondary" id="button-addon2" onClick={updateIsNum} >
-                    Actualizar
-                </Button>
+                        <Button variant="outline-secondary" id="button-addon2" onClick={updateIsNum} >
+                            Actualizar
+                        </Button>
 
-            </InputGroup>
+                    </InputGroup>
+
+                </Card.Body>
+            </Card>
+
 
             <ChangePriceModal setShow={setShow} show={show} selectedValue={selectedValue} descriptionTitle={"precio base"} />
-
-        </div>
+        </>
     )
 }
 

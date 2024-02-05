@@ -7,7 +7,7 @@ const DeletePrice = ({ myTitle }) => {
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     return (
         <div>
-            <Button onClick={() => { setShowDeleteModal(true) }}>Borrar caracteristica</Button>
+            <Button variant="danger" onClick={() => { setShowDeleteModal(true) }}>Borrar caracteristica</Button>
             <DeleteDescriptionModal showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} myTitle={myTitle} />
         </div>
     )

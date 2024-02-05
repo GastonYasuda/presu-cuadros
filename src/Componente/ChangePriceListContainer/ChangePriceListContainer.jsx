@@ -3,6 +3,9 @@ import AddNewPrice from '../AddNewPrice/AddNewPrice';
 import DeletePrice from '../DeletePrice/DeletePrice';
 import ChangePrice from '../ChangePrice/ChangePrice';
 import { cotizador } from '../../Context/ApiContext';
+import Card from 'react-bootstrap/Card';
+import './changePriceListContainer.css'
+
 
 const ChangePriceListContainer = () => {
 
@@ -15,12 +18,22 @@ const ChangePriceListContainer = () => {
                 dataPriceLocal.precios !== undefined &&
                 dataPriceLocal.precios.map((eachKey, i) => {
                     return (
-                        <Fragment key={i} >
-                            <h1>{(Object.keys(eachKey))}</h1>
-                            <AddNewPrice myTitle={Object.keys(eachKey)} />
-                            <DeletePrice myTitle={Object.keys(eachKey)} />
-                            <ChangePrice eachKey={eachKey} />
-                        </Fragment>
+                        <Card key={i} className='changePriceCard'>
+                            <Card.Body className='changePriceCard__body'>
+
+                                <div className='cardTitleMenu'>
+                                    <Card.Title className='cardTitleMenu__title'>{(Object.keys(eachKey))}</Card.Title>
+
+                                    <div className='cardTitleMenu__add-delete'>
+                                        <DeletePrice myTitle={Object.keys(eachKey)} />
+                                        <AddNewPrice myTitle={Object.keys(eachKey)} />
+                                    </div>
+
+                                </div>
+                                <ChangePrice eachKey={eachKey} />
+
+                            </Card.Body>
+                        </Card>
                     )
                 })
             }

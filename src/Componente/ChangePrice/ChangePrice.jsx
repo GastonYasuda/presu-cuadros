@@ -53,7 +53,7 @@ const ChangePrice = ({ eachKey }) => {
                         <Fragment key={i}>
                             <InputGroup className="mb-3" >
 
-                                <InputGroup.Text>{Object.keys(forEachKey)}</InputGroup.Text>
+                                <InputGroup.Text style={{ width: "9rem" }}>{Object.keys(forEachKey)}</InputGroup.Text>
                                 <InputGroup.Text>$</InputGroup.Text>
 
 
@@ -65,12 +65,12 @@ const ChangePrice = ({ eachKey }) => {
                                     <Form.Control type="" placeholder="" />
                                 </FloatingLabel>
 
-                                <Button onClick={() => { setShowDeleteModal(true); setMyKey(forEachKey) }}>
-                                    Eliminar
+                                <Button variant="danger" onClick={() => { setShowDeleteModal(true); setMyKey(forEachKey) }}>
+                                    <img src="./Assets/deleteIcon.png" alt="delete icon" />
                                 </Button>
 
-                                <Button variant="outline-secondary" id="button-addon2" onClick={() => { updateIsNum(); setMyKey(forEachKey) }} >
-                                    Actualizar
+                                <Button variant="primary" id="button-addon2" onClick={() => { updateIsNum(); setMyKey(forEachKey) }} >
+                                    <img src="./Assets/update.png" alt="update icon" />
                                 </Button>
 
                             </InputGroup>

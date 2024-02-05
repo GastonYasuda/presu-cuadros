@@ -1,0 +1,35 @@
+.changePriceContainer__main {
+    min-width: 100%;
+    min-height: 100%;
+    background-color: #222933;
+}
+
+.changeTitle {
+    color: #EFEEEE;
+    margin-top: 15px;
+}
+
+.addReturn {
+    padding: 30px 0;
+    display: flex;
+    justify-content: flex-end;
+
+    & Button {
+        margin-left: 15px;
+    }
+}
+
+.addReturn_button {
+    width: 40px;
+    color: #EFEEEE;
+    text-decoration: none;
+}
+
+.changeTitle {
+    text-align: center;
+}
+
+.changePriceContainer__body {
+    width: 95%;
+    margin: auto;
+}

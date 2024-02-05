@@ -6,6 +6,7 @@ import AddNewDescriptionModal from '../../Componente/AddNewDescriptionModal/AddN
 import { cotizador } from '../../Context/ApiContext';
 import ChangePriceListContainer from '../../Componente/ChangePriceListContainer/ChangePriceListContainer';
 import Header from '../../Componente/Header/Header';
+import './changePriceContainer.css'
 
 
 const ChangePriceContainer = () => {
@@ -20,21 +21,36 @@ const ChangePriceContainer = () => {
 
 
     return (
-        <div>
+        <div className='changePriceContainer__main'>
             <Header />
-            <h1>CAMBIAR PRECIOS!!</h1>
+            <h3 className='changeTitle'>AMD precios</h3>
+            
             <ChangeBasePrice />
 
-            <ChangePriceListContainer />
+            <div className='changePriceContainer__body'>
 
-            <Button variant="primary">
-                <Link to='/' style={{ color: '#ffff', textDecoration: 'none' }}>Volver al cotizador</Link>
-            </Button >
+                <div className='changePriceContainer__body-allLists'>
 
-            <Button variant='primary' onClick={() => { setShowNewDescriptionModal(true) }}>Agregar nueva caracteristica</Button>
 
-            <AddNewDescriptionModal showNewDescriptionModal={showNewDescriptionModal} setShowNewDescriptionModal={setShowNewDescriptionModal} />
-        </div >
+                    <ChangePriceListContainer />
+                </div>
+
+                <div className='addReturn'>
+                    <Button variant="primary">
+                        <Link to='/'  >
+                            <img src="./Assets/undo.png" alt="back icon" className='addReturn_button' />
+                        </Link>
+                    </Button >
+
+                    <Button variant='primary' onClick={() => { setShowNewDescriptionModal(true) }}  >
+                        <img src="./Assets/addData.png" alt="add data icon" className='addReturn_button' />
+                    </Button>
+                </div>
+
+                <AddNewDescriptionModal showNewDescriptionModal={showNewDescriptionModal} setShowNewDescriptionModal={setShowNewDescriptionModal} />
+            </div >
+
+        </div>
     )
 }
 
