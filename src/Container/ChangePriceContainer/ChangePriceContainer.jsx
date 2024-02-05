@@ -23,8 +23,8 @@ const ChangePriceContainer = () => {
     return (
         <div className='changePriceContainer__main'>
             <Header />
-            <h3 className='changeTitle'>AMD precios</h3>
-            
+            <h3 className='changeTitle'>ABM precios</h3>
+
             <ChangeBasePrice />
 
             <div className='changePriceContainer__body'>
@@ -38,12 +38,12 @@ const ChangePriceContainer = () => {
                 <div className='addReturn'>
                     <Button variant="primary">
                         <Link to='/'  >
-                            <img src="./Assets/undo.png" alt="back icon" className='addReturn_button' />
+                            <img src="./Assets/undo.png" alt="back icon" className='addReturn_button' title='Volver al cotizador.' />
                         </Link>
                     </Button >
 
                     <Button variant='primary' onClick={() => { setShowNewDescriptionModal(true) }}  >
-                        <img src="./Assets/addData.png" alt="add data icon" className='addReturn_button' />
+                        <img src="./Assets/addData.png" alt="add data icon" className='addReturn_button' title='Agregar nueva característica.' />
                     </Button>
                 </div>
 

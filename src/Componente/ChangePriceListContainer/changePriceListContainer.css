@@ -7,7 +7,7 @@
 }
 
 .changePriceContainer__body-allLists {
-    margin: 25px auto;
+    padding-bottom: 6.5rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

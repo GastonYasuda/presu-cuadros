@@ -66,11 +66,11 @@ const ChangePrice = ({ eachKey }) => {
                                 </FloatingLabel>
 
                                 <Button variant="danger" onClick={() => { setShowDeleteModal(true); setMyKey(forEachKey) }}>
-                                    <img src="./Assets/deleteIcon.png" alt="delete icon" />
+                                    <img src="./Assets/deleteIcon.png" alt="delete icon" title='Borrar descripción' />
                                 </Button>
 
                                 <Button variant="primary" id="button-addon2" onClick={() => { updateIsNum(); setMyKey(forEachKey) }} >
-                                    <img src="./Assets/update.png" alt="update icon" />
+                                    <img src="./Assets/update.png" alt="update icon" title='Actualizar precio' />
                                 </Button>
 
                             </InputGroup>
