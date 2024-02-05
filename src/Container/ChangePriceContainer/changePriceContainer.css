@@ -20,6 +20,12 @@
     }
 }
 
+@media (max-width: 600px) {
+    .addReturn {
+        left: 60%;
+    }
+}
+
 .addReturn_button {
     width: 40px;
     color: #EFEEEE;
