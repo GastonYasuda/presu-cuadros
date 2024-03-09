@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react'
 import { Button, FloatingLabel } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import ChangePriceModal from '../../Componente/ChangePriceModal/ChangePriceModal';
 import Card from 'react-bootstrap/Card';
 import './changeBasePrice.css'
 import { cotizador } from '../../Context/ApiContext';
