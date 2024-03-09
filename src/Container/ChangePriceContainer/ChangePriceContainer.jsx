@@ -6,7 +6,9 @@ import AddNewDescriptionModal from '../../Componente/AddNewDescriptionModal/AddN
 import { cotizador } from '../../Context/ApiContext';
 import ChangePriceListContainer from '../../Componente/ChangePriceListContainer/ChangePriceListContainer';
 import Header from '../../Componente/Header/Header';
+import '../ChangeBasePrice/changeBasePrice.css'
 import './changePriceContainer.css'
+import ChangeTitle from '../ChangeTitle/ChangeTitle';
 
 
 const ChangePriceContainer = () => {
@@ -25,7 +27,9 @@ const ChangePriceContainer = () => {
             <Header />
             <h3 className='changeTitle'>ABM precios</h3>
 
+            <ChangeTitle/>
             <ChangeBasePrice />
+
 
             <div className='changePriceContainer__body'>
 

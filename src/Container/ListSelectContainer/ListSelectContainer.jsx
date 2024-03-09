@@ -10,7 +10,7 @@ import Footer from '../../Componente/Footer/Footer';
 
 const ListSelectContainer = () => {
 
-    const { dataPriceLocal, addArray, addAll, sweety, quoterResult } = useContext(cotizador)
+    const { dataPriceLocal, addArray, addAll, sweety, quoterResult,firstUpper } = useContext(cotizador)
 
     const [sumarTodosLosPrecios, setSumarTodosLosPrecios] = useState([])
 
@@ -50,11 +50,13 @@ const ListSelectContainer = () => {
 
                 <div className="titleTxt">
                     <span className='titleTxt__txt'>¡Cotizá Rápido y Fácil!</span>
-                    <img src="./Assets/presupuesto.png" alt="presupuesto image" className='titleTxt__img' />
+                    <img src="./Assets/presupuesto.png" alt="presupuesto img" className='titleTxt__img' />
                 </div>
 
                 <div className='optionList'>
 
+                {dataPriceLocal.titulo!==undefined&& <span className='optionList__title'>Cotizar {firstUpper(dataPriceLocal.titulo)}</span>}
+                   
                     <span className='optionList__subtitle'>Seleccioná tus opciones.</span>
 
                     <div className='optionList__list'>

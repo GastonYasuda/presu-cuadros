@@ -132,7 +132,16 @@ const ApiContext = ({ children }) => {
             localStorage.setItem('dataPriceLocalStorage', JSON.stringify(dataPriceLocal))
 
 
-        } else {
+        } else if(title === "titulo"){
+
+            newValue = String (selectedValue)
+            dataPriceLocal.titulo = newValue
+            await updateDoc(documentRef, {
+                titulo: newValue
+            })
+            localStorage.setItem('dataPriceLocalStorage', JSON.stringify(dataPriceLocal))
+
+        }else {
             try {
                 if (dataPriceLocal.precios && dataPriceLocal.precios.length > 0) {
                     let newCharacteristic = characteristic[0]
